@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
-const App = ({ titles }) => {
+const App = ({titles}) => {
 
   return (
     <div>
@@ -20,7 +20,7 @@ App.propTypes = {
 };
 
 App.defaultProps = {
-  titles: ['Default title']
+  titles: [`Default title`]
 };
 
 export default App;
