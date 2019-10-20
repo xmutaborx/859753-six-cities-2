@@ -16,7 +16,7 @@ const App = ({titles, handleClick}) => {
 };
 
 App.propTypes = {
-  titles: PropTypes.array.isRequired,
+  titles: PropTypes.arrayOf(PropTypes.string).isRequired,
   handleClick: PropTypes.func
 };
 
