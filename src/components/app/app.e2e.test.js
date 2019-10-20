@@ -10,7 +10,7 @@ it(`click on the title works correctly`, () => {
 
   const app = shallow(<App
     titles={[`Title`]}
-    onClick={clickHandler}
+    handleClick={clickHandler}
   />);
 
   const title = app.find(`p`);
