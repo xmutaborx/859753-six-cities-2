@@ -10,6 +10,9 @@ const titles = [
 ];
 
 ReactDOM.render(
-    <App titles={titles} />,
+    <App
+      titles={titles}
+      handleClick={() => {}}
+    />,
     document.getElementById(`root`)
 );
