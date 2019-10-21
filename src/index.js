@@ -2,17 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
-const titles = [
-  `Beautiful & luxurious apartment at great location`,
-  `Wood and stone place`,
-  `Canal View Prinsengracht`,
-  `Nice, cozy, warm big bed apartment`
-];
+import {offers} from './mocks/offers'
 
 ReactDOM.render(
-    <App
-      titles={titles}
-      handleClick={() => {}}
-    />,
+    <App offers={offers} />,
     document.getElementById(`root`)
 );
