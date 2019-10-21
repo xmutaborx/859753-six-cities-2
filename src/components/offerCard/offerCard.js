@@ -1,8 +1,8 @@
 import React from 'react'
 
-const OfferCard = ({title, price, type, premium, img}) => {
+const OfferCard = ({title, price, type, premium, img, onMouseHover}) => {
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card" onMouseEnter={onMouseHover}>
       {premium &&
         <div className="place-card__mark">
           <span>Premium</span>

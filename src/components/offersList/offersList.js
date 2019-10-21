@@ -8,15 +8,16 @@ class OffersList extends React.Component {
     super(props)
 
     this.state = {
-      activeCard: 0
+      activeCard: {}
     };
   };
+
 
   render() {
     const {list} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className="cities__places-list places__list tabs__content" >
         {list.map((card, i) =>
           <OfferCard
             key={card.title + i}
@@ -25,6 +26,11 @@ class OffersList extends React.Component {
             type={card.type}
             premium={card.premium}
             img={card.img}
+            onMouseHover={() => {
+              this.setState({
+                activeCard: card,
+              })
+            }}
           />
         )};
       </div>
