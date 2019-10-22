@@ -12,6 +12,16 @@ class OffersList extends React.Component {
     };
   }
 
+  /* Тут получается, что при наведении на разные карточки, ре-рендерить
+   заново компонент мы не будем, но если два раза навести на одну и ту же
+   карточку он все равно перерендерится т.к. не удовлетворяет условию if.
+   Можно ли вообще в shouldComponentUpdate отрубить какое-то поле из стейта,
+   которое бы при обновлении не запускало рендер?
+
+   2. Стоит ли на таких маленьких компонентах заморачиваться с
+   shouldComponentUpdate?
+  */
+
   shouldComponentUpdate(_, nextState) {
     if (nextState.activeCard.title !== this.state.activeCard.title) {
       return false;
