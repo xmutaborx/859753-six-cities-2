@@ -20,11 +20,15 @@ describe(`Offer Card`, () => {
       rating={100}
       onMouseHover={hoverHandler}
       // А тут просто написать какой-то колбэк?
+      // onMouseHover={(e) => {
+      //  Не врублюсь как сюда должны попасть значения из пропсов...
+      // }}
     />);
 
     const cardHover = card.find(`article`);
     cardHover.simulate(`mouseenter`);
 
     // expect(hoverHandler).toHaveBeenCalledTimes(1);
+    // Что ожидать тут?
   });
 });
