@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const OfferCard = ({title, price, type, premium, img, onMouseHover}) => {
+const OfferCard = ({title, price, type, premium, img, rating, onMouseHover}) => {
   return (
     <article className="cities__place-card place-card" onMouseEnter={onMouseHover}>
       {premium &&
@@ -28,7 +29,7 @@ const OfferCard = ({title, price, type, premium, img, onMouseHover}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span className="width: 93%"></span>
+            <span style={{width: `${rating}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -38,7 +39,17 @@ const OfferCard = ({title, price, type, premium, img, onMouseHover}) => {
         <p className="place-card__type">{type}</p>
       </div>
     </article>
-  )
+  );
+};
+
+OfferCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  premium: PropTypes.bool.isRequired,
+  img: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  onMouseHover: PropTypes.func
 };
 
 export default OfferCard;
