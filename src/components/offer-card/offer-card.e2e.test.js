@@ -8,27 +8,28 @@ Enzyme.configure({adapter: new Adapter()});
 describe(`Offer Card`, () => {
   it(`when hovering, the correct data gets into the handler`, () => {
     const hoverHandler = jest.fn();
-    // Или не нужно тут присваивать jest.fn ?
-
+    const mock = {
+      title: `title`,
+      price: 100,
+      type: `room`,
+      premium: true,
+      img: `img`,
+      rating: 100
+    };
 
     const card = shallow(<OfferCard
-      title={`title`}
-      price={100}
-      type={`room`}
-      premium={true}
-      img={`img`}
-      rating={100}
+      title={mock.title}
+      price={mock.price}
+      type={mock.type}
+      premium={mock.premium}
+      img={mock.img}
+      rating={mock.rating}
       onMouseHover={hoverHandler}
-      // А тут просто написать какой-то колбэк?
-      // onMouseHover={(e) => {
-      //  Не врублюсь как сюда должны попасть значения из пропсов...
-      // }}
     />);
 
-    const cardHover = card.find(`article`);
-    cardHover.simulate(`mouseenter`);
-
-    // expect(hoverHandler).toHaveBeenCalledTimes(1);
-    // Что ожидать тут?
+    const article = card.find(`article`);
+    article.simulate(`mouseenter`, mock);
+    hoverHandler();
+    expect(hoverHandler.mock.calls[0][0]).toBe(mock);
   });
 });
