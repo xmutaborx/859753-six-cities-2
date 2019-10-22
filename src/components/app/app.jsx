@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import OffersList from '../offer-list/offer-list';
+import OffersList from '../offer-list/offer-list.jsx';
 
 const App = ({offers}) => {
-  return <OffersList list={offers} />;
+  return <OffersList cards={offers} />;
 };
 
 App.propTypes = {

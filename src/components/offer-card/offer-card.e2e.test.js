@@ -5,17 +5,18 @@ import OfferCard from './offer-card';
 
 Enzyme.configure({adapter: new Adapter()});
 
+const mock = {
+  title: `title`,
+  price: 100,
+  type: `room`,
+  premium: true,
+  img: `img`,
+  rating: 100
+};
+
 describe(`Offer Card`, () => {
   it(`when hovering, the correct data gets into the handler`, () => {
     const hoverHandler = jest.fn();
-    const mock = {
-      title: `title`,
-      price: 100,
-      type: `room`,
-      premium: true,
-      img: `img`,
-      rating: 100
-    };
 
     const card = shallow(<OfferCard
       title={mock.title}
@@ -29,7 +30,7 @@ describe(`Offer Card`, () => {
 
     const article = card.find(`article`);
     article.simulate(`mouseenter`, mock);
-    hoverHandler();
+    expect(hoverHandler).toHaveBeenCalledTimes(1);
     expect(hoverHandler.mock.calls[0][0]).toBe(mock);
   });
 });
