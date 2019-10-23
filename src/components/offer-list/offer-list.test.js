@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app';
+import OfferList from './offer-list.jsx';
 
-const offers = [
+const mock = [
   {
     title: `title`,
     price: 12,
@@ -13,10 +13,10 @@ const offers = [
   }
 ];
 
-it(`App correctly renders`, () => {
+it(`OfferCard correctly renders`, () => {
   const tree = renderer
-    .create(<App
-      offers={offers}
+    .create(<OfferList
+      cards={mock}
     />)
     .toJSON();
 
