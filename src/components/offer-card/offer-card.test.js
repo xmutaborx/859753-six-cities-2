@@ -2,14 +2,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import OfferCard from './offer-card';
 
-const mock = {
-  title: `title`,
-  price: 12,
-  type: `apartment`,
-  premium: true,
-  img: `img/apartment`,
-  rating: 12,
-};
+import {cardMock} from '../../mocks/card-mock';
+
+const mock = cardMock[0];
 
 it(`OfferCard correctly renders`, () => {
   const tree = renderer
@@ -26,4 +21,3 @@ it(`OfferCard correctly renders`, () => {
 
   expect(tree).toMatchSnapshot();
 });
-

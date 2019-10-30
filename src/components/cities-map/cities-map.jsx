@@ -3,32 +3,30 @@ import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
 class CitiesMap extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
-    const {mapConfig, offers} = this.props;
+    const {offers} = this.props;
+    const {defaultCity, zoom, icon, layer, copyRight} = this.props.mapConfig;
 
-    const icon = leaflet.icon(mapConfig.icon);
+    const mapIcon = leaflet.icon(icon);
 
     const map = leaflet.map(`map`, {
-      center: mapConfig.defaultCity,
-      zoom: mapConfig.zoom,
-      zoomControl: mapConfig.zoomControl,
-      marker: mapConfig.marker
+      center: defaultCity,
+      zoom,
+      zoomControl: false,
+      marker: true
     });
-    map.setView(mapConfig.defaultCity, mapConfig.zoom);
+    map.setView(defaultCity, zoom);
 
     leaflet
-      .tileLayer(mapConfig.layer, {
-        attribution: mapConfig.copyRight
+      .tileLayer(layer, {
+        attribution: copyRight
       })
       .addTo(map);
 
     for (let i = 0; i < offers.length; i++) {
       leaflet
-        .marker(offers[i].coordinates, {icon})
+        .marker(offers[i].coordinates, {mapIcon})
         .addTo(map);
     }
   }
@@ -43,14 +41,11 @@ class CitiesMap extends React.PureComponent {
 CitiesMap.propTypes = {
   mapConfig: PropTypes.shape({
     defaultCity: PropTypes.arrayOf(PropTypes.number).isRequired,
-    defaultCord: PropTypes.arrayOf(PropTypes.number).isRequired,
     zoom: PropTypes.number.isRequired,
     icon: PropTypes.shape({
       iconUrl: PropTypes.string.isRequired,
       iconSize: PropTypes.arrayOf(PropTypes.number).isRequired
     }),
-    zoomControl: PropTypes.bool.isRequired,
-    marker: PropTypes.bool.isRequired,
     layer: PropTypes.string.isRequired,
     copyRight: PropTypes.string.isRequired
   }),

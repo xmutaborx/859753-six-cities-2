@@ -3,16 +3,11 @@ import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import OfferCard from './offer-card';
 
+import {cardMock} from '../../mocks/card-mock';
+
 Enzyme.configure({adapter: new Adapter()});
 
-const mock = {
-  title: `title`,
-  price: 100,
-  type: `room`,
-  premium: true,
-  img: `img`,
-  rating: 100
-};
+const mock = cardMock[0];
 
 describe(`Offer Card`, () => {
   it(`when hovering, the correct data gets into the handler`, () => {
