@@ -22,7 +22,7 @@ exports[`OfferCard correctly renders 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment"
+        src="img/apartment-01.jpg"
         width="260"
       />
     </a>
@@ -40,7 +40,7 @@ exports[`OfferCard correctly renders 1`] = `
           className="place-card__price-value"
         >
           €
-          12
+          420
         </b>
         <span
           className="place-card__price-text"
@@ -77,7 +77,7 @@ exports[`OfferCard correctly renders 1`] = `
         <span
           style={
             Object {
-              "width": "12%",
+              "width": "42%",
             }
           }
         />
@@ -94,13 +94,13 @@ exports[`OfferCard correctly renders 1`] = `
       <a
         href="#"
       >
-        title
+        test title
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      apartment
+      type
     </p>
   </div>
 </article>
