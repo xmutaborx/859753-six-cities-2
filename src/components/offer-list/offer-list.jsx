@@ -41,6 +41,7 @@ class OffersList extends React.PureComponent {
 
 OffersList.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,

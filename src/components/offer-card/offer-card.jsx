@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const OfferCard = ({title, price, type, premium, img, rating, onMouseHover, coordinates}) => {
+const OfferCard = ({title, price, type, premium, img, rating, onMouseHover}) => {
   return (
     <article className="cities__place-card place-card" onMouseEnter={onMouseHover}>
       {premium &&
@@ -43,6 +43,7 @@ const OfferCard = ({title, price, type, premium, img, rating, onMouseHover, coor
 };
 
 OfferCard.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
