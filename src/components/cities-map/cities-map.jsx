@@ -26,13 +26,6 @@ class CitiesMap extends React.PureComponent {
       })
       .addTo(map);
 
-    // Оставить тестовый маркер из мока?
-    // leaflet
-    //   .marker(mapConfig.defaultCord, {icon})
-    //   .addTo(map);
-
-
-    // Правильно ли что циклом это сделал? Есть ли более подходящий вариант?
     for (let i = 0; i < offers.length; i++) {
       leaflet
         .marker(offers[i].coordinates, {icon})
