@@ -26,7 +26,6 @@ class OffersList extends React.PureComponent {
             premium={card.premium}
             img={card.img}
             rating={card.rating}
-            coordinates={card.coordinates}
             onMouseHover={() => {
               this.setState({
                 activeCard: card,
@@ -48,7 +47,6 @@ OffersList.propTypes = {
     premium: PropTypes.bool.isRequired,
     img: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   }))
 };
 

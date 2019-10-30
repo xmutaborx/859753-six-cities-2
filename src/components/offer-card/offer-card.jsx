@@ -49,7 +49,6 @@ OfferCard.propTypes = {
   premium: PropTypes.bool.isRequired,
   img: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
-  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   onMouseHover: PropTypes.func
 };
 
