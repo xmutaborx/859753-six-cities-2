@@ -5,10 +5,12 @@ import leaflet from 'leaflet';
 class CitiesMap extends React.PureComponent {
 
   componentDidMount() {
-    const {offers} = this.props;
-    const {defaultCity, zoom, icon, layer, copyRight} = this.props.mapConfig;
+    const {mapConfig: {defaultCity, zoom, layer, copyRight}, offers} = this.props;
 
-    const mapIcon = leaflet.icon(icon);
+    const icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
 
     const map = leaflet.map(`map`, {
       center: defaultCity,
@@ -26,7 +28,7 @@ class CitiesMap extends React.PureComponent {
 
     for (let i = 0; i < offers.length; i++) {
       leaflet
-        .marker(offers[i].coordinates, {mapIcon})
+        .marker(offers[i].coordinates, {icon})
         .addTo(map);
     }
   }
@@ -42,10 +44,6 @@ CitiesMap.propTypes = {
   mapConfig: PropTypes.shape({
     defaultCity: PropTypes.arrayOf(PropTypes.number).isRequired,
     zoom: PropTypes.number.isRequired,
-    icon: PropTypes.shape({
-      iconUrl: PropTypes.string.isRequired,
-      iconSize: PropTypes.arrayOf(PropTypes.number).isRequired
-    }),
     layer: PropTypes.string.isRequired,
     copyRight: PropTypes.string.isRequired
   }),

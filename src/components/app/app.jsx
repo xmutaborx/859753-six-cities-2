@@ -33,10 +33,6 @@ App.propTypes = {
   mapConfig: PropTypes.shape({
     defaultCity: PropTypes.arrayOf(PropTypes.number).isRequired,
     zoom: PropTypes.number.isRequired,
-    icon: PropTypes.shape({
-      iconUrl: PropTypes.string.isRequired,
-      iconSize: PropTypes.arrayOf(PropTypes.number).isRequired
-    }),
     layer: PropTypes.string.isRequired,
     copyRight: PropTypes.string.isRequired
   }),
