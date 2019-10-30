@@ -43,7 +43,6 @@ const OfferCard = ({title, price, type, premium, img, rating, onMouseHover}) => 
 };
 
 OfferCard.propTypes = {
-  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
