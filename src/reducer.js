@@ -1,8 +1,6 @@
-import {offers} from './mocks/offers';
-
 const initialState = {
   city: '',
-  offer: offers
+  offer: []
 };
 
 const ActionCreator = {

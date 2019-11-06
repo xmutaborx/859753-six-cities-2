@@ -6,7 +6,7 @@ class CitiesMap extends React.PureComponent {
 
   componentDidMount() {
     const {mapConfig: {defaultCity, zoom, layer, copyRight}, offers} = this.props;
-
+    console.log(offers, 'Cities Map Component')
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
