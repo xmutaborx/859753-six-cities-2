@@ -54,7 +54,7 @@ class App extends React.PureComponent {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList cards={availableOffers} />
+            <OffersList cards={availableOffers} city={city} />
             <div className="cities__right-section">
               <CitiesMap mapConfig={mapConfig} offers={offer}/>
             </div>
