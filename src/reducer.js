@@ -1,6 +1,6 @@
 const initialState = {
   city: '',
-  offers: []
+  offer: []
 };
 
 

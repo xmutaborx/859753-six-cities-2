@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
@@ -38,4 +39,15 @@ App.propTypes = {
   }),
 };
 
-export default App;
+
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  city: state.city,
+  offer: state.offers,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getOffers: (offer) => dispatch(ActionCreator.getOffers(offer)),
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
