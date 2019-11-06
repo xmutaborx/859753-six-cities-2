@@ -1,6 +1,7 @@
 export const offers = [
   {
     id: 1,
+    name: `Amsterdam`,
     title: `Beautiful & luxurious apartment at great location`,
     price: 120,
     type: `apartment`,
@@ -11,6 +12,7 @@ export const offers = [
   },
   {
     id: 2,
+    name: `Amsterdam`,
     title: `Wood and stone place`,
     price: 80,
     type: `Private room`,
@@ -21,6 +23,7 @@ export const offers = [
   },
   {
     id: 3,
+    name: `Paris`,
     title: `Canal View Prinsengracht`,
     price: 132,
     type: `apartment`,
@@ -31,6 +34,7 @@ export const offers = [
   },
   {
     id: 4,
+    name: `Moscow`,
     title: `Nice, cozy, warm big bed apartment`,
     price: 180,
     type: `apartment`,

@@ -16,24 +16,28 @@ class OffersList extends React.PureComponent {
     const {cards} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content" >
-        {cards.map((card) =>
-          <OfferCard
-            key={card.id}
-            title={card.title}
-            price={card.price}
-            type={card.type}
-            premium={card.premium}
-            img={card.img}
-            rating={card.rating}
-            onMouseHover={() => {
-              this.setState({
-                activeCard: card,
-              });
-            }}
-          />
-        )};
-      </div>
+      <section className="cities__places places">
+        <h2 className="visually-hidden">Places</h2>
+          <b className="places__found">{cards.length} places to stay in</b>
+        <div className="cities__places-list places__list tabs__content" >
+          {cards.map((card) =>
+            <OfferCard
+              key={card.id}
+              title={card.title}
+              price={card.price}
+              type={card.type}
+              premium={card.premium}
+              img={card.img}
+              rating={card.rating}
+              onMouseHover={() => {
+                this.setState({
+                  activeCard: card,
+                });
+              }}
+            />
+          )}
+        </div>
+      </section>
     );
   }
 }
