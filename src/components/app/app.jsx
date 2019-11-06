@@ -12,11 +12,13 @@ import {offers} from '../../mocks/offers';
 class App extends React.PureComponent {
 
   componentDidMount() {
+    // 1
     // Решил не импортить моки напрямую в стейт редакса, а закинуть в cDM
     // потому что подумал что это более логично, данные же с API будут приходить
     // и типа тут их надо получать и класть в редакс. Верно?
     this.props.getOffers(offers)
 
+    // 2
     // Установливаю первый город из списка по дефолту в state.city
     const city = getCityFromOffers(offers)
     this.props.changeCity(city[0])
@@ -25,16 +27,20 @@ class App extends React.PureComponent {
   render() {
     const {mapConfig, changeCity, city, offer} = this.props;
 
+    // 3
     // верно ли, что я в этом месте получаю список доступных городов и список офферов,
     // а далее закидываю их пропсами в нужные компоненты?
     // Что-то у меня сомнения =(
 
+    // 4
     // Получаю список доступных городов и передаю пропсом в компонент citiesList
     const availableCities = getCityFromOffers(offer);
 
+    // 5
     // Фильтрую предложения исходя из текущего города передаю в комп OffersList
     const availableOffers = getAvailableOffers(offer, city);
 
+    // 6
     // Первый раз пропс offer получаенный из redux state пустой, и только на втором круге
     // он заполняется. Не пойму почему в компонент CitiesMap не приходит заполненный массив
     // offer после его обновления. (слетели все маркеры)
