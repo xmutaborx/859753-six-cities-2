@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/reducer';
 
 import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
@@ -10,6 +10,15 @@ import CitiesList from '../cities-list/cities-list.jsx';
 import {mockOffers} from '../../mocks/offers';
 
 class App extends React.PureComponent {
+
+  _setAvailableCityFromOffers(offers) {
+    const list = offers.map((city) => city.name);
+    const availableCities = Array.from(new Set(list));
+
+    this.setState({availableCities});
+    this.props.changeCity(availableCities[0]);
+  }
+
   constructor(props) {
     super(props);
 
@@ -19,31 +28,14 @@ class App extends React.PureComponent {
   }
 
   componentDidMount() {
-    // моковые данные записал в initialState (типа API)
     this.props.setOffers(mockOffers);
-    // установил дефолтный city в initialState, установил массив названий городов в state App
     this._setAvailableCityFromOffers(mockOffers);
   }
 
-
-  _setAvailableCityFromOffers(offers) {
-    // получаем массив названий всех городов
-    const list = offers.map((city) => city.name);
-    const availableCities = Array.from(new Set(list));
-
-    // записываем все города в стейт App, чтобы передать пропсом в cities-list
-    this.setState({availableCities});
-
-    // ставим дефолтный город в initialState city
-    this.props.changeCity(availableCities[0]);
-
-    // Фильтрую офферы исходя из выбранного города
-    // this.props.filterOffers(offers, availableCities[0]);
-
-  }
-
   render() {
-    const {mapConfig, changeCity, city, offers, availableOffers} = this.props;
+    const {mapConfig, changeCity, city, offers} = this.props;
+    const availableOffers = offers.filter((offer) => offer.name === city);
+    const coordinates = availableOffers.map((offer) => offer.coordinates);
 
     return (
       <React.Fragment>
@@ -53,9 +45,9 @@ class App extends React.PureComponent {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList cards={offers} city={city} />
+            <OffersList cards={availableOffers} city={city} />
             <div className="cities__right-section">
-              <CitiesMap mapConfig={mapConfig} offers={offers}/>
+              <CitiesMap mapConfig={mapConfig} pins={coordinates}/>
             </div>
           </div>
         </div>
@@ -76,10 +68,8 @@ App.propTypes = {
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })),
   city: PropTypes.string,
-  availableOffers: PropTypes.array,
   changeCity: PropTypes.func.isRequired,
   setOffers: PropTypes.func.isRequired,
-  filterOffers: PropTypes.func.isRequired,
   mapConfig: PropTypes.shape({
     defaultCity: PropTypes.arrayOf(PropTypes.number).isRequired,
     zoom: PropTypes.number.isRequired,
@@ -91,14 +81,12 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  offers: state.offers,
-  availableOffers: state.availableOffers
+  offers: state.offers
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setOffers: (offers) => dispatch(ActionCreator.setOffers(offers)),
-  changeCity: (city) => dispatch(ActionCreator.changeCity(city)),
-  filterOffers: (offers, city) => dispatch(ActionCreator.filterOffers(offers, city)),
+  changeCity: (city) => dispatch(ActionCreator.changeCity(city))
 });
 
 export {App};

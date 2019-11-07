@@ -1,7 +1,6 @@
 const initialState = {
   city: ``,
-  offers: [],
-  availableOffers: [],
+  offers: []
 };
 
 const ActionCreator = {
@@ -14,16 +13,6 @@ const ActionCreator = {
     type: `SET_OFFERS`,
     payload: offers
   }),
-
-  filterOffers: (offers, city) => {
-    const availableOffers = offers.filter((offer) => offer.name === city);
-
-    return {
-      type: `FILTER_OFFERS`,
-      payload: availableOffers,
-    };
-  },
-
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,10 +23,6 @@ const reducer = (state = initialState, action) => {
 
     case `SET_OFFERS` : return Object.assign({}, state, {
       offers: action.payload,
-    });
-
-    case `FILTER_OFFERS` : return Object.assign({}, state, {
-      availableOffers: action.payload,
     });
 
     default: return state;

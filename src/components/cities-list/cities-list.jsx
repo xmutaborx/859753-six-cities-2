@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const citiesList = ({cities, changeCity}) => {
+const CitiesList = ({cities, changeCity}) => {
   const MAX_CITY = 6;
 
   return (
@@ -28,9 +28,9 @@ const citiesList = ({cities, changeCity}) => {
   );
 };
 
-citiesList.propTypes = {
+CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   changeCity: PropTypes.func.isRequired
 };
 
-export default citiesList;
+export default CitiesList;

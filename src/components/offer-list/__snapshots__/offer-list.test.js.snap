@@ -1,112 +1,127 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OfferCard correctly renders 1`] = `
-<div
-  className="cities__places-list places__list tabs__content"
+<section
+  className="cities__places places"
 >
-  <article
-    className="cities__place-card place-card"
-    onMouseEnter={[Function]}
+  <h2
+    className="visually-hidden"
   >
-    <div
-      className="place-card__mark"
-    >
-      <span>
-        Premium
-      </span>
-    </div>
-    <div
-      className="cities__image-wrapper place-card__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="img/apartment-01.jpg"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
+    Places
+  </h2>
+  <b
+    className="places__found"
+  >
+    1
+     places to stay in 
+    city name
+  </b>
+  <div
+    className="cities__places-list places__list tabs__content"
+  >
+    <article
+      className="cities__place-card place-card"
+      onMouseEnter={[Function]}
     >
       <div
-        className="place-card__price-wrapper"
+        className="place-card__mark"
       >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            420
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button button"
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              xlinkHref="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            To bookmarks
-          </span>
-        </button>
+        <span>
+          Premium
+        </span>
       </div>
       <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": "42%",
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
+        className="cities__image-wrapper place-card__image-wrapper"
       >
         <a
           href="#"
         >
-          test title
+          <img
+            alt="Place image"
+            className="place-card__image"
+            height="200"
+            src="img/apartment-01.jpg"
+            width="260"
+          />
         </a>
-      </h2>
-      <p
-        className="place-card__type"
+      </div>
+      <div
+        className="place-card__info"
       >
-        type
-      </p>
-    </div>
-  </article>
-  ;
-</div>
+        <div
+          className="place-card__price-wrapper"
+        >
+          <div
+            className="place-card__price"
+          >
+            <b
+              className="place-card__price-value"
+            >
+              €
+              420
+            </b>
+            <span
+              className="place-card__price-text"
+            >
+              / night
+            </span>
+          </div>
+          <button
+            className="place-card__bookmark-button button"
+            type="button"
+          >
+            <svg
+              className="place-card__bookmark-icon"
+              height="19"
+              width="18"
+            >
+              <use
+                xlinkHref="#icon-bookmark"
+              />
+            </svg>
+            <span
+              className="visually-hidden"
+            >
+              To bookmarks
+            </span>
+          </button>
+        </div>
+        <div
+          className="place-card__rating rating"
+        >
+          <div
+            className="place-card__stars rating__stars"
+          >
+            <span
+              style={
+                Object {
+                  "width": "42%",
+                }
+              }
+            />
+            <span
+              className="visually-hidden"
+            >
+              Rating
+            </span>
+          </div>
+        </div>
+        <h2
+          className="place-card__name"
+        >
+          <a
+            href="#"
+          >
+            test title
+          </a>
+        </h2>
+        <p
+          className="place-card__type"
+        >
+          type
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
 `;

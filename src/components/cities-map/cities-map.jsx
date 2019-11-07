@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
 class CitiesMap extends React.PureComponent {
-
-  componentDidMount() {
-    const {mapConfig: {defaultCity, zoom, layer, copyRight}, offers} = this.props;
+  _init() {
+    const {mapConfig: {defaultCity, zoom, layer, copyRight}, pins} = this.props;
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -26,11 +25,15 @@ class CitiesMap extends React.PureComponent {
       })
       .addTo(map);
 
-    for (let i = 0; i < offers.length; i++) {
+    for (let i = 0; i < pins.length; i++) {
       leaflet
-        .marker(offers[i].coordinates, {icon})
+        .marker(pins[i], {icon})
         .addTo(map);
     }
+  }
+
+  componentDidUpdate() {
+    this._init();
   }
 
   render() {

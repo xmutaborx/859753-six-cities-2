@@ -51,7 +51,8 @@ OffersList.propTypes = {
     premium: PropTypes.bool.isRequired,
     img: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-  }))
+  })),
+  city: PropTypes.string.isRequired
 };
 
 export default OffersList;
