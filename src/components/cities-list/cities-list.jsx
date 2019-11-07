@@ -14,6 +14,7 @@ const citiesList = ({cities, changeCity}) => {
                 className="locations__item-link tabs__item"
                 href="#"
                 onClick={(e) => {
+                  // eslint-disable-next-line no-unused-expressions
                   e.preventDefault;
                   changeCity(it);
                 }}>
@@ -29,6 +30,7 @@ const citiesList = ({cities, changeCity}) => {
 
 citiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  changeCity: PropTypes.func.isRequired
 };
 
 export default citiesList;

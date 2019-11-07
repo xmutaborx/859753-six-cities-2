@@ -1,7 +1,7 @@
 export const mockOffers = [
   {
     id: 1,
-    name: `Amsterdam`,
+    name: `Paris`,
     title: `Beautiful & luxurious apartment at great location`,
     price: 120,
     type: `apartment`,
@@ -12,7 +12,7 @@ export const mockOffers = [
   },
   {
     id: 2,
-    name: `Amsterdam`,
+    name: `Cologne`,
     title: `Wood and stone place`,
     price: 80,
     type: `Private room`,
@@ -23,7 +23,7 @@ export const mockOffers = [
   },
   {
     id: 3,
-    name: `Paris`,
+    name: `Brussels`,
     title: `Canal View Prinsengracht`,
     price: 132,
     type: `apartment`,
@@ -34,7 +34,7 @@ export const mockOffers = [
   },
   {
     id: 4,
-    name: `Moscow`,
+    name: `Amsterdam`,
     title: `Nice, cozy, warm big bed apartment`,
     price: 180,
     type: `apartment`,
@@ -42,5 +42,49 @@ export const mockOffers = [
     img: `img/apartment-03.jpg`,
     rating: 100,
     coordinates: [52.3809553943508, 4.939309666406198]
-  }
+  },
+  {
+    id: 5,
+    name: `Amsterdam`,
+    title: `Nice, cozy, warm big bed apartment`,
+    price: 180,
+    type: `apartment`,
+    premium: true,
+    img: `img/apartment-03.jpg`,
+    rating: 100,
+    coordinates: [52.3809355943508, 4.939309666406198]
+  },
+  {
+    id: 6,
+    name: `Hamburg`,
+    title: `Nice, cozy, warm big bed apartment`,
+    price: 180,
+    type: `apartment`,
+    premium: true,
+    img: `img/apartment-03.jpg`,
+    rating: 100,
+    coordinates: [52.3802345943508, 4.939309666406198]
+  },
+  {
+    id: 7,
+    name: `Hamburg`,
+    title: `Nice, cozy, warm big bed apartment`,
+    price: 180,
+    type: `apartment`,
+    premium: true,
+    img: `img/apartment-03.jpg`,
+    rating: 100,
+    coordinates: [52.3802377943508, 4.939309666406198]
+  },
+  {
+    id: 8,
+    name: `Dusseldorf`,
+    title: `Nice, cozy, warm big bed apartment`,
+    price: 180,
+    type: `apartment`,
+    premium: true,
+    img: `img/apartment-03.jpg`,
+    rating: 100,
+    coordinates: [52.3802377943000, 4.939309666406198]
+  },
 ];

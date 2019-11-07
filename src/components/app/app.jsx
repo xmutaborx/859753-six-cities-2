@@ -19,32 +19,31 @@ class App extends React.PureComponent {
   }
 
   componentDidMount() {
-    // получаю офферы из мока и заливаю в initialState
+    // моковые данные записал в initialState (типа API)
     this.props.setOffers(mockOffers);
-
-    // Устанавливаю дефолтный город в initialState
-    // Записываю массив названий городов в App state
+    // установил дефолтный city в initialState, установил массив названий городов в state App
     this._setAvailableCityFromOffers(mockOffers);
-
   }
+
 
   _setAvailableCityFromOffers(offers) {
     // получаем массив названий всех городов
     const list = offers.map((city) => city.name);
     const availableCities = Array.from(new Set(list));
 
-    // записывает в стейт App
+    // записываем все города в стейт App, чтобы передать пропсом в cities-list
     this.setState({availableCities});
 
     // ставим дефолтный город в initialState city
     this.props.changeCity(availableCities[0]);
 
     // Фильтрую офферы исходя из выбранного города
-    this.props.filterOffers(offers, this.props.city);
+    // this.props.filterOffers(offers, availableCities[0]);
+
   }
 
   render() {
-    const {mapConfig, changeCity, city} = this.props;
+    const {mapConfig, changeCity, city, offers, availableOffers} = this.props;
 
     return (
       <React.Fragment>
@@ -54,9 +53,9 @@ class App extends React.PureComponent {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList cards={this.props.offers} city={city} />
+            <OffersList cards={offers} city={city} />
             <div className="cities__right-section">
-              <CitiesMap mapConfig={mapConfig} offers={this.props.offers}/>
+              <CitiesMap mapConfig={mapConfig} offers={offers}/>
             </div>
           </div>
         </div>
@@ -77,6 +76,7 @@ App.propTypes = {
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })),
   city: PropTypes.string,
+  availableOffers: PropTypes.array,
   changeCity: PropTypes.func.isRequired,
   setOffers: PropTypes.func.isRequired,
   filterOffers: PropTypes.func.isRequired,
@@ -91,7 +91,8 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  offers: state.offers
+  offers: state.offers,
+  availableOffers: state.availableOffers
 });
 
 const mapDispatchToProps = (dispatch) => ({

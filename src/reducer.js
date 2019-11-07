@@ -1,6 +1,7 @@
 const initialState = {
   city: ``,
-  offers: []
+  offers: [],
+  availableOffers: [],
 };
 
 const ActionCreator = {
@@ -36,7 +37,7 @@ const reducer = (state = initialState, action) => {
     });
 
     case `FILTER_OFFERS` : return Object.assign({}, state, {
-      offers: action.payload,
+      availableOffers: action.payload,
     });
 
     default: return state;
