@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator, getAvailableOffers} from '../../reducer';
+import {ActionCreator} from '../../reducer';
 
 import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
@@ -12,12 +12,19 @@ class App extends React.PureComponent {
     super(props);
 
     this.state = {
-      availableCities: []
+      availableCities: [],
+      availableOffers: []
     };
   }
 
   componentDidMount() {
     this._setAvailableCityFromOffers(this.props.offers);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.city !== this.props.city) {
+      this._setAvailableOffersFromCity(this.props.offers, this.props.city);
+    }
   }
 
   _setAvailableCityFromOffers(offers) {
@@ -27,10 +34,13 @@ class App extends React.PureComponent {
     this.setState({availableCities});
   }
 
+  _setAvailableOffersFromCity(offers, city) {
+    const availableOffers = offers.filter((offer) => offer.name === city);
+    this.setState({availableOffers});
+  }
+
   render() {
     const {mapConfig, changeCity, city} = this.props;
-
-    const availableOffers = getAvailableOffers(this.props.offers, this.props.city);
 
     return (
       <React.Fragment>
@@ -40,7 +50,7 @@ class App extends React.PureComponent {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList cards={availableOffers} city={city} />
+            <OffersList cards={this.state.availableOffers} city={city} />
             <div className="cities__right-section">
               <CitiesMap mapConfig={mapConfig} offers={this.props.offers}/>
             </div>

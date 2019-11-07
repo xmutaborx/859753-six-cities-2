@@ -32,12 +32,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const getAvailableOffers = (offers, city) => {
-  return offers.filter((offer) => offer.name === city);
-};
-
 export {
   ActionCreator,
-  reducer,
-  getAvailableOffers
+  reducer
 };
