@@ -24,11 +24,11 @@ const citiesList = ({cities, changeCity}) => {
         </ul>
       </section>
     </div>
-  )
-}
+  );
+};
 
 citiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-}
+};
 
 export default citiesList;

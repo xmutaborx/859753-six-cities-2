@@ -1,6 +1,8 @@
+import {mockOffers} from './mocks/offers';
+
 const initialState = {
-  city: '',
-  offer: []
+  city: ``,
+  offers: mockOffers
 };
 
 const ActionCreator = {
@@ -9,12 +11,12 @@ const ActionCreator = {
     payload: city
   }),
 
-  getOffers: (offer) => ({
-    type: `GET_OFFERS`,
-    payload: offer
+  setOffers: (offers) => ({
+    type: `SET_OFFERS`,
+    payload: offers
   }),
 
-}
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -22,26 +24,20 @@ const reducer = (state = initialState, action) => {
       city: action.payload,
     });
 
-    case `GET_OFFERS` : return Object.assign({}, state, {
-      offer: action.payload,
+    case `SET_OFFERS` : return Object.assign({}, state, {
+      offers: action.payload,
     });
 
-    default: return state
+    default: return state;
   }
-}
-
-const getCityFromOffers = (offers) => {
-  const list = offers.map((city) => city.name);
-  return Array.from(new Set(list));
-}
+};
 
 const getAvailableOffers = (offers, city) => {
-  return offers.filter((offer) => offer.name === city)
-}
+  return offers.filter((offer) => offer.name === city);
+};
 
 export {
   ActionCreator,
   reducer,
-  getCityFromOffers,
   getAvailableOffers
-}
+};
