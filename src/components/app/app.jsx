@@ -17,20 +17,14 @@ class App extends React.PureComponent {
   }
 
   componentDidMount() {
-    // 1
-    // Получаем список городов из всех предложений
-    const availableCities = this._getCityFromOffers(this.props.offers);
-
-    // Устанавливаем в initialState город по дефолту
-    this.props.changeCity(availableCities[0]);
-
-    // Записываю список доступных городов в стейт, чтобы передать компоненту "Список городов"
-    this.setState({availableCities});
+    this._setAvailableCityFromOffers(this.props.offers);
   }
 
-  _getCityFromOffers(offers) {
+  _setAvailableCityFromOffers(offers) {
     const list = offers.map((city) => city.name);
-    return Array.from(new Set(list));
+    const availableCities = Array.from(new Set(list));
+    this.props.changeCity(availableCities[0]);
+    this.setState({availableCities});
   }
 
   render() {
