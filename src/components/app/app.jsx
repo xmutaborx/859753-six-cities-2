@@ -7,6 +7,8 @@ import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 
+import {mockOffers} from '../../mocks/offers';
+
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -17,16 +19,28 @@ class App extends React.PureComponent {
   }
 
   componentDidMount() {
-    this._setAvailableCityFromOffers(this.props.offers);
+    // получаю офферы из мока и заливаю в initialState
+    this.props.setOffers(mockOffers);
+
+    // Устанавливаю дефолтный город в initialState
+    // Записываю массив названий городов в App state
+    this._setAvailableCityFromOffers(mockOffers);
+
   }
 
   _setAvailableCityFromOffers(offers) {
+    // получаем массив названий всех городов
     const list = offers.map((city) => city.name);
     const availableCities = Array.from(new Set(list));
-    this.props.changeCity(availableCities[0]);
-    this.props.changeOffers(offers, availableCities[0]);
 
+    // записывает в стейт App
     this.setState({availableCities});
+
+    // ставим дефолтный город в initialState city
+    this.props.changeCity(availableCities[0]);
+
+    // Фильтрую офферы исходя из выбранного города
+    this.props.filterOffers(offers, this.props.city);
   }
 
   render() {
@@ -40,7 +54,7 @@ class App extends React.PureComponent {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList cards={this.props.availableOffers} city={city} />
+            <OffersList cards={this.props.offers} city={city} />
             <div className="cities__right-section">
               <CitiesMap mapConfig={mapConfig} offers={this.props.offers}/>
             </div>
@@ -62,11 +76,10 @@ App.propTypes = {
     rating: PropTypes.number.isRequired,
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })),
-  availableOffers: PropTypes.array.isRequired,
-  city: PropTypes.string.isRequired,
+  city: PropTypes.string,
   changeCity: PropTypes.func.isRequired,
   setOffers: PropTypes.func.isRequired,
-  changeOffers: PropTypes.func.isRequired,
+  filterOffers: PropTypes.func.isRequired,
   mapConfig: PropTypes.shape({
     defaultCity: PropTypes.arrayOf(PropTypes.number).isRequired,
     zoom: PropTypes.number.isRequired,
@@ -78,14 +91,13 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  offers: state.offers,
-  availableOffers: state.availableOffers
+  offers: state.offers
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setOffers: (offers) => dispatch(ActionCreator.setOffers(offers)),
   changeCity: (city) => dispatch(ActionCreator.changeCity(city)),
-  changeOffers: (offers, city) => dispatch(ActionCreator.changeOffers(offers, city)),
+  filterOffers: (offers, city) => dispatch(ActionCreator.filterOffers(offers, city)),
 });
 
 export {App};
