@@ -4,36 +4,51 @@ import leaflet from 'leaflet';
 
 class CitiesMap extends React.PureComponent {
   _init() {
-    const {mapConfig: {defaultCity, zoom, layer, copyRight}, pins} = this.props;
+    const {defaultCity, zoom, layer, copyRight} = this.props.mapConfig;
 
-    const icon = leaflet.icon({
+    this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
 
-    const map = leaflet.map(`map`, {
+    this.map = leaflet.map(`map`, {
       center: defaultCity,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(defaultCity, zoom);
+    this.map.setView(defaultCity, zoom);
 
     leaflet
       .tileLayer(layer, {
         attribution: copyRight
       })
-      .addTo(map);
+      .addTo(this.map);
+
+    this.markerGroup = [];
+  }
+
+  _renderPins() {
+    const {pins} = this.props;
 
     for (let i = 0; i < pins.length; i++) {
-      leaflet
-        .marker(pins[i], {icon})
-        .addTo(map);
+      let marker = leaflet.marker(pins[i], this.icon).addTo(this.map);
+      this.markerGroup.push(marker);
     }
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     this._init();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.pins !== this.props.pins) {
+      this.markerGroup.forEach((it) => {
+        this.map.removeLayer(it);
+      });
+
+      this._renderPins();
+    }
   }
 
   render() {
@@ -50,6 +65,7 @@ CitiesMap.propTypes = {
     layer: PropTypes.string.isRequired,
     copyRight: PropTypes.string.isRequired
   }),
+  pins: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   offers: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

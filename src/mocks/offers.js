@@ -30,7 +30,7 @@ export const mockOffers = [
     premium: false,
     img: `img/apartment-02.jpg`,
     rating: 80,
-    coordinates: [52.3909553943508, 4.929309666406198]
+    coordinates: [52.3909553443508, 4.929309666406198]
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ export const mockOffers = [
     premium: true,
     img: `img/apartment-03.jpg`,
     rating: 100,
-    coordinates: [52.3809553943508, 4.939309666406198]
+    coordinates: [52.3509553943508, 4.939309666406198]
   },
   {
     id: 5,
