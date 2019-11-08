@@ -47,7 +47,9 @@ class App extends React.PureComponent {
           <div className="cities__places-container container">
             <OffersList cards={availableOffers} city={city} />
             <div className="cities__right-section">
-              <CitiesMap mapConfig={mapConfig} pins={coordinates}/>
+              <section className="cities__map map">
+                <CitiesMap mapConfig={mapConfig} pins={coordinates} />
+              </section>
             </div>
           </div>
         </div>

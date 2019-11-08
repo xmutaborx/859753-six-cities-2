@@ -17,6 +17,7 @@ class CitiesMap extends React.PureComponent {
       zoomControl: false,
       marker: true
     });
+
     this.map.setView(defaultCity, zoom);
 
     leaflet
@@ -26,6 +27,7 @@ class CitiesMap extends React.PureComponent {
       .addTo(this.map);
 
     this.markerGroup = [];
+
   }
 
   _renderPins() {
@@ -53,7 +55,7 @@ class CitiesMap extends React.PureComponent {
 
   render() {
     return (
-      <div className="cities__map" id="map" />
+      <div id="map" style={{height: `100%`}}/>
     );
   }
 }
