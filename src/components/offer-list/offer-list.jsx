@@ -12,28 +12,34 @@ class OffersList extends React.PureComponent {
     };
   }
 
+  hoverHandler(card) {
+    this.setState({
+      activeCard: card,
+    });
+  }
+
   render() {
-    const {cards} = this.props;
+    const {cards, city} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content" >
-        {cards.map((card) =>
-          <OfferCard
-            key={card.id}
-            title={card.title}
-            price={card.price}
-            type={card.type}
-            premium={card.premium}
-            img={card.img}
-            rating={card.rating}
-            onMouseHover={() => {
-              this.setState({
-                activeCard: card,
-              });
-            }}
-          />
-        )};
-      </div>
+      <section className="cities__places places">
+        <h2 className="visually-hidden">Places</h2>
+        <b className="places__found">{cards.length} places to stay in {city}</b>
+        <div className="cities__places-list places__list tabs__content" >
+          {cards.map((card) =>
+            <OfferCard
+              key={card.id}
+              title={card.title}
+              price={card.price}
+              type={card.type}
+              premium={card.premium}
+              img={card.img}
+              rating={card.rating}
+              onMouseHover={() => this.hoverHandler(card)}
+            />
+          )}
+        </div>
+      </section>
     );
   }
 }
@@ -47,7 +53,8 @@ OffersList.propTypes = {
     premium: PropTypes.bool.isRequired,
     img: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-  }))
+  })),
+  city: PropTypes.string.isRequired
 };
 
 export default OffersList;

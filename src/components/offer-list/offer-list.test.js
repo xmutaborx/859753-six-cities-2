@@ -8,6 +8,7 @@ it(`OfferCard correctly renders`, () => {
   const tree = renderer
     .create(<OfferList
       cards={cardMock}
+      city={`city name`}
     />)
     .toJSON();
 
