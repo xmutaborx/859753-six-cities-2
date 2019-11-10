@@ -120,10 +120,18 @@ Array [
       <div
         className="cities__right-section"
       >
-        <div
-          className="cities__map"
-          id="map"
-        />
+        <section
+          className="cities__map map"
+        >
+          <div
+            id="map"
+            style={
+              Object {
+                "height": "100%",
+              }
+            }
+          />
+        </section>
       </div>
     </div>
   </div>,
