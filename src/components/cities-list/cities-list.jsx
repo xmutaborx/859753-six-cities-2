@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const MAX_CITY = 6;
 
 class CitiesList extends React.PureComponent {
-
   clickHandler(e, city) {
     e.preventDefault();
     this.props.changeCity(city);
@@ -17,8 +16,8 @@ class CitiesList extends React.PureComponent {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {cities.slice(0, MAX_CITY).map((it, i) => (
-              <li className="locations__item" key={i + it}>
+            {cities.slice(0, MAX_CITY).map((it) => (
+              <li className="locations__item" key={it}>
                 <a
                   className="locations__item-link tabs__item"
                   href="#"
