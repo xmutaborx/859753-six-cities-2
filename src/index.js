@@ -9,15 +9,11 @@ import {mapConfig} from './mocks/map-config';
 
 const store = createStore(reducer);
 
-const init = () => {
-  ReactDOM.render(
-      <Provider store={store}>
-        <App
-          mapConfig={mapConfig}
-        />
-      </Provider>,
-      document.getElementById(`root`)
-  );
-};
-
-init();
+ReactDOM.render(
+    <Provider store={store}>
+      <App
+        mapConfig={mapConfig}
+      />
+    </Provider>,
+    document.getElementById(`root`)
+);

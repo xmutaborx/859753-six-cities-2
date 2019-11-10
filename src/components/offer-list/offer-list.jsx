@@ -12,6 +12,12 @@ class OffersList extends React.PureComponent {
     };
   }
 
+  hoverHandler(card) {
+    this.setState({
+      activeCard: card,
+    });
+  }
+
   render() {
     const {cards, city} = this.props;
 
@@ -29,11 +35,7 @@ class OffersList extends React.PureComponent {
               premium={card.premium}
               img={card.img}
               rating={card.rating}
-              onMouseHover={() => {
-                this.setState({
-                  activeCard: card,
-                });
-              }}
+              onMouseHover={() => this.hoverHandler(card)}
             />
           )}
         </div>

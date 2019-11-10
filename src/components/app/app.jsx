@@ -6,10 +6,16 @@ import {ActionCreator} from '../../reducer/reducer';
 import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
-
 import {mockOffers} from '../../mocks/offers';
 
 class App extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      availableCities: []
+    };
+  }
 
   _setAvailableCityFromOffers(offers) {
     const list = offers.map((city) => city.name);
@@ -17,14 +23,6 @@ class App extends React.PureComponent {
 
     this.setState({availableCities});
     this.props.changeCity(availableCities[0]);
-  }
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      availableCities: []
-    };
   }
 
   componentDidMount() {

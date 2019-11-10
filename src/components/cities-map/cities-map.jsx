@@ -33,10 +33,10 @@ class CitiesMap extends React.PureComponent {
   _renderPins() {
     const {pins} = this.props;
 
-    for (let i = 0; i < pins.length; i++) {
-      let marker = leaflet.marker(pins[i], this.icon).addTo(this.map);
+    pins.forEach((it) => {
+      let marker = leaflet.marker(it, this.icon).addTo(this.map);
       this.markerGroup.push(marker);
-    }
+    });
   }
 
   componentDidMount() {

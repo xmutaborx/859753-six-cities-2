@@ -1,32 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CitiesList = ({cities, changeCity}) => {
-  const MAX_CITY = 6;
+const MAX_CITY = 6;
 
-  return (
-    <div className="tabs">
-      <section className="locations container">
-        <ul className="locations__list tabs__list">
-          {cities.slice(0, MAX_CITY).map((it, i) => (
-            <li className="locations__item" key={i + it}>
-              <a
-                className="locations__item-link tabs__item"
-                href="#"
-                onClick={(e) => {
-                  // eslint-disable-next-line no-unused-expressions
-                  e.preventDefault;
-                  changeCity(it);
-                }}>
-                <span>{it}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
-  );
-};
+class CitiesList extends React.PureComponent {
+
+  clickHandler(e, city) {
+    e.preventDefault();
+    this.props.changeCity(city);
+  }
+
+  render() {
+    const {cities} = this.props;
+
+    return (
+      <div className="tabs">
+        <section className="locations container">
+          <ul className="locations__list tabs__list">
+            {cities.slice(0, MAX_CITY).map((it, i) => (
+              <li className="locations__item" key={i + it}>
+                <a
+                  className="locations__item-link tabs__item"
+                  href="#"
+                  onClick={(e) => this.clickHandler(e, it)}
+                >
+                  <span>{it}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    );
+  }
+}
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
