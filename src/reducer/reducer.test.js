@@ -1,6 +1,5 @@
 import {reducer, ActionCreator} from './reducer';
 
-
 describe(`ActionsCreator returns correctly action`, () => {
   it(`change city`, () => {
     const city = `Moscow`;
