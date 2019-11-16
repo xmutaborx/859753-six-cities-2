@@ -8,7 +8,7 @@ import CitiesMap from '../cities-map/cities-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import {mockOffers} from '../../mocks/offers';
 
-import withActiveItem from '../hocs/with-active-item/with-active-item.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 
 const OffersWrapped = withActiveItem(OffersList);
 
