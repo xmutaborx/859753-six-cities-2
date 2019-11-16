@@ -8,6 +8,10 @@ import CitiesMap from '../cities-map/cities-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import {mockOffers} from '../../mocks/offers';
 
+import withActiveItem from '../hocs/with-active-item/with-active-item.jsx';
+
+const OffersWrapped = withActiveItem(OffersList);
+
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -43,7 +47,7 @@ class App extends React.PureComponent {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList cards={availableOffers} city={city} />
+            <OffersWrapped cards={availableOffers} city={city} />
             <div className="cities__right-section">
               <section className="cities__map map">
                 <CitiesMap mapConfig={mapConfig} pins={coordinates} />
