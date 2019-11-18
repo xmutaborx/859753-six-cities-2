@@ -8,24 +8,12 @@ import CitiesMap from '../cities-map/cities-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import {mockOffers} from '../../mocks/offers';
 
-import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
-
-const OffersWrapped = withActiveItem(OffersList);
-
 class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      availableCities: []
-    };
-  }
-
   _setAvailableCityFromOffers(offers) {
     const list = offers.map((city) => city.name);
     const availableCities = Array.from(new Set(list));
 
-    this.setState({availableCities});
+    this.props.setAvailableCities(availableCities);
     this.props.changeCity(availableCities[0]);
   }
 
@@ -42,12 +30,12 @@ class App extends React.PureComponent {
     return (
       <React.Fragment>
         <CitiesList
-          cities={this.state.availableCities}
+          cities={this.props.availableCities}
           changeCity={changeCity}
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersWrapped cards={availableOffers} city={city} />
+            <OffersList cards={availableOffers} city={city} />
             <div className="cities__right-section">
               <section className="cities__map map">
                 <CitiesMap mapConfig={mapConfig} pins={coordinates} />
@@ -74,6 +62,8 @@ App.propTypes = {
   city: PropTypes.string,
   changeCity: PropTypes.func.isRequired,
   setOffers: PropTypes.func.isRequired,
+  setAvailableCities: PropTypes.func.isRequired,
+  availableCities: PropTypes.array.isRequired,
   mapConfig: PropTypes.shape({
     defaultCity: PropTypes.arrayOf(PropTypes.number).isRequired,
     zoom: PropTypes.number.isRequired,
@@ -85,12 +75,14 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  offers: state.offers
+  offers: state.offers,
+  availableCities: state.availableCities,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setOffers: (offers) => dispatch(ActionCreator.setOffers(offers)),
-  changeCity: (city) => dispatch(ActionCreator.changeCity(city))
+  changeCity: (city) => dispatch(ActionCreator.changeCity(city)),
+  setAvailableCities: (cities) => dispatch(ActionCreator.setAvailableCities(cities)),
 });
 
 export {App};

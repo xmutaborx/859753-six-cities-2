@@ -1,6 +1,7 @@
 const initialState = {
   city: ``,
-  offers: []
+  offers: [],
+  availableCities: [],
 };
 
 const ActionCreator = {
@@ -13,11 +14,17 @@ const ActionCreator = {
     type: actionsTypes.setOffers,
     payload: offers
   }),
+
+  setAvailableCities: (cities) => ({
+    type: actionsTypes.availableCities,
+    payload: cities
+  }),
 };
 
 const actionsTypes = {
   changeCity: `CHANGE_CITY`,
-  setOffers: `SET_OFFERS`
+  setOffers: `SET_OFFERS`,
+  availableCities: `AVAILABLE_CITIES`,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +35,10 @@ const reducer = (state = initialState, action) => {
 
     case actionsTypes.setOffers : return Object.assign({}, state, {
       offers: action.payload,
+    });
+
+    case actionsTypes.availableCities : return Object.assign({}, state, {
+      availableCities: action.payload,
     });
 
     default: return state;

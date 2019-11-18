@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import OfferCard from '../offer-card/offer-card.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 
 const OffersList = (props) => {
   const {handleChangeActiveItem, cards, city} = props;
@@ -25,20 +26,22 @@ const OffersList = (props) => {
         )}
       </div>
     </section>
-  )
-}
+  );
+};
 
 OffersList.propTypes = {
+  handleChangeActiveItem: PropTypes.func.isRequired,
   cards: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
     img: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
   })),
   city: PropTypes.string.isRequired
 };
 
-export default OffersList;
+export default withActiveItem(OffersList);
