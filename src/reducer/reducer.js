@@ -1,28 +1,55 @@
 const initialState = {
   city: ``,
-  offers: []
+  offers: [],
+  availableCities: [],
+  availableOffers: [],
 };
 
 const ActionCreator = {
   changeCity: (city) => ({
-    type: `CHANGE_CITY`,
+    type: actionsTypes.changeCity,
     payload: city
   }),
 
   setOffers: (offers) => ({
-    type: `SET_OFFERS`,
+    type: actionsTypes.setOffers,
+    payload: offers
+  }),
+
+  setAvailableCities: (cities) => ({
+    type: actionsTypes.availableCities,
+    payload: cities
+  }),
+
+  setAvailableOffers: (offers) => ({
+    type: actionsTypes.availableOffers,
     payload: offers
   }),
 };
 
+const actionsTypes = {
+  changeCity: `CHANGE_CITY`,
+  setOffers: `SET_OFFERS`,
+  availableCities: `AVAILABLE_CITIES`,
+  availableOffers: `AVAILABLE_OFFERS`,
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case `CHANGE_CITY` : return Object.assign({}, state, {
+    case actionsTypes.changeCity : return Object.assign({}, state, {
       city: action.payload,
     });
 
-    case `SET_OFFERS` : return Object.assign({}, state, {
+    case actionsTypes.setOffers : return Object.assign({}, state, {
       offers: action.payload,
+    });
+
+    case actionsTypes.availableCities : return Object.assign({}, state, {
+      availableCities: action.payload,
+    });
+
+    case actionsTypes.availableOffers : return Object.assign({}, state, {
+      availableOffers: action.payload,
     });
 
     default: return state;
@@ -31,5 +58,6 @@ const reducer = (state = initialState, action) => {
 
 export {
   ActionCreator,
-  reducer
+  reducer,
+  actionsTypes
 };

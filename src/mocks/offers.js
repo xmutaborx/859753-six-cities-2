@@ -27,7 +27,7 @@ export const mockOffers = [
     title: `Canal View Prinsengracht`,
     price: 132,
     type: `apartment`,
-    premium: false,
+    premium: true,
     img: `img/apartment-02.jpg`,
     rating: 80,
     coordinates: [52.3909553443508, 4.929309666406198]
@@ -49,7 +49,7 @@ export const mockOffers = [
     title: `Nice, cozy, warm big bed apartment`,
     price: 180,
     type: `apartment`,
-    premium: true,
+    premium: false,
     img: `img/apartment-03.jpg`,
     rating: 100,
     coordinates: [52.3809355943508, 4.939309666406198]
@@ -60,7 +60,7 @@ export const mockOffers = [
     title: `Nice, cozy, warm big bed apartment`,
     price: 180,
     type: `apartment`,
-    premium: true,
+    premium: false,
     img: `img/apartment-03.jpg`,
     rating: 100,
     coordinates: [52.3802345943508, 4.939309666406198]

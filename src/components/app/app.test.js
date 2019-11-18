@@ -11,11 +11,15 @@ it(`App correctly renders`, () => {
   global.document.body.appendChild(div);
   const tree = renderer
     .create(<App
-      offers={cardMock}
       mapConfig={mapConfigMock}
+      city={`city_name`}
+      offers={cardMock}
+      availableCities={[`first city`, `second city`]}
+      availableOffers={cardMock}
       changeCity={() => {}}
       setOffers={() => {}}
-      city={`city_name`}
+      setAvailableCities={() => {}}
+      setAvailableOffers={() => {}}
     />)
     .toJSON();
 
