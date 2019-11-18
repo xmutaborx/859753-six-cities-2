@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/reducer';
@@ -10,7 +10,7 @@ import {mockOffers} from '../../mocks/offers';
 
 const MAX_CITY = 6;
 
-class App extends React.PureComponent {
+class App extends PureComponent {
   _setAvailableCityFromOffers(offers) {
     const list = offers.map((city) => city.name);
     const availableCities = Array.from(new Set(list));
@@ -24,9 +24,12 @@ class App extends React.PureComponent {
     this.props.setAvailableOffers(availableOffers);
   }
 
-  // Вынес фильтрацию списка городов в метод из рендера. Или это было лишнее?
   _listOfCities() {
     return this.props.availableCities.slice(0, MAX_CITY);
+  }
+
+  _listOfPins() {
+    return this.props.availableOffers.map((offer) => offer.coordinates);
   }
 
   componentDidMount() {
@@ -42,28 +45,26 @@ class App extends React.PureComponent {
 
   render() {
     const {mapConfig, changeCity, city} = this.props;
-    const coordinates = this.props.availableOffers.map((offer) => offer.coordinates);
-
-    // const MAX_CITY = 6;
-    // const availableCities = this.props.availableCities.slice(0, MAX_CITY);
 
     return (
-      <Fragment>
-        <CitiesList
-          cities={this._listOfCities()}
-          changeCity={changeCity}
-        />
-        <div className="cities">
-          <div className="cities__places-container container">
-            <OffersList cards={this.props.availableOffers} city={city} />
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <CitiesMap mapConfig={mapConfig} pins={coordinates} />
-              </section>
+      <div className="page page--gray page--main">
+        <main className="page__main page__main--index">
+          <CitiesList
+            cities={this._listOfCities()}
+            changeCity={changeCity}
+          />
+          <div className="cities">
+            <div className="cities__places-container container">
+              <OffersList cards={this.props.availableOffers} city={city} />
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <CitiesMap mapConfig={mapConfig} pins={this._listOfPins()} />
+                </section>
+              </div>
             </div>
           </div>
-        </div>
-      </Fragment>
+        </main>
+      </div>
     );
   }
 }
