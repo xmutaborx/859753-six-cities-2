@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/reducer';
@@ -35,12 +35,14 @@ class App extends React.PureComponent {
 
   render() {
     const {mapConfig, changeCity, city} = this.props;
+    const MAX_CITY = 6;
     const coordinates = this.props.availableOffers.map((offer) => offer.coordinates);
+    const availableCities = this.props.availableCities.slice(0, MAX_CITY);
 
     return (
-      <React.Fragment>
+      <Fragment>
         <CitiesList
-          cities={this.props.availableCities}
+          cities={availableCities}
           changeCity={changeCity}
         />
         <div className="cities">
@@ -53,7 +55,7 @@ class App extends React.PureComponent {
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
