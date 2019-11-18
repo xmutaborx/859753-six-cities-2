@@ -10,12 +10,10 @@ Enzyme.configure({adapter: new Adapter()});
 
 describe(`HOC with-active-item`, () => {
   const ComponentWrapped = withActiveItem(OffersList);
-  const handleChangeActiveItem = jest.fn();
 
   const wrapper = mount(<ComponentWrapped
     cards={cardMock}
     city={`Moscow`}
-    handleChangeActiveItem={handleChangeActiveItem}
   />);
 
   it(`activeItem from HOC state is empty object`, () => {
@@ -24,10 +22,8 @@ describe(`HOC with-active-item`, () => {
 
   it(`HOC state change correctly when mouse over`, () => {
     const article = wrapper.find(`article`);
-    // eslint-disable-next-line no-console
-    console.log(article);
-    // article.simulate(`mouseenter`, mock);
-    // expect(handleChangeActiveItem).toHaveBeenCalledTimes(1);
+    article.simulate(`mouseenter`, cardMock);
+    expect(wrapper.state().activeItem).toEqual(cardMock[0]);
   });
 
 });
