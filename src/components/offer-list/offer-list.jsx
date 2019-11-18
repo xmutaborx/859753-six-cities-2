@@ -44,4 +44,5 @@ OffersList.propTypes = {
   city: PropTypes.string.isRequired
 };
 
+export {OffersList};
 export default withActiveItem(OffersList);

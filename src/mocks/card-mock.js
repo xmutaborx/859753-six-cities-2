@@ -2,6 +2,7 @@ export const cardMock = [
   {
     id: 42,
     title: `test title`,
+    name: `Paris`,
     price: 420,
     type: `type`,
     premium: true,
