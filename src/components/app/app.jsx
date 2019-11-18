@@ -22,6 +22,12 @@ class App extends React.PureComponent {
     this.props.setAvailableOffers(availableOffers);
   }
 
+  // Вынес фильтрацию списка городов в метод из рендера. Или это было лишнее?
+  _listOfCities() {
+    const MAX_CITY = 6;
+    return this.props.availableCities.slice(0, MAX_CITY);
+  }
+
   componentDidMount() {
     this.props.setOffers(mockOffers);
     this._setAvailableCityFromOffers(mockOffers);
@@ -35,14 +41,15 @@ class App extends React.PureComponent {
 
   render() {
     const {mapConfig, changeCity, city} = this.props;
-    const MAX_CITY = 6;
     const coordinates = this.props.availableOffers.map((offer) => offer.coordinates);
-    const availableCities = this.props.availableCities.slice(0, MAX_CITY);
+
+    // const MAX_CITY = 6;
+    // const availableCities = this.props.availableCities.slice(0, MAX_CITY);
 
     return (
       <Fragment>
         <CitiesList
-          cities={availableCities}
+          cities={this._listOfCities()}
           changeCity={changeCity}
         />
         <div className="cities">
