@@ -8,6 +8,8 @@ import CitiesMap from '../cities-map/cities-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import {mockOffers} from '../../mocks/offers';
 
+const MAX_CITY = 6;
+
 class App extends React.PureComponent {
   _setAvailableCityFromOffers(offers) {
     const list = offers.map((city) => city.name);
@@ -24,7 +26,6 @@ class App extends React.PureComponent {
 
   // Вынес фильтрацию списка городов в метод из рендера. Или это было лишнее?
   _listOfCities() {
-    const MAX_CITY = 6;
     return this.props.availableCities.slice(0, MAX_CITY);
   }
 
