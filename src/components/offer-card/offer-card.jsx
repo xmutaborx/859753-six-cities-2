@@ -43,13 +43,13 @@ const OfferCard = ({title, price, type, premium, img, rating, onMouseHover}) => 
 };
 
 OfferCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  premium: PropTypes.bool.isRequired,
-  img: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-  onMouseHover: PropTypes.func
+  // title: PropTypes.string.isRequired,
+  // price: PropTypes.number.isRequired,
+  // type: PropTypes.string.isRequired,
+  // premium: PropTypes.bool.isRequired,
+  // img: PropTypes.string.isRequired,
+  // rating: PropTypes.number.isRequired,
+  // onMouseHover: PropTypes.func
 };
 
 export default OfferCard;

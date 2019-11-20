@@ -30,18 +30,18 @@ const OffersList = (props) => {
 };
 
 OffersList.propTypes = {
-  handleChangeActiveItem: PropTypes.func.isRequired,
-  cards: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-  })),
-  city: PropTypes.string.isRequired
+  // handleChangeActiveItem: PropTypes.func.isRequired,
+  // cards: PropTypes.arrayOf(PropTypes.shape({
+  //   id: PropTypes.number.isRequired,
+  //   img: PropTypes.string.isRequired,
+  //   name: PropTypes.string.isRequired,
+  //   premium: PropTypes.bool.isRequired,
+  //   price: PropTypes.number.isRequired,
+  //   rating: PropTypes.number.isRequired,
+  //   title: PropTypes.string.isRequired,
+  //   type: PropTypes.string.isRequired,
+  // })),
+  // city: PropTypes.string.isRequired
 };
 
 export {OffersList};

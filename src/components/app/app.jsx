@@ -6,21 +6,20 @@ import {ActionCreator} from '../../reducer/reducer';
 import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
-import {mockOffers} from '../../mocks/offers';
 
 const MAX_CITY = 6;
 
 class App extends PureComponent {
   _setAvailableCityFromOffers(offers) {
-    const list = offers.map((city) => city.name);
+    const list = offers.map((offer) => offer.city.name);
     const availableCities = Array.from(new Set(list));
 
-    this.props.setAvailableCities(availableCities);
     this.props.changeCity(availableCities[0]);
+    this.props.setAvailableCities(availableCities);
   }
 
   _setAvailableOffers(offers, city) {
-    const availableOffers = offers.filter((offer) => offer.name === city);
+    const availableOffers = offers.filter((offer) => offer.city.name === city);
     this.props.setAvailableOffers(availableOffers);
   }
 
@@ -33,12 +32,14 @@ class App extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.setOffers(mockOffers);
-    this._setAvailableCityFromOffers(mockOffers);
+    // this._setAvailableCityFromOffers(this.props.offers);
+    // this._setAvailableOffers(this.props.offers, this.props.city);
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.city !== this.props.city) {
+    if (prevProps.offers.length !== this.props.offers.length) {
+      this._setAvailableCityFromOffers(this.props.offers);
+
       this._setAvailableOffers(this.props.offers, this.props.city);
     }
   }
@@ -55,7 +56,7 @@ class App extends PureComponent {
           />
           <div className="cities">
             <div className="cities__places-container container">
-              <OffersList cards={this.props.availableOffers} city={city} />
+              <OffersList cards={this.props.offers} city={city} />
               <div className="cities__right-section">
                 <section className="cities__map map">
                   <CitiesMap mapConfig={mapConfig} pins={this._listOfPins()} />
@@ -70,19 +71,9 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    img: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  })),
+  offers: PropTypes.array,
   city: PropTypes.string,
   changeCity: PropTypes.func.isRequired,
-  setOffers: PropTypes.func.isRequired,
   setAvailableCities: PropTypes.func.isRequired,
   availableCities: PropTypes.array.isRequired,
   setAvailableOffers: PropTypes.func.isRequired,
@@ -104,7 +95,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setOffers: (offers) => dispatch(ActionCreator.setOffers(offers)),
+  // setOffers: (offers) => dispatch(ActionCreator.setOffers(offers)),
   changeCity: (city) => dispatch(ActionCreator.changeCity(city)),
   setAvailableCities: (cities) => dispatch(ActionCreator.setAvailableCities(cities)),
   setAvailableOffers: (offers) => dispatch(ActionCreator.setAvailableOffers(offers)),

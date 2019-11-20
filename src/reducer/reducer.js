@@ -1,8 +1,19 @@
+import api from '../api';
+
 const initialState = {
   city: ``,
   offers: [],
   availableCities: [],
   availableOffers: [],
+};
+
+const Operation = {
+  loadOffers: () => (dispatch) => {
+    return api.get(`/hotels`)
+      .then((response) => {
+        dispatch(ActionCreator.loadOffers(response.data));
+      });
+  }
 };
 
 const ActionCreator = {
@@ -25,6 +36,11 @@ const ActionCreator = {
     type: actionsTypes.availableOffers,
     payload: offers
   }),
+
+  loadOffers: (offers) => ({
+    type: actionsTypes.loadOffers,
+    payload: offers
+  }),
 };
 
 const actionsTypes = {
@@ -32,16 +48,17 @@ const actionsTypes = {
   setOffers: `SET_OFFERS`,
   availableCities: `AVAILABLE_CITIES`,
   availableOffers: `AVAILABLE_OFFERS`,
+  loadOffers: `LOAD_OFFERS`
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionsTypes.changeCity : return Object.assign({}, state, {
-      city: action.payload,
-    });
-
     case actionsTypes.setOffers : return Object.assign({}, state, {
       offers: action.payload,
+    });
+
+    case actionsTypes.changeCity : return Object.assign({}, state, {
+      city: action.payload,
     });
 
     case actionsTypes.availableCities : return Object.assign({}, state, {
@@ -52,6 +69,10 @@ const reducer = (state = initialState, action) => {
       availableOffers: action.payload,
     });
 
+    case actionsTypes.loadOffers : return Object.assign({}, state, {
+      offers: action.payload,
+    });
+
     default: return state;
   }
 };
@@ -59,5 +80,6 @@ const reducer = (state = initialState, action) => {
 export {
   ActionCreator,
   reducer,
-  actionsTypes
+  actionsTypes,
+  Operation
 };

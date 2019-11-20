@@ -1,14 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import enhancer from './store';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import {reducer} from './reducer/reducer';
+import {compose} from 'recompose';
+import {reducer, Operation} from './reducer/reducer';
+import thunk from 'redux-thunk';
 
+import configureAPI from './api';
 import App from './components/app/app.jsx';
 import {mapConfig} from './mocks/map-config';
 
-const store = createStore(reducer, enhancer);
+const api = configureAPI((...args) => store.dispatch(...args));
+
+const store = createStore(
+    reducer,
+    compose(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    )
+);
+
+store.dispatch(Operation.loadOffers());
 
 ReactDOM.render(
     <Provider store={store}>
