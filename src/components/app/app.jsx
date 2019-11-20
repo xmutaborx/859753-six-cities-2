@@ -10,37 +10,56 @@ import CitiesList from '../cities-list/cities-list.jsx';
 const MAX_CITY = 6;
 
 class App extends PureComponent {
-  _setAvailableCityFromOffers(offers) {
-    const list = offers.map((offer) => offer.city.name);
+
+  // функцию вызываю в CDU т.к. this.props.offers приходит с API и все завязанно на нём
+  _initialOffers() {
+    // получаем список всех городов
+    const list = this.props.offers.map((offer) => offer.city.name);
+    // формируем уникальный список без повторений
     const availableCities = Array.from(new Set(list));
-
+    // устанавливаем первый город по дефолту в initialState City
     this.props.changeCity(availableCities[0]);
+    // устанавливаем уникальный список городов в initialState availableCities
     this.props.setAvailableCities(availableCities);
-  }
 
-  _setAvailableOffers(offers, city) {
-    const availableOffers = offers.filter((offer) => offer.city.name === city);
+    // ------------------------------------------//
+
+    // Я хотел бы на этом моменте передавать не availableSities[0], а this.props.city из initialState
+    // чтобы setAvailableOffers был завязан на this.props.city
+    // Но в данный момент this.props.city = ``, хоть я выше его обновляю. Асинхронность, все дела
+    // Если же я оставлю как есть, тогда мне потребуется новая функция
+    // changeOffers - которую я ниже закомментировал
+    // и её мне надо передавать в CitiesList в метод changeCity, чтобы она принимала тот
+    // город, на который кликнули и исходя из этого фильтровала новый список предложений.
+    // НО! тогда какой смысл вообще хранить в initialState поле активного города, если
+    // список офферов перерисовывается только в зависимости от клика в списке городов.
+    //
+    // Идея в том, что не важно каким образом я сменил город, важно что city в initialState поменялся
+    // и тогда автоматически должно поменяться поле availableOffers
+    // Как правильно это реализовать?
+    //   ||
+    //   \/
+
+    const availableOffers = this.filterOffers(this.props.offers, availableCities[0]);
     this.props.setAvailableOffers(availableOffers);
   }
 
-  _listOfCities() {
+  // changeOffers(city) {
+  //   const newOffers = this.props.offers.filter((offer) => offer.city.name === city);
+  //   this.props.setAvailableOffers(newOffers);
+  // }
+
+  filterOffers(offers, city) {
+    return offers.filter((offer) => offer.city.name === city);
+  }
+
+  listOfCities() {
     return this.props.availableCities.slice(0, MAX_CITY);
-  }
-
-  _listOfPins() {
-    return this.props.availableOffers.map((offer) => offer.coordinates);
-  }
-
-  componentDidMount() {
-    // this._setAvailableCityFromOffers(this.props.offers);
-    // this._setAvailableOffers(this.props.offers, this.props.city);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.offers.length !== this.props.offers.length) {
-      this._setAvailableCityFromOffers(this.props.offers);
-
-      this._setAvailableOffers(this.props.offers, this.props.city);
+      this._initialOffers();
     }
   }
 
@@ -51,15 +70,15 @@ class App extends PureComponent {
       <div className="page page--gray page--main">
         <main className="page__main page__main--index">
           <CitiesList
-            cities={this._listOfCities()}
+            cities={this.listOfCities()}
             changeCity={changeCity}
           />
           <div className="cities">
             <div className="cities__places-container container">
-              <OffersList cards={this.props.offers} city={city} />
+              <OffersList cards={this.props.availableOffers} city={city} />
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <CitiesMap mapConfig={mapConfig} pins={this._listOfPins()} />
+                  <CitiesMap mapConfig={mapConfig} pins={[[0, 0]]} />
                 </section>
               </div>
             </div>
@@ -71,19 +90,19 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.array,
-  city: PropTypes.string,
-  changeCity: PropTypes.func.isRequired,
-  setAvailableCities: PropTypes.func.isRequired,
-  availableCities: PropTypes.array.isRequired,
-  setAvailableOffers: PropTypes.func.isRequired,
-  availableOffers: PropTypes.arrayOf(PropTypes.object),
-  mapConfig: PropTypes.shape({
-    defaultCity: PropTypes.arrayOf(PropTypes.number).isRequired,
-    zoom: PropTypes.number.isRequired,
-    layer: PropTypes.string.isRequired,
-    copyRight: PropTypes.string.isRequired
-  }),
+  // offers: PropTypes.array,
+  // city: PropTypes.string,
+  // changeCity: PropTypes.func.isRequired,
+  // setAvailableCities: PropTypes.func.isRequired,
+  // availableCities: PropTypes.array.isRequired,
+  // setAvailableOffers: PropTypes.func.isRequired,
+  // // availableOffers: PropTypes.arrayOf(PropTypes.object),
+  // mapConfig: PropTypes.shape({
+  //   defaultCity: PropTypes.arrayOf(PropTypes.number).isRequired,
+  //   zoom: PropTypes.number.isRequired,
+  //   layer: PropTypes.string.isRequired,
+  //   copyRight: PropTypes.string.isRequired
+  // }),
 };
 
 
@@ -95,7 +114,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // setOffers: (offers) => dispatch(ActionCreator.setOffers(offers)),
   changeCity: (city) => dispatch(ActionCreator.changeCity(city)),
   setAvailableCities: (cities) => dispatch(ActionCreator.setAvailableCities(cities)),
   setAvailableOffers: (offers) => dispatch(ActionCreator.setAvailableOffers(offers)),
