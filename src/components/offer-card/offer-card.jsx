@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const OfferCard = ({title, price, type, premium, img, rating, onMouseHover}) => {
+const OfferCard = ({title, price, type, isPremium, images, rating, onMouseOver}) => {
   return (
-    <article className="cities__place-card place-card" onMouseEnter={onMouseHover}>
-      {premium &&
+    <article className="cities__place-card place-card" onMouseEnter={onMouseOver}>
+      {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={img} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={images[0]} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -29,7 +29,7 @@ const OfferCard = ({title, price, type, premium, img, rating, onMouseHover}) => 
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating}%`}}></span>
+            <span style={{width: `${rating * 20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -43,13 +43,13 @@ const OfferCard = ({title, price, type, premium, img, rating, onMouseHover}) => 
 };
 
 OfferCard.propTypes = {
-  // title: PropTypes.string.isRequired,
-  // price: PropTypes.number.isRequired,
-  // type: PropTypes.string.isRequired,
-  // premium: PropTypes.bool.isRequired,
-  // img: PropTypes.string.isRequired,
-  // rating: PropTypes.number.isRequired,
-  // onMouseHover: PropTypes.func
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  isPremium: PropTypes.bool.isRequired,
+  images: PropTypes.array.isRequired,
+  rating: PropTypes.number.isRequired,
+  onMouseOver: PropTypes.func
 };
 
 export default OfferCard;

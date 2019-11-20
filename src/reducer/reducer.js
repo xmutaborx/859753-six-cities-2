@@ -18,59 +18,49 @@ const Operation = {
 
 const ActionCreator = {
   changeCity: (city) => ({
-    type: actionsTypes.changeCity,
+    type: actionType.changeCity,
     payload: city
   }),
 
-  setOffers: (offers) => ({
-    type: actionsTypes.setOffers,
-    payload: offers
-  }),
-
   setAvailableCities: (cities) => ({
-    type: actionsTypes.availableCities,
+    type: actionType.availableCities,
     payload: cities
   }),
 
   setAvailableOffers: (offers) => ({
-    type: actionsTypes.availableOffers,
+    type: actionType.availableOffers,
     payload: offers
   }),
 
   loadOffers: (offers) => ({
-    type: actionsTypes.loadOffers,
+    type: actionType.loadOffers,
     payload: offers
   }),
 };
 
-const actionsTypes = {
+const actionType = {
+  loadOffers: `LOAD_OFFERS`,
   changeCity: `CHANGE_CITY`,
-  setOffers: `SET_OFFERS`,
   availableCities: `AVAILABLE_CITIES`,
-  availableOffers: `AVAILABLE_OFFERS`,
-  loadOffers: `LOAD_OFFERS`
+  availableOffers: `AVAILABLE_OFFERS`
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionsTypes.setOffers : return Object.assign({}, state, {
+    case actionType.loadOffers : return Object.assign({}, state, {
       offers: action.payload,
     });
 
-    case actionsTypes.changeCity : return Object.assign({}, state, {
+    case actionType.changeCity : return Object.assign({}, state, {
       city: action.payload,
     });
 
-    case actionsTypes.availableCities : return Object.assign({}, state, {
+    case actionType.availableCities : return Object.assign({}, state, {
       availableCities: action.payload,
     });
 
-    case actionsTypes.availableOffers : return Object.assign({}, state, {
+    case actionType.availableOffers : return Object.assign({}, state, {
       availableOffers: action.payload,
-    });
-
-    case actionsTypes.loadOffers : return Object.assign({}, state, {
-      offers: action.payload,
     });
 
     default: return state;
@@ -80,6 +70,6 @@ const reducer = (state = initialState, action) => {
 export {
   ActionCreator,
   reducer,
-  actionsTypes,
+  actionType,
   Operation
 };
