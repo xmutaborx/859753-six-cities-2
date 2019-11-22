@@ -1,4 +1,4 @@
-import {actionType} from './actionType';
+import {actionType} from './action-type';
 
 export const ActionCreator = {
   changeCity: (city) => ({

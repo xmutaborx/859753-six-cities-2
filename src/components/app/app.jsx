@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/actionCreator';
+import {ActionCreator} from '../../store/action-creator';
 import {getCityOffers, getSixCities} from '../../store/selectors';
 
 import OffersList from '../offer-list/offer-list.jsx';
