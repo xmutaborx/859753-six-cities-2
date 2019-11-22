@@ -1,17 +1,15 @@
-import api from '../api';
-
 const initialState = {
   city: ``,
   offers: [],
-  availableCities: [],
-  availableOffers: [],
 };
 
 const Operation = {
-  loadOffers: () => (dispatch) => {
+  loadOffers: () => (dispatch, _, api) => {
     return api.get(`/hotels`)
       .then((response) => {
         dispatch(ActionCreator.loadOffers(response.data));
+        const initialCity = response.data[0].city.name;
+        dispatch(ActionCreator.changeCity(initialCity));
       });
   }
 };
@@ -20,16 +18,6 @@ const ActionCreator = {
   changeCity: (city) => ({
     type: actionType.changeCity,
     payload: city
-  }),
-
-  setAvailableCities: (cities) => ({
-    type: actionType.availableCities,
-    payload: cities
-  }),
-
-  setAvailableOffers: (offers) => ({
-    type: actionType.availableOffers,
-    payload: offers
   }),
 
   loadOffers: (offers) => ({
@@ -41,8 +29,6 @@ const ActionCreator = {
 const actionType = {
   loadOffers: `LOAD_OFFERS`,
   changeCity: `CHANGE_CITY`,
-  availableCities: `AVAILABLE_CITIES`,
-  availableOffers: `AVAILABLE_OFFERS`
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,14 +39,6 @@ const reducer = (state = initialState, action) => {
 
     case actionType.changeCity : return Object.assign({}, state, {
       city: action.payload,
-    });
-
-    case actionType.availableCities : return Object.assign({}, state, {
-      availableCities: action.payload,
-    });
-
-    case actionType.availableOffers : return Object.assign({}, state, {
-      availableOffers: action.payload,
     });
 
     default: return state;
