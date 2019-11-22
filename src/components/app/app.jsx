@@ -1,13 +1,12 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/reducer';
+import {ActionCreator} from '../../store/actionCreator';
+import {getCityOffers, getSixCities} from '../../store/selectors';
 
 import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
-
-import {getCityOffers, getSixCities} from '../../store/selectors';
 
 class App extends PureComponent {
   listOfPins() {
@@ -15,14 +14,14 @@ class App extends PureComponent {
   }
 
   render() {
-    const {mapConfig, city, availableOffers, availableCities} = this.props;
+    const {mapConfig, city, availableOffers, availableCities, changeCity} = this.props;
 
     return (
       <div className="page page--gray page--main">
         <main className="page__main page__main--index">
           <CitiesList
             cities={availableCities}
-            onChangeCity={this.props.changeCity}
+            onChangeCity={changeCity}
           />
           <div className="cities">
             <div className="cities__places-container container">
@@ -41,8 +40,8 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.array,
-  city: PropTypes.string,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
   availableCities: PropTypes.array.isRequired,
   availableOffers: PropTypes.arrayOf(PropTypes.object),

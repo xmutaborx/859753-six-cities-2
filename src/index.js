@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {compose} from 'recompose';
-import {reducer, Operation} from './reducer/reducer';
+import {reducer} from './store/reducer';
 import thunk from 'redux-thunk';
 
+import {Operation} from './store/async-creator';
 import configureAPI from './api';
 import App from './components/app/app.jsx';
 import {mapConfig} from './mocks/map-config';
