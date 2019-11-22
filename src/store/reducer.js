@@ -1,16 +1,18 @@
-import {actionType} from './action-type';
-import {initialState} from './initial-state';
+import ActionType from './action-type';
+import InitialState from './initial-state';
 
-export const reducer = (state = initialState, action) => {
+const reducer = (state = InitialState, action) => {
   switch (action.type) {
-    case actionType.loadOffers : return Object.assign({}, state, {
+    case ActionType.loadOffers : return Object.assign({}, state, {
       offers: action.payload,
     });
 
-    case actionType.changeCity : return Object.assign({}, state, {
+    case ActionType.changeCity : return Object.assign({}, state, {
       city: action.payload,
     });
 
     default: return state;
   }
 };
+
+export default reducer;

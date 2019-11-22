@@ -1,13 +1,15 @@
-import {actionType} from './action-type';
+import ActionType from './action-type';
 
-export const ActionCreator = {
+const ActionCreator = {
   changeCity: (city) => ({
-    type: actionType.changeCity,
+    type: ActionType.changeCity,
     payload: city
   }),
 
   loadOffers: (offers) => ({
-    type: actionType.loadOffers,
+    type: ActionType.loadOffers,
     payload: offers
   }),
 };
+
+export default ActionCreator;

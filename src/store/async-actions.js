@@ -1,4 +1,4 @@
-import {ActionCreator} from './action-creator';
+import ActionCreator from './action-creator';
 
 export const Operation = {
   loadOffers: () => (dispatch, _, api) => {

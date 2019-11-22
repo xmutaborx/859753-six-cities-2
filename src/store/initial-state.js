@@ -1,4 +1,6 @@
-export const initialState = {
+const InitialState = {
   city: ``,
   offers: [],
 };
+
+export default InitialState;

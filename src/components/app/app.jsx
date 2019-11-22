@@ -1,12 +1,14 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action-creator';
-import {getCityOffers, getSixCities} from '../../store/selectors';
+import ActionCreator from '../../store/action-creator';
+import {getCityOffers, getCitiesList} from '../../store/selectors';
 
+import CitiesList from '../cities-list/cities-list.jsx';
+import TypesSort from '../types-sort/types-sort.jsx';
 import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
-import CitiesList from '../cities-list/cities-list.jsx';
+
 
 class App extends PureComponent {
   listOfPins() {
@@ -25,7 +27,12 @@ class App extends PureComponent {
           />
           <div className="cities">
             <div className="cities__places-container container">
-              <OffersList offers={availableOffers} city={city} />
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{availableOffers.length} places to stay in {city}</b>
+                <TypesSort />
+                <OffersList offers={availableOffers} />
+              </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
                   <CitiesMap mapConfig={mapConfig} pins={this.listOfPins()} />
@@ -57,7 +64,7 @@ App.propTypes = {
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
   offers: state.offers,
-  availableCities: getSixCities(state),
+  availableCities: getCitiesList(state),
   availableOffers: getCityOffers(state),
 });
 

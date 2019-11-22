@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const createAPI = (dispatch) => {
-
   const api = axios.create({
     baseURL: `https://htmlacademy-react-2.appspot.com/six-cities`,
     timeout: 5000,
@@ -9,18 +8,18 @@ const createAPI = (dispatch) => {
   });
 
   const onSuccess = (response) => response;
-
   const onFail = (err) => {
-    if (err.response.status === 403) {
-      dispatch(/* */);
+    if (err.status === 401) {
+      // dispatch();
+      return;
     }
-    return err;
+
+    throw err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);
 
   return api;
 };
-
 
 export default createAPI;
