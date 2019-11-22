@@ -6,7 +6,7 @@ import {compose} from 'recompose';
 import {reducer} from './store/reducer';
 import thunk from 'redux-thunk';
 
-import {Operation} from './store/async-creator';
+import {Operation} from './store/async-actions';
 import configureAPI from './api';
 import App from './components/app/app.jsx';
 import {mapConfig} from './mocks/map-config';
