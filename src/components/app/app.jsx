@@ -1,64 +1,41 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/reducer';
+import ActionCreator from '../../store/action-creator';
+import {getCityOffers, getCitiesList} from '../../store/selectors';
 
+import CitiesList from '../cities-list/cities-list.jsx';
+import TypesSort from '../types-sort/types-sort.jsx';
 import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
-import CitiesList from '../cities-list/cities-list.jsx';
-import {mockOffers} from '../../mocks/offers';
 
-const MAX_CITY = 6;
 
 class App extends PureComponent {
-  _setAvailableCityFromOffers(offers) {
-    const list = offers.map((city) => city.name);
-    const availableCities = Array.from(new Set(list));
-
-    this.props.setAvailableCities(availableCities);
-    this.props.changeCity(availableCities[0]);
-  }
-
-  _setAvailableOffers(offers, city) {
-    const availableOffers = offers.filter((offer) => offer.name === city);
-    this.props.setAvailableOffers(availableOffers);
-  }
-
-  _listOfCities() {
-    return this.props.availableCities.slice(0, MAX_CITY);
-  }
-
-  _listOfPins() {
-    return this.props.availableOffers.map((offer) => offer.coordinates);
-  }
-
-  componentDidMount() {
-    this.props.setOffers(mockOffers);
-    this._setAvailableCityFromOffers(mockOffers);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.city !== this.props.city) {
-      this._setAvailableOffers(this.props.offers, this.props.city);
-    }
+  listOfPins() {
+    return this.props.availableOffers.map((offer) => [offer.location.latitude, offer.location.longitude]);
   }
 
   render() {
-    const {mapConfig, changeCity, city} = this.props;
+    const {mapConfig, city, availableOffers, availableCities, changeCity} = this.props;
 
     return (
       <div className="page page--gray page--main">
         <main className="page__main page__main--index">
           <CitiesList
-            cities={this._listOfCities()}
-            changeCity={changeCity}
+            cities={availableCities}
+            onChangeCity={changeCity}
           />
           <div className="cities">
             <div className="cities__places-container container">
-              <OffersList cards={this.props.availableOffers} city={city} />
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{availableOffers.length} places to stay in {city}</b>
+                <TypesSort />
+                <OffersList offers={availableOffers} />
+              </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <CitiesMap mapConfig={mapConfig} pins={this._listOfPins()} />
+                  <CitiesMap mapConfig={mapConfig} pins={this.listOfPins()} />
                 </section>
               </div>
             </div>
@@ -70,22 +47,10 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    img: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  })),
-  city: PropTypes.string,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
-  setOffers: PropTypes.func.isRequired,
-  setAvailableCities: PropTypes.func.isRequired,
   availableCities: PropTypes.array.isRequired,
-  setAvailableOffers: PropTypes.func.isRequired,
   availableOffers: PropTypes.arrayOf(PropTypes.object),
   mapConfig: PropTypes.shape({
     defaultCity: PropTypes.arrayOf(PropTypes.number).isRequired,
@@ -99,15 +64,12 @@ App.propTypes = {
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
   offers: state.offers,
-  availableCities: state.availableCities,
-  availableOffers: state.availableOffers,
+  availableCities: getCitiesList(state),
+  availableOffers: getCityOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setOffers: (offers) => dispatch(ActionCreator.setOffers(offers)),
   changeCity: (city) => dispatch(ActionCreator.changeCity(city)),
-  setAvailableCities: (cities) => dispatch(ActionCreator.setAvailableCities(cities)),
-  setAvailableOffers: (offers) => dispatch(ActionCreator.setAvailableOffers(offers)),
 });
 
 export {App};

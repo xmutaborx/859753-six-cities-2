@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class CitiesList extends React.PureComponent {
   clickHandler(e, city) {
     e.preventDefault();
-    this.props.changeCity(city);
+    this.props.onChangeCity(city);
   }
 
   render() {
@@ -34,7 +34,7 @@ class CitiesList extends React.PureComponent {
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  changeCity: PropTypes.func.isRequired
+  onChangeCity: PropTypes.func.isRequired,
 };
 
 export default CitiesList;
