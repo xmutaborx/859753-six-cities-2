@@ -11,6 +11,14 @@ const reducer = (state = InitialState, action) => {
       city: action.payload,
     });
 
+    case ActionType.Authorization : return Object.assign({}, state, {
+      isAuthorizationRequired: action.payload,
+    });
+
+    case ActionType.saveUserData : return Object.assign({}, state, {
+      userData: action.payload,
+    });
+
     default: return state;
   }
 };
