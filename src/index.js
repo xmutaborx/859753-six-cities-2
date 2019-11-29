@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {compose} from 'recompose';
@@ -25,9 +26,11 @@ store.dispatch(Operation.loadOffers());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        mapConfig={mapConfig}
-      />
+      <BrowserRouter>
+        <App
+          mapConfig={mapConfig}
+        />
+      </BrowserRouter>
     </Provider>,
     document.getElementById(`root`)
 );
