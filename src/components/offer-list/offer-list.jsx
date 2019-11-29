@@ -12,6 +12,7 @@ const OffersList = (props) => {
       {offers.map((card) =>
         <OfferCard
           key={card.id}
+          id={card.id}
           title={card.title}
           price={card.price}
           type={card.type}

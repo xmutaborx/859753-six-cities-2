@@ -3,6 +3,7 @@ const ActionType = {
   changeCity: `CHANGE_CITY`,
   Authorization: `AUTHORIZATION`,
   saveUserData: `SAVE_USER_DATA`,
+  toggleFavorites: `TOGGLE_FAVORITES`,
 };
 
 export default ActionType;

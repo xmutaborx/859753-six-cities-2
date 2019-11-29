@@ -19,6 +19,15 @@ const reducer = (state = InitialState, action) => {
       userData: action.payload,
     });
 
+    case ActionType.toggleFavorites : {
+      state.offers.map((offer) => {
+        if (offer.id === action.payload) {
+          offer.is_premium = !offer.is_premium;
+          return offer;
+        }
+      })
+    }
+
     default: return state;
   }
 };
