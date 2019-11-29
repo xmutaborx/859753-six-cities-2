@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
+import {Router} from 'react-router-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {compose} from 'recompose';
 import reducer from './store/reducer';
 import thunk from 'redux-thunk';
+import history from './history';
 
 import {Operation} from './store/async-actions';
 import configureAPI from './api';
@@ -26,11 +27,11 @@ store.dispatch(Operation.loadOffers());
 
 ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <Router history={history}>
         <App
           mapConfig={mapConfig}
         />
-      </BrowserRouter>
+      </Router>
     </Provider>,
     document.getElementById(`root`)
 );

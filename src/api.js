@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from './history';
 
 const createAPI = (dispatch) => {
   const api = axios.create({
@@ -9,12 +10,12 @@ const createAPI = (dispatch) => {
 
   const onSuccess = (response) => response;
   const onFail = (err) => {
-    if (err.status === 401) {
-      // dispatch();
+    if (err.response.status === 401) {
+      history.push('/login');
       return;
     }
 
-    throw err;
+    return Promise.reject(err);
   };
 
   api.interceptors.response.use(onSuccess, onFail);
