@@ -11,7 +11,7 @@ const createAPI = (dispatch) => {
   const onSuccess = (response) => response;
   const onFail = (err) => {
     if (err.response.status === 401) {
-      history.push('/login');
+      // history.push('/login');
       return;
     }
 

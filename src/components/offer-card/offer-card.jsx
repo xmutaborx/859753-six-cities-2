@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ActionCreator from '../../store/action-creator';
+import {connect} from 'react-redux';
 
-const OfferCard = ({title, price, type, isPremium, images, rating, onMouseOver}) => {
+const OfferCard = ({id, title, price, type, isPremium, images, rating, onMouseOver, toggleFavorites}) => {
   return (
     <article className="cities__place-card place-card" onMouseEnter={onMouseOver}>
       {isPremium &&
@@ -20,7 +22,11 @@ const OfferCard = ({title, price, type, isPremium, images, rating, onMouseOver})
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            className={`place-card__bookmark-button button` + (isPremium ? ` place-card__bookmark-button--active` : ``)}
+            type="button"
+            onClick={() => toggleFavorites(id)}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
             </svg>
@@ -52,4 +58,9 @@ OfferCard.propTypes = {
   onMouseOver: PropTypes.func
 };
 
-export default OfferCard;
+const mapDispatchToProps = (dispatch) => ({
+  toggleFavorites: (id) => dispatch(ActionCreator.toggleFavorites(id)),
+});
+
+export {OfferCard};
+export default connect(null, mapDispatchToProps)(OfferCard);

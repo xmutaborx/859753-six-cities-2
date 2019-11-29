@@ -20,6 +20,11 @@ const ActionCreator = {
     type: ActionType.saveUserData,
     payload: data
   }),
+
+  toggleFavorites: (id) => ({
+    type: ActionType.toggleFavorites,
+    payload: id
+  }),
 };
 
 export default ActionCreator;
