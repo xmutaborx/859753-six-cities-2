@@ -1,11 +1,11 @@
 import React from 'react';
 
 const Feedback = (props) => {
-  const {name, avatar_url, comment, rating, date, is_pro} = props.offer;
+  const {comment, rating, date, user:{avatar_url, name}} = props.offer;
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
-        <div className={`reviews__avatar-wrapper user__avatar-wrapper ` + is_pro ? `user__avatar-wrapper--pro` : ``}>
+        <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={avatar_url} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">{name}</span>
