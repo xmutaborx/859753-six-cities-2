@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import axios from 'axios';
+import configureAPI from '../../api';
 
 import FeedbackList from '../feedback-list/feedback-list.jsx';
+
+const api = configureAPI();
 
 class Offer extends React.PureComponent {
   constructor(props) {
@@ -15,11 +17,10 @@ class Offer extends React.PureComponent {
   }
 
   componentDidMount() {
-    axios.get(`https://htmlacademy-react-2.appspot.com/six-cities/comments/${this.props.match.params.id}`)
+    api.get(`/comments/${this.props.match.params.id}`)
       .then(response => {
         this.setState({comments: response.data})
-        console.log(response.data)
-      })
+      });
   }
 
   render() {
@@ -90,7 +91,7 @@ class Offer extends React.PureComponent {
                 </ul>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{this.state.comments.length}</span></h2>
                   <FeedbackList offers={this.state.comments} />
               </section>
             </div>
