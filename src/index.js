@@ -11,7 +11,6 @@ import history from './history';
 import {Operation} from './store/async-actions';
 import configureAPI from './api';
 import App from './components/app/app.jsx';
-import {mapConfig} from './mocks/map-config';
 
 const api = configureAPI((...args) => store.dispatch(...args));
 
@@ -28,9 +27,7 @@ store.dispatch(Operation.loadOffers());
 ReactDOM.render(
     <Provider store={store}>
       <Router history={history}>
-        <App
-          mapConfig={mapConfig}
-        />
+        <App />
       </Router>
     </Provider>,
     document.getElementById(`root`)
