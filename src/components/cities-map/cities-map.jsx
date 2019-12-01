@@ -28,14 +28,16 @@ class CitiesMap extends React.PureComponent {
 
   }
 
-  _renderPins() {
-    const pins = this.props.offersList.map((offer) => [offer.location.latitude, offer.location.longitude]);
+  _takeCenter() {
     const latitude = this.props.offersList[0].city.location.latitude;
     const longitude = this.props.offersList[0].city.location.longitude;
     const zoom = this.props.offersList[0].city.location.zoom;
 
     this.map.setView(new L.LatLng(latitude, longitude), zoom);
+  }
 
+  _renderPins() {
+    const pins = this.props.offersList.map((offer) => [offer.location.latitude, offer.location.longitude]);
 
     pins.forEach((it) => {
       let marker = leaflet.marker(it, this.icon).addTo(this.map);
@@ -53,6 +55,7 @@ class CitiesMap extends React.PureComponent {
         this.map.removeLayer(it);
       });
       this._renderPins();
+      this._takeCenter();
     }
   }
 
