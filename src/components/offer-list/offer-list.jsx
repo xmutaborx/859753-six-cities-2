@@ -13,6 +13,7 @@ const OffersList = (props) => {
         <OfferCard
           key={card.id}
           id={card.id}
+          isFavorite={card.is_favorite}
           title={card.title}
           price={card.price}
           type={card.type}
@@ -35,6 +36,8 @@ OffersList.propTypes = {
     type: PropTypes.string.isRequired,
     // eslint-disable-next-line camelcase
     is_premium: PropTypes.bool.isRequired,
+    // eslint-disable-next-line camelcase
+    is_favorite: PropTypes.bool.isRequired,
     images: PropTypes.array.isRequired,
     rating: PropTypes.number.isRequired,
   })),

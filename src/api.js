@@ -1,7 +1,7 @@
 import axios from 'axios';
 import history from './history';
 
-const createAPI = (dispatch) => {
+const createAPI = () => {
   const api = axios.create({
     baseURL: `https://htmlacademy-react-2.appspot.com/six-cities`,
     timeout: 5000,
@@ -15,7 +15,7 @@ const createAPI = (dispatch) => {
       return;
     }
 
-    return Promise.reject(err);
+    return err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);
