@@ -2,6 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+import FeedbackList from '../feedback-list/feedback-list.jsx';
+
+const mock = [{
+  id: 1,
+  name: `avasdf`,
+  avatar_url: `https://htmlacademy-react-2.appspot.com/six-cities/static/avatar/5.jpg`,
+  comment: `askdh alksdhj alksd hlaksdh`,
+  rating: 4,
+  date: `2019-11-29T04:29:57.759Z`,
+  is_pro: true
+},
+{
+  id: 5,
+  name: `avasdf`,
+  avatar_url: `https://htmlacademy-react-2.appspot.com/six-cities/static/avatar/5.jpg`,
+  comment: `askdh alksdhj alksd hlaksdh`,
+  rating: 1,
+  date: `2019-11-29T04:29:57.759Z`,
+  is_pro: true
+}]
+
 const Offer = (props) => {
   if (!props.offers.length) return null;
 
@@ -69,6 +90,10 @@ const Offer = (props) => {
                 ))}
               </ul>
             </div>
+            <section className="property__reviews reviews">
+              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+                <FeedbackList offers={mock} />
+            </section>
           </div>
         </div>
       </section>

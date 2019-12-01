@@ -11,7 +11,7 @@ const OfferCard = (props) => {
     type,
     isPremium,
     isFavorite,
-    images,
+    image,
     rating,
     onMouseOver,
     toggleFavorites} = props;
@@ -25,7 +25,7 @@ const OfferCard = (props) => {
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={images[0]} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -67,7 +67,7 @@ OfferCard.propTypes = {
   type: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  images: PropTypes.array.isRequired,
+  image: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   onMouseOver: PropTypes.func,
   toggleFavorites: PropTypes.func,

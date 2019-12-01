@@ -18,7 +18,7 @@ const OffersList = (props) => {
           price={card.price}
           type={card.type}
           isPremium={card.is_premium}
-          images={card.images}
+          image={card.preview_image}
           rating={card.rating}
           onMouseOver={() => handleChangeActiveItem(card)}
         />
