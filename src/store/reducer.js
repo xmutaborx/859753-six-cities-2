@@ -22,11 +22,12 @@ const reducer = (state = InitialState, action) => {
     case ActionType.toggleFavorites : {
       state.offers.map((offer) => {
         if (offer.id === action.payload) {
-          offer.is_premium = !offer.is_premium;
+          // eslint-disable-next-line camelcase
+          offer.is_favorite = !offer.is_favorite;
           return offer;
         }
-      })
-    }
+      });
+    };
 
     default: return state;
   }

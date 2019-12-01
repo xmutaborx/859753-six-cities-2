@@ -1,9 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ActionCreator from '../../store/action-creator';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-const OfferCard = ({id, title, price, type, isPremium, images, rating, onMouseOver, toggleFavorites}) => {
+const OfferCard = (props) => {
+  const {id,
+    title,
+    price,
+    type,
+    isPremium,
+    isFavorite,
+    images,
+    rating,
+    onMouseOver,
+    toggleFavorites} = props;
+
   return (
     <article className="cities__place-card place-card" onMouseEnter={onMouseOver}>
       {isPremium &&
@@ -23,7 +35,7 @@ const OfferCard = ({id, title, price, type, isPremium, images, rating, onMouseOv
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button button` + (isPremium ? ` place-card__bookmark-button--active` : ``)}
+            className={`place-card__bookmark-button button` + (isFavorite ? ` place-card__bookmark-button--active` : ``)}
             type="button"
             onClick={() => toggleFavorites(id)}
           >
@@ -40,7 +52,7 @@ const OfferCard = ({id, title, price, type, isPremium, images, rating, onMouseOv
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -49,13 +61,16 @@ const OfferCard = ({id, title, price, type, isPremium, images, rating, onMouseOv
 };
 
 OfferCard.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
   images: PropTypes.array.isRequired,
   rating: PropTypes.number.isRequired,
-  onMouseOver: PropTypes.func
+  onMouseOver: PropTypes.func,
+  toggleFavorites: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
