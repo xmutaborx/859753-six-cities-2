@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 const Offer = (props) => {
+  if (!props.offers.length) return null;
+
   const offerId = parseInt(props.match.params.id, 10);
   const [offer] = props.offers.filter((it) => it.id === offerId);
 

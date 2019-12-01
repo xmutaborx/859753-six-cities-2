@@ -20,12 +20,17 @@ const reducer = (state = InitialState, action) => {
     });
 
     case ActionType.toggleFavorites : {
-      state.offers.map((offer) => {
+      let newOffers = state.offers.map((offer) => {
         if (offer.id === action.payload) {
+          const selectOffer = JSON.parse(JSON.stringify(offer));
           // eslint-disable-next-line camelcase
-          offer.is_favorite = !offer.is_favorite;
-          return offer;
+          selectOffer.is_favorite = !selectOffer.is_favorite;
+          return selectOffer;
         }
+        return offer;
+      });
+      return Object.assign({}, state, {
+        offers: newOffers,
       });
     };
 
