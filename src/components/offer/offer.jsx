@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import configureAPI from '../../api';
+import {getCityOffers} from '../../store/selectors';
 
 import FeedbackList from '../feedback-list/feedback-list.jsx';
+import CitiesMap from '../cities-map/cities-map.jsx';
 
 const api = configureAPI();
 
@@ -28,6 +30,13 @@ class Offer extends React.PureComponent {
 
     const offerId = parseInt(this.props.match.params.id, 10);
     const [offer] = this.props.offers.filter((it) => it.id === offerId);
+
+
+    let offersNear = this.props.availableOffers.filter((it) => it.id !== offerId);
+    offersNear = offersNear.slice(0, 3);
+    offersNear.push(offer)
+    console.log(offersNear);
+
 
     return (
       <main className="page__main page__main--property">
@@ -95,6 +104,9 @@ class Offer extends React.PureComponent {
                   <FeedbackList offers={this.state.comments} />
               </section>
             </div>
+            <section className="property__map map">
+              <CitiesMap offersList={offersNear}/>
+            </section>
           </div>
         </section>
       </main>
@@ -104,7 +116,9 @@ class Offer extends React.PureComponent {
 
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  city: state.city,
   offers: state.offers,
+  availableOffers: getCityOffers(state),
 });
 
 Offer.propTypes = {
