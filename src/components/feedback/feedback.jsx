@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 const Feedback = (props) => {
   // eslint-disable-next-line camelcase
   const {comment, rating, date, user: {avatar_url, name}} = props.comment;
+  // eslint-disable-next-line camelcase
+  const avatarUrl = avatar_url;
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={avatar_url} width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">{name}</span>
       </div>
@@ -31,11 +34,10 @@ Feedback.propTypes = {
     comment: PropTypes.array,
     rating: PropTypes.number,
     date: PropTypes.string,
-    user: PropTypes.shape({
-      // eslint-disable-next-line camelcase
-      avatar_url: PropTypes.string,
-      name: PropTypes.string,
-    }),
+    user: PropTypes.object,
+    // eslint-disable-next-line camelcase
+    avatar_url: PropTypes.string,
+    name: PropTypes.string,
   })),
 };
 

@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeCity: (city) => dispatch(ActionCreator.changeCity(city)),
 });
 
-MainPage.PropTypes = {
+MainPage.propTypes = {
   city: PropTypes.string,
   availableOffers: PropTypes.array,
   availableCities: PropTypes.array,
