@@ -16,7 +16,7 @@ class CitiesMap extends React.PureComponent {
       iconSize: [30, 30]
     });
 
-    this.map.setView([52.38333, 4.9], 13);
+    // this.map.setView([52.38333, 4.9], 13);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -50,7 +50,7 @@ class CitiesMap extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.offersList.length !== this.props.offersList.length) {
+    if (prevProps.offersList !== this.props.offersList) {
       this.markerGroup.forEach((it) => {
         this.map.removeLayer(it);
       });

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import configureAPI from '../../api';
-import {getCityOffers} from '../../store/selectors';
 
 import FeedbackList from '../feedback-list/feedback-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
@@ -11,32 +10,31 @@ const api = configureAPI();
 
 class Offer extends React.PureComponent {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       comments: [],
-    }
+    };
   }
 
   componentDidMount() {
     api.get(`/comments/${this.props.match.params.id}`)
-      .then(response => {
-        this.setState({comments: response.data})
+      .then((response) => {
+        this.setState({comments: response.data});
       });
   }
 
   render() {
-    if (!this.props.offers.length) return null;
+    if (!this.props.offers.length) {
+      return null;
+    }
 
     const offerId = parseInt(this.props.match.params.id, 10);
     const [offer] = this.props.offers.filter((it) => it.id === offerId);
 
-
-    let offersNear = this.props.availableOffers.filter((it) => it.id !== offerId);
+    let offersNear = this.props.offers.filter((it) => it.city.name === offer.city.name && it.id !== offerId);
     offersNear = offersNear.slice(0, 3);
-    offersNear.push(offer)
-    console.log(offersNear);
-
+    offersNear.push(offer);
 
     return (
       <main className="page__main page__main--property">
@@ -101,7 +99,7 @@ class Offer extends React.PureComponent {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{this.state.comments.length}</span></h2>
-                  <FeedbackList offers={this.state.comments} />
+                <FeedbackList offers={this.state.comments} />
               </section>
             </div>
             <section className="property__map map">
@@ -112,13 +110,11 @@ class Offer extends React.PureComponent {
       </main>
     );
   }
-};
+}
 
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.city,
   offers: state.offers,
-  availableOffers: getCityOffers(state),
 });
 
 Offer.propTypes = {
