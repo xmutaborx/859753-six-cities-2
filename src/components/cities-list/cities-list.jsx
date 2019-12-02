@@ -8,7 +8,7 @@ class CitiesList extends React.PureComponent {
   }
 
   render() {
-    const {cities} = this.props;
+    const {cities, currentCity} = this.props;
 
     return (
       <div className="tabs">
@@ -17,7 +17,7 @@ class CitiesList extends React.PureComponent {
             {cities.map((it) => (
               <li className="locations__item" key={it}>
                 <a
-                  className="locations__item-link tabs__item"
+                  className={`locations__item-link tabs__item ${currentCity === it ? `tabs__item--active` : ``}`}
                   href="#"
                   onClick={(e) => this.clickHandler(e, it)}
                 >
@@ -34,6 +34,7 @@ class CitiesList extends React.PureComponent {
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currentCity: PropTypes.string.isRequired,
   onChangeCity: PropTypes.func.isRequired,
 };
 

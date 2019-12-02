@@ -28,6 +28,7 @@ const MainPage = (props) => {
       <main className="page__main page__main--index">
         <CitiesList
           cities={availableCities}
+          currentCity={city}
           onChangeCity={changeCity}
         />
         <div className="cities">
