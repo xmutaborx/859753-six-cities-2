@@ -11,21 +11,30 @@ const OfferCard = (props) => {
     type,
     isPremium,
     isFavorite,
-    images,
+    image,
     rating,
+    nearMode,
     onMouseOver,
     toggleFavorites} = props;
 
+  let articleClasses = `cities__place-card`;
+  let wrappedClasses = `cities__image-wrapper`;
+
+  if (nearMode) {
+    wrappedClasses = `near-places__image-wrapper`;
+    articleClasses = `near-places__card`;
+  }
+
   return (
-    <article className="cities__place-card place-card" onMouseEnter={onMouseOver}>
+    <article className={`${articleClasses} place-card`} onMouseEnter={onMouseOver}>
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src={images[0]} width="260" height="200" alt="Place image" />
+      <div className={`${wrappedClasses} place-card__image-wrapper`}>
+        <a>
+          <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -60,6 +69,10 @@ const OfferCard = (props) => {
   );
 };
 
+OfferCard.defaultProps = {
+  nearMode: false,
+};
+
 OfferCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
@@ -67,10 +80,11 @@ OfferCard.propTypes = {
   type: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  images: PropTypes.array.isRequired,
+  image: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   onMouseOver: PropTypes.func,
   toggleFavorites: PropTypes.func,
+  nearMode: PropTypes.bool,
 };
 
 const mapDispatchToProps = (dispatch) => ({

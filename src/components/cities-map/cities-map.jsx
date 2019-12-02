@@ -4,25 +4,21 @@ import leaflet from 'leaflet';
 
 class CitiesMap extends React.PureComponent {
   _init() {
-    const {defaultCity, zoom, layer, copyRight} = this.props.mapConfig;
+    this.map = leaflet.map(`map`, {
+      center: [52.38333, 4.9],
+      zoom: 12,
+      zoomControl: false,
+      marker: true
+    });
 
     this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
 
-    this.map = leaflet.map(`map`, {
-      center: defaultCity,
-      zoom,
-      zoomControl: false,
-      marker: true
-    });
-
-    this.map.setView(defaultCity, zoom);
-
     leaflet
-      .tileLayer(layer, {
-        attribution: copyRight
+      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this.map);
 
@@ -30,8 +26,16 @@ class CitiesMap extends React.PureComponent {
 
   }
 
+  _takeCenter() {
+    const latitude = this.props.offersList[0].city.location.latitude;
+    const longitude = this.props.offersList[0].city.location.longitude;
+    const zoom = this.props.offersList[0].city.location.zoom;
+
+    this.map.setView(new L.LatLng(latitude, longitude), zoom);
+  }
+
   _renderPins() {
-    const {pins} = this.props;
+    const pins = this.props.offersList.map((offer) => [offer.location.latitude, offer.location.longitude]);
 
     pins.forEach((it) => {
       let marker = leaflet.marker(it, this.icon).addTo(this.map);
@@ -44,12 +48,12 @@ class CitiesMap extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.pins !== this.props.pins) {
+    if (prevProps.offersList !== this.props.offersList) {
       this.markerGroup.forEach((it) => {
         this.map.removeLayer(it);
       });
-
       this._renderPins();
+      this._takeCenter();
     }
   }
 

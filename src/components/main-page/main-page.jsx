@@ -9,7 +9,6 @@ import TypesSort from '../types-sort/types-sort.jsx';
 import OffersList from '../offer-list/offer-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import MainEmpty from '../main-empty/main-empty.jsx';
-import {mapConfig} from '../../mocks/map-config';
 
 const MainPage = (props) => {
   const {
@@ -17,18 +16,15 @@ const MainPage = (props) => {
     availableOffers,
     availableCities,
     changeCity,
-    userData,
     offers} = props;
 
-  const listOfPins = () => {
-    return availableOffers.map((offer) => [offer.location.latitude, offer.location.longitude]);
+  if (!offers.length) {
+    return <MainEmpty />;
   }
-
-  if (!offers.length) return <MainEmpty />
 
   return (
     <div className="page page--gray page--main">
-      <Header user={userData} />
+      <Header />
       <main className="page__main page__main--index">
         <CitiesList
           cities={availableCities}
@@ -44,20 +40,19 @@ const MainPage = (props) => {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <CitiesMap mapConfig={mapConfig} pins={listOfPins()} />
+                <CitiesMap offersList={availableOffers} />
               </section>
             </div>
           </div>
         </div>
       </main>
     </div>
-  )
+  );
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
   offers: state.offers,
-  userData: state.userData,
   availableCities: getCitiesList(state),
   availableOffers: getCityOffers(state),
 });
