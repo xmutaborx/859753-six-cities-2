@@ -24,6 +24,12 @@ const withOffer = (Component) => {
         });
     }
 
+    componentDidUpdate(prevProps) {
+      if (prevProps.match.params.id !== this.props.match.params.id) {
+        window.scrollTo(0, 0);
+      }
+    }
+
     render() {
       const offerId = parseInt(this.props.match.params.id, 10);
       const [offer] = this.props.offers.filter((it) => it.id === offerId);
