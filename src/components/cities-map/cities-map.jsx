@@ -34,10 +34,9 @@ class CitiesMap extends React.PureComponent {
 
   _takeCenter() {
     if (this.props.offersList.length) {
-      const latitude = this.props.offersList[0].city.location.latitude;
-      const longitude = this.props.offersList[0].city.location.longitude;
+      const location = this.props.offersList[0].city.location;
       const zoom = this.props.offersList[0].city.location.zoom;
-      this.map.setView(new leaflet.LatLng(latitude, longitude), zoom);
+      this.map.setView(new leaflet.LatLng(location.latitude, location.longitude), zoom);
     } else {
       this.map.setView(this._defaultCenter, this._defaultZoom);
     }
