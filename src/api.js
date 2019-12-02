@@ -18,7 +18,7 @@ const createAPI = () => {
       return;
     }
 
-    return err;
+    return;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

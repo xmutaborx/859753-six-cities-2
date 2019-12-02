@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Feedback = (props) => {
-  const {comment, rating, date, user:{avatar_url, name}} = props.offer;
+  // eslint-disable-next-line camelcase
+  const {comment, rating, date, user: {avatar_url, name}} = props.comment;
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -22,6 +24,19 @@ const Feedback = (props) => {
       </div>
     </li>
   );
+};
+
+Feedback.propTypes = {
+  comment: PropTypes.arrayOf(PropTypes.shape({
+    comment: PropTypes.array,
+    rating: PropTypes.number,
+    date: PropTypes.string,
+    user: PropTypes.shape({
+      // eslint-disable-next-line camelcase
+      avatar_url: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  })),
 };
 
 export default Feedback;

@@ -32,7 +32,7 @@ const reducer = (state = InitialState, action) => {
       return Object.assign({}, state, {
         offers: newOffers,
       });
-    };
+    }
 
     default: return state;
   }

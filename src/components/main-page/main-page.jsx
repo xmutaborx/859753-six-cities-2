@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import ActionCreator from '../../store/action-creator';
 import {getCityOffers, getCitiesList} from '../../store/selectors';
@@ -61,6 +62,14 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 const mapDispatchToProps = (dispatch) => ({
   changeCity: (city) => dispatch(ActionCreator.changeCity(city)),
 });
+
+MainPage.PropTypes = {
+  city: PropTypes.string,
+  availableOffers: PropTypes.array,
+  availableCities: PropTypes.array,
+  changeCity: PropTypes.func,
+  offers: PropTypes.array
+};
 
 export {MainPage};
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
