@@ -33,7 +33,7 @@ const OfferCard = (props) => {
         </div>
       }
       <div className={`${wrappedClasses} place-card__image-wrapper`}>
-        <a href="#">
+        <a>
           <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
         </a>
       </div>
