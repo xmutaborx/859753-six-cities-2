@@ -78,10 +78,7 @@ const Offer = (props) => {
                   ))}
                 </ul>
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
-                <FeedbackList offers={comments} />
-              </section>
+              <FeedbackList comments={comments} />
             </div>
           </div>
           <section className="property__map map">
