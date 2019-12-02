@@ -8,10 +8,13 @@ const createAPI = () => {
     withCredentials: true
   });
 
-  const onSuccess = (response) => response;
+  const onSuccess = (response) => {
+    return response;
+  };
+
   const onFail = (err) => {
     if (err.response.status === 401) {
-      // history.push('/login');
+      history.push(`/login`);
       return;
     }
 
