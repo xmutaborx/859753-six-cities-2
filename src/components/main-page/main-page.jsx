@@ -16,14 +16,15 @@ const MainPage = (props) => {
     availableOffers,
     availableCities,
     changeCity,
-    userData,
     offers} = props;
 
-  if (!offers.length) return <MainEmpty />
+  if (!offers.length) {
+    return <MainEmpty />;
+  }
 
   return (
     <div className="page page--gray page--main">
-      <Header user={userData} />
+      <Header />
       <main className="page__main page__main--index">
         <CitiesList
           cities={availableCities}
@@ -46,13 +47,12 @@ const MainPage = (props) => {
         </div>
       </main>
     </div>
-  )
+  );
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
   offers: state.offers,
-  userData: state.userData,
   availableCities: getCitiesList(state),
   availableOffers: getCityOffers(state),
 });

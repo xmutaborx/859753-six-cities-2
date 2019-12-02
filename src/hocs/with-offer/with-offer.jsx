@@ -30,7 +30,7 @@ const withOffer = (Component) => {
 
       let nearOffers = this.props.offers.filter((it) => it.city.name === offer.city.name && it.id !== offerId);
       nearOffers = nearOffers.slice(0, 3);
-      nearOffers.push(offer);
+      const allOffers = nearOffers.concat([offer]);
 
       return (
         <Component
@@ -39,6 +39,7 @@ const withOffer = (Component) => {
           comments={this.state.comments}
           currentOffer={offer}
           nearOffers={nearOffers}
+          allOffers={allOffers}
         />
       );
     }
