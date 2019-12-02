@@ -1,12 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Feedback = (props) => {
-  const {comment, rating, date, user:{avatar_url, name}} = props.offer;
+  // eslint-disable-next-line camelcase
+  const {comment, rating, date, user: {avatar_url: avatarUrl, name}} = props.comment;
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={avatar_url} width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">{name}</span>
       </div>
@@ -22,6 +25,19 @@ const Feedback = (props) => {
       </div>
     </li>
   );
+};
+
+Feedback.propTypes = {
+  comment: PropTypes.shape({
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      // eslint-disable-next-line camelcase
+      avatar_url: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired
+  }),
 };
 
 export default Feedback;

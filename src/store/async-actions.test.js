@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import createAPI from '../api';
 import ActionType from './action-type';
-import Operation from './async-actions';
+import Operation from './operation';
 import OFFER_MOCK from '../mocks/offer-mock';
 
 

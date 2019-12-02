@@ -1,6 +1,7 @@
 import ActionCreator from './action-creator';
+import history from '../history';
 
-export const Operation = {
+const Operation = {
   loadOffers: () => (dispatch, _, api) => {
     return api.get(`/hotels`)
       .then((response) => {
@@ -19,7 +20,10 @@ export const Operation = {
         if (response.status === 200) {
           dispatch(ActionCreator.saveUserData(response.data));
           dispatch(ActionCreator.authorization(true));
+          history.push(`/`);
         }
       });
   }
 };
+
+export default Operation;

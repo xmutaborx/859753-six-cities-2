@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Operation} from '../../store/async-actions';
+import Operation from '../../store/operation';
 import {connect} from 'react-redux';
 
 const SignIn = (props) => {

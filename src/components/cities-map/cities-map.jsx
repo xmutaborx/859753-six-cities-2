@@ -3,17 +3,23 @@ import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
 class CitiesMap extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._defaultCenter = [52.38333, 4.9];
+    this._defaultZoom = 12;
+    this.icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+  }
+
   _init() {
     this.map = leaflet.map(`map`, {
       center: [52.38333, 4.9],
       zoom: 12,
       zoomControl: false,
       marker: true
-    });
-
-    this.icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
     });
 
     leaflet
@@ -27,11 +33,13 @@ class CitiesMap extends React.PureComponent {
   }
 
   _takeCenter() {
-    const latitude = this.props.offersList[0].city.location.latitude;
-    const longitude = this.props.offersList[0].city.location.longitude;
-    const zoom = this.props.offersList[0].city.location.zoom;
-
-    this.map.setView(new L.LatLng(latitude, longitude), zoom);
+    if (this.props.offersList.length) {
+      const location = this.props.offersList[0].city.location;
+      const zoom = this.props.offersList[0].city.location.zoom;
+      this.map.setView(new leaflet.LatLng(location.latitude, location.longitude), zoom);
+    } else {
+      this.map.setView(this._defaultCenter, this._defaultZoom);
+    }
   }
 
   _renderPins() {
@@ -45,6 +53,8 @@ class CitiesMap extends React.PureComponent {
 
   componentDidMount() {
     this._init();
+    this._renderPins();
+    this._takeCenter();
   }
 
   componentDidUpdate(prevProps) {
@@ -72,15 +82,7 @@ CitiesMap.propTypes = {
     copyRight: PropTypes.string.isRequired
   }),
   pins: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    img: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  })),
+  offersList: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default CitiesMap;
