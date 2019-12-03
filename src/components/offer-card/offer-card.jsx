@@ -28,7 +28,11 @@ const OfferCard = (props) => {
   }
 
   return (
-    <article className={`${articleClasses} place-card`} onMouseEnter={onChangeActiveItem} onMouseLeave={onClearItem}>
+    <article
+      className={`${articleClasses} place-card`}
+      onMouseEnter={onChangeActiveItem}
+      onMouseLeave={onClearItem}
+    >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>

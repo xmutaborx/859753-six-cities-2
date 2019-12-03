@@ -56,7 +56,11 @@ class Offer extends React.PureComponent {
                   <h1 className="property__name">
                     {currentOffer.title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button
+                    className={`property__bookmark-button button` + (currentOffer.is_favorite ? ` property__bookmark-button--active` : ``)}
+                    type="button"
+                    onClick={() => this.props.toggleFavorites(offerId, !currentOffer.is_favorite)}
+                  >
                     <svg className="property__bookmark-icon" width={31} height={33}>
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -72,7 +76,7 @@ class Offer extends React.PureComponent {
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    Entire place
+                    {currentOffer.type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
                     {currentOffer.bedrooms} Bedrooms
@@ -131,6 +135,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 
 const mapDispatchToProps = (dispatch) => ({
   getComments: (id) => dispatch(Operation.getComments(id)),
+  toggleFavorites: (id, status) => dispatch(Operation.toggleFavorites(id, status)),
 });
 
 export {Offer};
