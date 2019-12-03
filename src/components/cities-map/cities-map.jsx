@@ -105,7 +105,7 @@ CitiesMap.propTypes = {
   pins: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   offersList: PropTypes.arrayOf(PropTypes.object),
   activePin: PropTypes.array,
-  offerId: PropTypes.string,
+  offerId: PropTypes.number,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
