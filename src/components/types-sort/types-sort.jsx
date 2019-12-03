@@ -1,40 +1,40 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-// const SORT_TYPES = {
-//   popular: `Pupolar`,
-//   lowToHigh: `Price: low to high`,
-//   highToLow: `Price: high to low`,
-//   rated: `Top rated first`,
-// };
+import {SORT_OPTION} from '../../constants/constants';
+import withTypesSort from '../../hocs/with-types-sort/with-types-sort.jsx';
 
-class TypesSort extends PureComponent {
-  constructor(props) {
-    super(props);
+const TypesSort = (props) => {
+  const {onToggleList, onChangeType, isOpen, sortTypeLabel, sortType} = props;
+  return (
+    <form className="places__sorting" action="#" method="get">
+      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-type" tabIndex="0" onClick={onToggleList}>
+        {sortTypeLabel}
+        <svg className="places__sorting-arrow" width="7" height="4">
+          <use xlinkHref="#icon-arrow-select" />
+        </svg>
+      </span>
+      <ul className={`places__options places__options--custom ${isOpen ? `places__options--opened` : ``}`}>
+        {SORT_OPTION.map((it) => (
+          <li
+            className={`places__option ${sortType === it.type ? `places__option--active` : ``}`}
+            tabIndex="0"
+            onClick={() => onChangeType(it)}
+            key={it.type}
+          >{it.value}</li>
+        ))}
+      </ul>
+    </form>
+  );
+};
 
-    this.state = {
-      type: `Popular`,
-    };
-  }
+TypesSort.propTypes = {
+  onToggleList: PropTypes.func.isRequired,
+  onChangeType: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  sortTypeLabel: PropTypes.string.isRequired,
+  sortType: PropTypes.string.isRequired,
+};
 
-  render() {
-    return (
-      <form className="places__sorting" action="#" method="get">
-        <span className="places__sorting-caption">Sort by</span>
-        <span className="places__sorting-type" tabIndex="0">
-          {this.state.type}
-          <svg className="places__sorting-arrow" width="7" height="4">
-            <use xlinkHref="#icon-arrow-select" />
-          </svg>
-        </span>
-        <ul className="places__options places__options--custom places__options--opened">
-          <li className="places__option places__option--active" tabIndex="0">Popular</li>
-          <li className="places__option" tabIndex="0">Price: low to high</li>
-          <li className="places__option" tabIndex="0">Price: high to low</li>
-          <li className="places__option" tabIndex="0">Top rated first</li>
-        </ul>
-      </form>
-    );
-  }
-}
-
-export default TypesSort;
+export default withTypesSort(TypesSort);

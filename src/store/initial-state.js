@@ -3,6 +3,7 @@ const InitialState = {
   offers: [],
   isAuthorizationRequired: false,
   userData: {},
+  sortType: `popular`
 };
 
 export default InitialState;

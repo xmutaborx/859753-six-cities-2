@@ -8,6 +8,7 @@ class CitiesMap extends React.PureComponent {
 
     this._defaultCenter = [52.38333, 4.9];
     this._defaultZoom = 12;
+
     this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -35,8 +36,7 @@ class CitiesMap extends React.PureComponent {
   _takeCenter() {
     if (this.props.offersList.length) {
       const location = this.props.offersList[0].city.location;
-      const zoom = this.props.offersList[0].city.location.zoom;
-      this.map.setView(new leaflet.LatLng(location.latitude, location.longitude), zoom);
+      this.map.setView(new leaflet.LatLng(location.latitude, location.longitude), location.zoom);
     } else {
       this.map.setView(this._defaultCenter, this._defaultZoom);
     }

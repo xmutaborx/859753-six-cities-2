@@ -34,6 +34,10 @@ const reducer = (state = InitialState, action) => {
       });
     }
 
+    case ActionType.changeSortType : return Object.assign({}, state, {
+      sortType: action.payload,
+    });
+
     default: return state;
   }
 };

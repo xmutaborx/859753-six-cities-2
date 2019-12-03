@@ -25,6 +25,11 @@ const ActionCreator = {
     type: ActionType.toggleFavorites,
     payload: id
   }),
+
+  changeSortType: (type) => ({
+    type: ActionType.changeSortType,
+    payload: type
+  })
 };
 
 export default ActionCreator;
