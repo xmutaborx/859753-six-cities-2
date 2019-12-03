@@ -5,7 +5,8 @@ const ActionType = {
   saveUserData: `SAVE_USER_DATA`,
   toggleFavorites: `TOGGLE_FAVORITES`,
   changeSortType: `CHANGE_SORT_TYPE`,
-  setActivePin: `SET_ACTIVE_PIN`
+  setActivePin: `SET_ACTIVE_PIN`,
+  getComments: `GET_COMMENTS`,
 };
 
 export default ActionType;

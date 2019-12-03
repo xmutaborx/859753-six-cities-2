@@ -32,6 +32,13 @@ const Operation = {
       });
   },
 
+  getComments: (id) => (dispatch, _, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreator.getComments(response.data))
+      });
+  },
+
 };
 
 export default Operation;

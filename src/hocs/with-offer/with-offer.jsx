@@ -2,31 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
-
-import configureAPI from '../../api';
-
-const api = configureAPI();
+import Operation from '../../store/operation';
 
 const withOffer = (Component) => {
   class WithOffer extends React.PureComponent {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        comments: [],
-      };
-    }
-
     componentDidMount() {
-      api.get(`/comments/${this.props.match.params.id}`)
-        .then((response) => {
-          this.setState({comments: response.data});
-        });
+      this.props.getComments(this.props.match.params.id);
     }
 
     componentDidUpdate(prevProps) {
       if (prevProps.match.params.id !== this.props.match.params.id) {
         window.scrollTo(0, 0);
+        this.props.getComments(this.props.match.params.id);
       }
     }
 
@@ -42,7 +29,7 @@ const withOffer = (Component) => {
         <Component
           {...this.props}
           offerId={this.props.match.params.id}
-          comments={this.state.comments}
+          comments={this.props.comments}
           currentOffer={offer}
           nearOffers={nearOffers}
           allOffers={allOffers}
@@ -65,10 +52,15 @@ const withOffer = (Component) => {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   offers: state.offers,
+  comments: state.comments
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getComments: (id) => dispatch(Operation.getComments(id)),
 });
 
 const composedWithOffer = compose(
-    connect(mapStateToProps, null),
+    connect(mapStateToProps, mapDispatchToProps),
     withOffer
 );
 
