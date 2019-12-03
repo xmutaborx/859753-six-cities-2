@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ActionCreator from '../../store/action-creator';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import Operation from '../../store/operation';
 
 const OfferCard = (props) => {
   const {id,
@@ -14,7 +15,8 @@ const OfferCard = (props) => {
     image,
     rating,
     nearMode,
-    onMouseOver,
+    onChangeActiveItem,
+    onClearItem,
     toggleFavorites} = props;
 
   let articleClasses = `cities__place-card`;
@@ -26,7 +28,7 @@ const OfferCard = (props) => {
   }
 
   return (
-    <article className={`${articleClasses} place-card`} onMouseEnter={onMouseOver}>
+    <article className={`${articleClasses} place-card`} onMouseEnter={onChangeActiveItem} onMouseLeave={onClearItem}>
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -46,7 +48,7 @@ const OfferCard = (props) => {
           <button
             className={`place-card__bookmark-button button` + (isFavorite ? ` place-card__bookmark-button--active` : ``)}
             type="button"
-            onClick={() => toggleFavorites(id)}
+            onClick={() => toggleFavorites(id, !isFavorite)}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
@@ -74,6 +76,8 @@ OfferCard.defaultProps = {
 };
 
 OfferCard.propTypes = {
+  onChangeActiveItem: PropTypes.func.isRequired,
+  onClearItem: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
@@ -84,11 +88,11 @@ OfferCard.propTypes = {
   rating: PropTypes.number.isRequired,
   onMouseOver: PropTypes.func,
   toggleFavorites: PropTypes.func,
-  nearMode: PropTypes.bool,
+  nearMode: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleFavorites: (id) => dispatch(ActionCreator.toggleFavorites(id)),
+  toggleFavorites: (id, status) => dispatch(Operation.toggleFavorites(id, status)),
 });
 
 export {OfferCard};

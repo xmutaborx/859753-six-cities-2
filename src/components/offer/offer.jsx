@@ -5,11 +5,11 @@ import withOffer from '../../hocs/with-offer/with-offer.jsx';
 import Header from '../header/header.jsx';
 import FeedbackList from '../feedback-list/feedback-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
-import OfferList from '../offer-list/offer-list.jsx';
+import OffersList from '../offer-list/offers-list.jsx';
 
 
 const Offer = (props) => {
-  const {currentOffer, nearOffers, allOffers, comments} = props;
+  const {currentOffer, nearOffers, allOffers, comments, offerId} = props;
 
   if (!currentOffer) {
     return null;
@@ -82,14 +82,14 @@ const Offer = (props) => {
             </div>
           </div>
           <section className="property__map map">
-            <CitiesMap offersList={allOffers}/>
+            <CitiesMap offersList={allOffers} offerId={offerId} />
           </section>
         </section>
 
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OfferList offers={nearOffers} nearMode={true} />
+            <OffersList offers={nearOffers} nearMode={true} />
           </section>
         </div>
 
@@ -103,6 +103,7 @@ Offer.propTypes = {
   nearOffers: PropTypes.arrayOf(PropTypes.object),
   allOffers: PropTypes.arrayOf(PropTypes.object),
   comments: PropTypes.arrayOf(PropTypes.object),
+  offerId: PropTypes.string,
 };
 
 export default withOffer(Offer);

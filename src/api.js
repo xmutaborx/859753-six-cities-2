@@ -13,7 +13,6 @@ const createAPI = () => {
   const onFail = (err) => {
     if (err.response.status === 401) {
       history.push(`/login`);
-      return;
     }
   };
 

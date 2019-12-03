@@ -21,9 +21,19 @@ const ActionCreator = {
     payload: data
   }),
 
-  toggleFavorites: (id) => ({
+  toggleFavorites: (id, status) => ({
     type: ActionType.toggleFavorites,
-    payload: id
+    payload: {id, status}
+  }),
+
+  changeSortType: (type) => ({
+    type: ActionType.changeSortType,
+    payload: type
+  }),
+
+  setActivePin: (pin) => ({
+    type: ActionType.setActivePin,
+    payload: pin
   }),
 };
 

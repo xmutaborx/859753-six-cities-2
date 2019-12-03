@@ -23,7 +23,15 @@ const Operation = {
           history.push(`/`);
         }
       });
-  }
+  },
+
+  toggleFavorites: (id, status) => (dispatch, _, api) => {
+    return api.post(`/favorite/${id}/${status ? 1 : 0}`)
+      .then(() => {
+        dispatch(ActionCreator.toggleFavorites(id, status));
+      });
+  },
+
 };
 
 export default Operation;
