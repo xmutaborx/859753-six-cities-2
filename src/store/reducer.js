@@ -38,6 +38,10 @@ const reducer = (state = InitialState, action) => {
       sortType: action.payload,
     });
 
+    case ActionType.setActivePin : return Object.assign({}, state, {
+      activePin: action.payload,
+    });
+
     default: return state;
   }
 };

@@ -9,7 +9,7 @@ import OfferList from '../offer-list/offer-list.jsx';
 
 
 const Offer = (props) => {
-  const {currentOffer, nearOffers, allOffers, comments} = props;
+  const {currentOffer, nearOffers, allOffers, comments, offerId} = props;
 
   if (!currentOffer) {
     return null;
@@ -82,7 +82,7 @@ const Offer = (props) => {
             </div>
           </div>
           <section className="property__map map">
-            <CitiesMap offersList={allOffers}/>
+            <CitiesMap offersList={allOffers} offerId={offerId} />
           </section>
         </section>
 
@@ -103,6 +103,7 @@ Offer.propTypes = {
   nearOffers: PropTypes.arrayOf(PropTypes.object),
   allOffers: PropTypes.arrayOf(PropTypes.object),
   comments: PropTypes.arrayOf(PropTypes.object),
+  offerId: PropTypes.string,
 };
 
 export default withOffer(Offer);

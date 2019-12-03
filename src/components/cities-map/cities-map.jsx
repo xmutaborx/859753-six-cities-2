@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
+import {connect} from 'react-redux';
 
 class CitiesMap extends React.PureComponent {
   constructor(props) {
@@ -8,11 +9,6 @@ class CitiesMap extends React.PureComponent {
 
     this._defaultCenter = [52.38333, 4.9];
     this._defaultZoom = 12;
-
-    this.icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
-    });
   }
 
   _init() {
@@ -23,6 +19,16 @@ class CitiesMap extends React.PureComponent {
       marker: true
     });
 
+    this.activeIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [27, 39]
+    });
+
+    this.icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [27, 39]
+    });
+
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -31,6 +37,9 @@ class CitiesMap extends React.PureComponent {
 
     this.markerGroup = [];
 
+    if (this.props.offerId) {
+      this.map.scrollWheelZoom.disable();
+    }
   }
 
   _takeCenter() {
@@ -43,11 +52,23 @@ class CitiesMap extends React.PureComponent {
   }
 
   _renderPins() {
-    const pins = this.props.offersList.map((offer) => [offer.location.latitude, offer.location.longitude]);
+    const pins = this.props.offersList.map((offer) => (
+      {
+        latitude: offer.location.latitude,
+        longitude: offer.location.longitude,
+        id: offer.id
+      }
+    ));
 
     pins.forEach((it) => {
-      let marker = leaflet.marker(it, this.icon).addTo(this.map);
-      this.markerGroup.push(marker);
+      const item = [it.latitude, it.longitude];
+      if (JSON.stringify(item) === JSON.stringify(this.props.activePin) || +this.props.offerId === it.id) {
+        let marker = leaflet.marker([it.latitude, it.longitude], {icon: this.activeIcon}).addTo(this.map);
+        this.markerGroup.push(marker);
+      } else {
+        let marker = leaflet.marker([it.latitude, it.longitude], {icon: this.icon}).addTo(this.map);
+        this.markerGroup.push(marker);
+      }
     });
   }
 
@@ -58,7 +79,7 @@ class CitiesMap extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.offersList !== this.props.offersList) {
+    if (prevProps.offersList !== this.props.offersList || prevProps.activePin !== this.props.activePin) {
       this.markerGroup.forEach((it) => {
         this.map.removeLayer(it);
       });
@@ -83,6 +104,12 @@ CitiesMap.propTypes = {
   }),
   pins: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   offersList: PropTypes.arrayOf(PropTypes.object),
+  activePin: PropTypes.array,
+  offerId: PropTypes.string,
 };
 
-export default CitiesMap;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  activePin: state.activePin,
+});
+
+export default connect(mapStateToProps, null)(CitiesMap);

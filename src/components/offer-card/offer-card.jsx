@@ -14,7 +14,8 @@ const OfferCard = (props) => {
     image,
     rating,
     nearMode,
-    onMouseOver,
+    onChangeActiveItem,
+    onClearItem,
     toggleFavorites} = props;
 
   let articleClasses = `cities__place-card`;
@@ -26,7 +27,7 @@ const OfferCard = (props) => {
   }
 
   return (
-    <article className={`${articleClasses} place-card`} onMouseEnter={onMouseOver}>
+    <article className={`${articleClasses} place-card`} onMouseEnter={onChangeActiveItem} onMouseLeave={onClearItem}>
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -74,6 +75,8 @@ OfferCard.defaultProps = {
 };
 
 OfferCard.propTypes = {
+  onChangeActiveItem: PropTypes.func.isRequired,
+  onClearItem: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

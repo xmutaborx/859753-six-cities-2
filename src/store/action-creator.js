@@ -29,7 +29,12 @@ const ActionCreator = {
   changeSortType: (type) => ({
     type: ActionType.changeSortType,
     payload: type
-  })
+  }),
+
+  setActivePin: (pin) => ({
+    type: ActionType.setActivePin,
+    payload: pin
+  }),
 };
 
 export default ActionCreator;

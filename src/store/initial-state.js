@@ -3,7 +3,8 @@ const InitialState = {
   offers: [],
   isAuthorizationRequired: false,
   userData: {},
-  sortType: `popular`
+  sortType: `popular`,
+  activePin: [],
 };
 
 export default InitialState;

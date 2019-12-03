@@ -5,7 +5,7 @@ import OfferCard from '../offer-card/offer-card.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 
 const OffersList = (props) => {
-  const {handleChangeActiveItem, offers, nearMode} = props;
+  const {onChangeActiveItem, onClearItem, offers, nearMode} = props;
   let wrappedClasses = `cities__places-list places__list tabs__content`;
 
   if (nearMode) {
@@ -26,7 +26,8 @@ const OffersList = (props) => {
           image={card.preview_image}
           rating={card.rating}
           nearMode={nearMode}
-          onMouseOver={() => handleChangeActiveItem(card)}
+          onChangeActiveItem={() => onChangeActiveItem(card)}
+          onClearItem={() => onClearItem()}
         />
       )}
     </div>
@@ -38,7 +39,8 @@ OffersList.defaultProps = {
 };
 
 OffersList.propTypes = {
-  handleChangeActiveItem: PropTypes.func.isRequired,
+  onChangeActiveItem: PropTypes.func.isRequired,
+  onClearItem: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
