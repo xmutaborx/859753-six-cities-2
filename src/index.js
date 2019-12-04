@@ -4,6 +4,7 @@ import {Router} from 'react-router-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {compose} from 'recompose';
+import {batch} from 'react-redux';
 import reducer from './store/reducer';
 import thunk from 'redux-thunk';
 import history from './history';
@@ -21,7 +22,10 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.loadOffers());
+batch(() => {
+  store.dispatch(Operation.loadOffers());
+  store.dispatch(Operation.checkAuthorization());
+});
 
 ReactDOM.render(
     <Provider store={store}>

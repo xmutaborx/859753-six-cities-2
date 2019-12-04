@@ -10,12 +10,7 @@ const createAPI = () => {
 
   const onSuccess = (response) => response;
 
-  const onFail = (err) => {
-    if (err.response.status === 401) {
-      history.push(`/login`);
-    }
-    return err;
-  };
+  const onFail = (err) => err;
 
   api.interceptors.response.use(onSuccess, onFail);
 

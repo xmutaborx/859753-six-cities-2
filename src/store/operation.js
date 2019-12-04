@@ -42,6 +42,8 @@ const Operation = {
       .then((response) => {
         if (response.status === 200) {
           dispatch(ActionCreator.toggleFavorites(id, status));
+        } else {
+          history.push(`/login`);
         }
       });
   },
