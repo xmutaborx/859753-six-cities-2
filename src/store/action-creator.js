@@ -39,6 +39,11 @@ const ActionCreator = {
   getComments: (data) => ({
     type: ActionType.getComments,
     payload: data
+  }),
+
+  postComments: (comment) => ({
+    type: ActionType.postComments,
+    payload: comment
   })
 };
 

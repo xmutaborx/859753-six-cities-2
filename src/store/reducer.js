@@ -46,6 +46,10 @@ const reducer = (state = InitialState, action) => {
       comments: action.payload,
     });
 
+    case ActionType.postComments : return Object.assign({}, state, {
+      comments: action.payload,
+    });
+
     default: return state;
   }
 };

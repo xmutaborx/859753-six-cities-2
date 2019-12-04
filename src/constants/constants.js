@@ -5,4 +5,5 @@ export const SORT_OPTION = [
   {type: `rated`, value: `Top rated first`},
 ];
 
+export const CITIES_LIST = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 export const MAX_CITIES = 6;

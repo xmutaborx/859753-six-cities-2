@@ -27,15 +27,26 @@ const Operation = {
 
   toggleFavorites: (id, status) => (dispatch, _, api) => {
     return api.post(`/favorite/${id}/${status ? 1 : 0}`)
-      .then(() => {
-        dispatch(ActionCreator.toggleFavorites(id, status));
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.toggleFavorites(id, status));
+        }
       });
   },
 
   getComments: (id) => (dispatch, _, api) => {
     return api.get(`/comments/${id}`)
       .then((response) => {
-        dispatch(ActionCreator.getComments(response.data))
+        dispatch(ActionCreator.getComments(response.data));
+      });
+  },
+
+  postComments: (id, rating, comment) => (dispatch, _, api) => {
+    return api.post(`/comments/${id}`, {rating, comment})
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.postComments(response.data));
+        }
       });
   },
 

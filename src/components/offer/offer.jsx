@@ -7,7 +7,7 @@ import Header from '../header/header.jsx';
 import FeedbackList from '../feedback-list/feedback-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import OffersList from '../offer-list/offers-list.jsx';
-
+import FeedbackForm from '../feedback-form/feedback-form.jsx';
 
 class Offer extends React.PureComponent {
   componentDidMount() {
@@ -16,7 +16,10 @@ class Offer extends React.PureComponent {
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
-      window.scrollTo(0, 0);
+      window.scrollTo({
+        top: 0,
+        behavior: `smooth`
+      });
       this.props.getComments(this.props.match.params.id);
     }
   }
@@ -39,8 +42,8 @@ class Offer extends React.PureComponent {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {currentOffer.images.slice(0, 6).map((it, i) => (
-                  <div className="property__image-wrapper" key={i}>
+                {currentOffer.images.slice(0, 6).map((it) => (
+                  <div className="property__image-wrapper" key={it}>
                     <img className="property__image" src={it} alt="Photo" />
                   </div>
                 ))}
@@ -99,7 +102,10 @@ class Offer extends React.PureComponent {
                     ))}
                   </ul>
                 </div>
-                <FeedbackList comments={this.props.comments} />
+                <section className="property__reviews reviews">
+                  <FeedbackList comments={this.props.comments} />
+                  <FeedbackForm id={offerId} />
+                </section>
               </div>
             </div>
             <section className="property__map map">
@@ -118,14 +124,22 @@ class Offer extends React.PureComponent {
       </div>
     );
   }
-};
+}
 
 Offer.propTypes = {
   currentOffer: PropTypes.object,
   nearOffers: PropTypes.arrayOf(PropTypes.object),
   allOffers: PropTypes.arrayOf(PropTypes.object),
   comments: PropTypes.arrayOf(PropTypes.object),
+  getComments: PropTypes.func.isRequired,
+  toggleFavorites: PropTypes.func.isRequired,
   offerId: PropTypes.string,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  })
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {

@@ -7,6 +7,7 @@ const ActionType = {
   changeSortType: `CHANGE_SORT_TYPE`,
   setActivePin: `SET_ACTIVE_PIN`,
   getComments: `GET_COMMENTS`,
+  postComments: `POST_COMMENTS`,
 };
 
 export default ActionType;

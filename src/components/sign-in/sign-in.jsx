@@ -22,7 +22,7 @@ const SignIn = (props) => {
               className="login__form form"
               action="#"
               method="post"
-              onSubmit={(e) => handleSubmit(e)}
+              onSubmit={handleSubmit}
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
