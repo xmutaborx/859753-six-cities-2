@@ -42,6 +42,14 @@ const reducer = (state = InitialState, action) => {
       activePin: action.payload,
     });
 
+    case ActionType.getComments : return Object.assign({}, state, {
+      comments: action.payload,
+    });
+
+    case ActionType.postComments : return Object.assign({}, state, {
+      comments: action.payload,
+    });
+
     default: return state;
   }
 };

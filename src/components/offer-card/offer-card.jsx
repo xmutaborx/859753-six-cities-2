@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ActionCreator from '../../store/action-creator';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Operation from '../../store/operation';
@@ -28,7 +27,11 @@ const OfferCard = (props) => {
   }
 
   return (
-    <article className={`${articleClasses} place-card`} onMouseEnter={onChangeActiveItem} onMouseLeave={onClearItem}>
+    <article
+      className={`${articleClasses} place-card`}
+      onMouseEnter={onChangeActiveItem}
+      onMouseLeave={onClearItem}
+    >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -46,7 +49,7 @@ const OfferCard = (props) => {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button button` + (isFavorite ? ` place-card__bookmark-button--active` : ``)}
+            className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : ``}`}
             type="button"
             onClick={() => toggleFavorites(id, !isFavorite)}
           >
@@ -58,7 +61,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}}></span>
+            <span style={{width: `${rating * 20}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

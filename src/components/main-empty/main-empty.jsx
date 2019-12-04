@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from '../header/header.jsx';
+import {CITIES_LIST} from '../../constants/constants';
 
 const MainEmpty = () => {
-  const citiesList = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -11,7 +11,7 @@ const MainEmpty = () => {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {citiesList.map((it) => (
+              {CITIES_LIST.map((it) => (
                 <li className="locations__item" key={it}>
                   <a className="locations__item-link tabs__item" href="#">
                     <span>{it}</span>
@@ -29,7 +29,7 @@ const MainEmpty = () => {
                 <p className="cities__status-description">We could not find any property availbale at the moment in Dusseldorf</p>
               </div>
             </section>
-            <div className="cities__right-section"></div>
+            <div className="cities__right-section" />
           </div>
         </div>
       </main>

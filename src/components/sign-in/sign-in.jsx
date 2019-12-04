@@ -1,17 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Operation from '../../store/operation';
-import {connect} from 'react-redux';
+
+import withSignIn from '../../hocs/with-sign-in/with-wign-in.jsx';
 
 const SignIn = (props) => {
-  let loginInput;
-  let password;
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    props.submitForm(loginInput.value, password.value);
-  };
-
+  const {onSubmitForm, onChangeLogin, onChangePassword, login, password} = props;
   return (
     <div className="page page--gray page--login">
       <main className="page__main page__main--login">
@@ -22,7 +15,7 @@ const SignIn = (props) => {
               className="login__form form"
               action="#"
               method="post"
-              onSubmit={(e) => handleSubmit(e)}
+              onSubmit={onSubmitForm}
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
@@ -32,9 +25,8 @@ const SignIn = (props) => {
                   name="email"
                   placeholder="Email"
                   required
-                  ref={(e) => {
-                    loginInput = e;
-                  }}
+                  value={login}
+                  onChange={onChangeLogin}
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -45,9 +37,8 @@ const SignIn = (props) => {
                   name="password"
                   placeholder="Password"
                   required
-                  ref={(e) => {
-                    password = e;
-                  }}
+                  value={password}
+                  onChange={onChangePassword}
                 />
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
@@ -66,13 +57,12 @@ const SignIn = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  submitForm: (login, password) => dispatch(Operation.authorization(login, password)),
-});
-
 SignIn.propTypes = {
-  submitForm: PropTypes.func.isRequired,
+  onSubmitForm: PropTypes.func.isRequired,
+  onChangeLogin: PropTypes.func.isRequired,
+  onChangePassword: PropTypes.func.isRequired,
+  login: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
 };
 
-export {SignIn};
-export default connect(null, mapDispatchToProps)(SignIn);
+export default withSignIn(SignIn);

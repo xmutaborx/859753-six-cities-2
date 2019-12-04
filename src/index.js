@@ -7,7 +7,6 @@ import {compose} from 'recompose';
 import reducer from './store/reducer';
 import thunk from 'redux-thunk';
 import history from './history';
-
 import Operation from './store/operation';
 import configureAPI from './api';
 import App from './components/app/app.jsx';

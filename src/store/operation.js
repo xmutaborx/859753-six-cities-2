@@ -1,4 +1,5 @@
 import ActionCreator from './action-creator';
+import {batch} from 'react-redux';
 import history from '../history';
 
 const Operation = {
@@ -11,6 +12,15 @@ const Operation = {
       });
   },
 
+  checkAuthorization: () => (dispatch, _, api) => {
+    return api.get(`/login`)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.saveUserData(response.data));
+        }
+      });
+  },
+
   authorization: (email, password) => (dispatch, _, api) => {
     return api.post(`/login`, {
       email,
@@ -18,8 +28,10 @@ const Operation = {
     })
       .then((response) => {
         if (response.status === 200) {
-          dispatch(ActionCreator.saveUserData(response.data));
-          dispatch(ActionCreator.authorization(true));
+          batch(() => {
+            dispatch(ActionCreator.saveUserData(response.data));
+            dispatch(ActionCreator.authorization(true));
+          });
           history.push(`/`);
         }
       });
@@ -27,8 +39,26 @@ const Operation = {
 
   toggleFavorites: (id, status) => (dispatch, _, api) => {
     return api.post(`/favorite/${id}/${status ? 1 : 0}`)
-      .then(() => {
-        dispatch(ActionCreator.toggleFavorites(id, status));
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.toggleFavorites(id, status));
+        }
+      });
+  },
+
+  getComments: (id) => (dispatch, _, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreator.getComments(response.data));
+      });
+  },
+
+  postComments: (id, rating, comment) => (dispatch, _, api) => {
+    return api.post(`/comments/${id}`, {rating, comment})
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.postComments(response.data));
+        }
       });
   },
 

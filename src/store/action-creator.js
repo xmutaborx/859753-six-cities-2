@@ -35,6 +35,16 @@ const ActionCreator = {
     type: ActionType.setActivePin,
     payload: pin
   }),
+
+  getComments: (data) => ({
+    type: ActionType.getComments,
+    payload: data
+  }),
+
+  postComments: (comment) => ({
+    type: ActionType.postComments,
+    payload: comment
+  })
 };
 
 export default ActionCreator;

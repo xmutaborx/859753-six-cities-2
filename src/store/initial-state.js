@@ -5,6 +5,7 @@ const InitialState = {
   userData: {},
   sortType: `popular`,
   activePin: [],
+  comments: [],
 };
 
 export default InitialState;

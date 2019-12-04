@@ -27,7 +27,7 @@ const OffersList = (props) => {
           rating={card.rating}
           nearMode={nearMode}
           onChangeActiveItem={() => onChangeActiveItem(card)}
-          onClearItem={() => onClearItem()}
+          onClearItem={onClearItem}
         />
       )}
     </div>
