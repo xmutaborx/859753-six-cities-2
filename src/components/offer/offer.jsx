@@ -104,7 +104,7 @@ class Offer extends React.PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <FeedbackList comments={this.props.comments} />
-                  <FeedbackForm id={offerId} />
+                  {this.props.userData.id && <FeedbackForm id={offerId} />}
                 </section>
               </div>
             </div>
@@ -144,7 +144,8 @@ Offer.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   offers: state.offers,
-  comments: state.comments
+  comments: state.comments,
+  userData: state.userData,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,4 +1,5 @@
 import ActionCreator from './action-creator';
+import {batch} from 'react-redux';
 import history from '../history';
 
 const Operation = {
@@ -18,8 +19,10 @@ const Operation = {
     })
       .then((response) => {
         if (response.status === 200) {
-          dispatch(ActionCreator.saveUserData(response.data));
-          dispatch(ActionCreator.authorization(true));
+          batch(() => {
+            dispatch(ActionCreator.saveUserData(response.data));
+            dispatch(ActionCreator.authorization(true));
+          });
           history.push(`/`);
         }
       });
