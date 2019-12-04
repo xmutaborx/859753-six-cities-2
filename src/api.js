@@ -14,6 +14,7 @@ const createAPI = () => {
     if (err.response.status === 401) {
       history.push(`/login`);
     }
+    return err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);
