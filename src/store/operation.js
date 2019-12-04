@@ -12,6 +12,15 @@ const Operation = {
       });
   },
 
+  checkAuthorization: () => (dispatch, _, api) => {
+    return api.get(`/login`)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.saveUserData(response.data));
+        }
+      });
+  },
+
   authorization: (email, password) => (dispatch, _, api) => {
     return api.post(`/login`, {
       email,
