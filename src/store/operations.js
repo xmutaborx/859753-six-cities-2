@@ -2,7 +2,7 @@ import ActionCreator from './action-creator';
 import {batch} from 'react-redux';
 import history from '../history';
 
-const Operation = {
+const Operations = {
   loadOffers: () => (dispatch, _, api) => {
     return api.get(`/hotels`)
       .then((response) => {
@@ -41,7 +41,10 @@ const Operation = {
     return api.post(`/favorite/${id}/${status ? 1 : 0}`)
       .then((response) => {
         if (response.status === 200) {
-          dispatch(ActionCreator.toggleFavorites(id, status));
+          batch(() => {
+            dispatch(ActionCreator.toggleFavorites(id, status));
+            dispatch(ActionCreator.clearFavoritesList(id, status));
+          });
         } else {
           history.push(`/login`);
         }
@@ -64,6 +67,13 @@ const Operation = {
       });
   },
 
+  getFavorites: () => (dispatch, _, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.getFavorites(response.data));
+      });
+  },
+
 };
 
-export default Operation;
+export default Operations;

@@ -44,7 +44,18 @@ const ActionCreator = {
   postComments: (comment) => ({
     type: ActionType.postComments,
     payload: comment
-  })
+  }),
+
+  getFavorites: (offers) => ({
+    type: ActionType.getFavorites,
+    payload: offers
+  }),
+
+  clearFavoritesList: (id, status) => ({
+    type: ActionType.clearFavoritesList,
+    payload: {id, status},
+  }),
+
 };
 
 export default ActionCreator;

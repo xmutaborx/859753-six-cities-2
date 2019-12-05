@@ -51,6 +51,11 @@ class CitiesMap extends React.PureComponent {
     }
   }
 
+  _pinsAndCenter() {
+    this._renderPins();
+    this._takeCenter();
+  }
+
   _renderPins() {
     const pins = this.props.offersList.map((offer) => (
       {
@@ -62,20 +67,18 @@ class CitiesMap extends React.PureComponent {
 
     pins.forEach((it) => {
       const item = [it.latitude, it.longitude];
-      if (JSON.stringify(item) === JSON.stringify(this.props.activePin) || +this.props.offerId === it.id) {
-        let marker = leaflet.marker([it.latitude, it.longitude], {icon: this.activeIcon}).addTo(this.map);
-        this.markerGroup.push(marker);
-      } else {
-        let marker = leaflet.marker([it.latitude, it.longitude], {icon: this.icon}).addTo(this.map);
-        this.markerGroup.push(marker);
+      let icon = this.icon;
+      if (item.toString() === this.props.activePin.toString() || +this.props.offerId === it.id) {
+        icon = this.activeIcon;
       }
+      let marker = leaflet.marker([it.latitude, it.longitude], {icon}).addTo(this.map);
+      this.markerGroup.push(marker);
     });
   }
 
   componentDidMount() {
     this._init();
-    this._renderPins();
-    this._takeCenter();
+    this._pinsAndCenter();
   }
 
   componentDidUpdate(prevProps) {
@@ -83,8 +86,7 @@ class CitiesMap extends React.PureComponent {
       this.markerGroup.forEach((it) => {
         this.map.removeLayer(it);
       });
-      this._renderPins();
-      this._takeCenter();
+      this._pinsAndCenter();
     }
   }
 

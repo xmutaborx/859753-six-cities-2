@@ -50,6 +50,17 @@ const reducer = (state = InitialState, action) => {
       comments: action.payload,
     });
 
+    case ActionType.getFavorites : return Object.assign({}, state, {
+      favorites: action.payload,
+    });
+
+    case ActionType.clearFavoritesList : {
+      let newOffers = state.favorites.filter((offer) => offer.id !== action.payload.id);
+      return Object.assign({}, state, {
+        favorites: newOffers,
+      });
+    }
+
     default: return state;
   }
 };

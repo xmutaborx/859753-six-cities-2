@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Operation from '../../store/operation';
+import Operations from '../../store/operations';
 
 import Header from '../header/header.jsx';
 import FeedbackList from '../feedback-list/feedback-list.jsx';
@@ -26,9 +26,9 @@ class Offer extends React.PureComponent {
 
   render() {
     const offerId = Number(this.props.match.params.id);
-    const [currentOffer] = this.props.offers.filter((it) => it.id === offerId);
 
-    let nearOffers = this.props.offers.filter((it) => it.city.name === currentOffer.city.name && it.id !== offerId).slice(0, 3);
+    const [currentOffer] = this.props.offers.filter((it) => it.id === offerId);
+    const nearOffers = this.props.offers.filter((it) => it.city.name === currentOffer.city.name && it.id !== offerId).slice(0, 3);
     const allOffers = nearOffers.concat([currentOffer]);
 
     if (!currentOffer) {
@@ -149,8 +149,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getComments: (id) => dispatch(Operation.getComments(id)),
-  toggleFavorites: (id, status) => dispatch(Operation.toggleFavorites(id, status)),
+  getComments: (id) => dispatch(Operations.getComments(id)),
+  toggleFavorites: (id, status) => dispatch(Operations.toggleFavorites(id, status)),
 });
 
 export {Offer};

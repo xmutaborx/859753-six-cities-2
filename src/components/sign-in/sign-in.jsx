@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import withSignIn from '../../hocs/with-sign-in/with-wign-in.jsx';
+import withSignIn from '../../hocs/with-sign-in/with-sign-in.jsx';
 
 const SignIn = (props) => {
   const {onSubmitForm, onChangeLogin, onChangePassword, login, password} = props;

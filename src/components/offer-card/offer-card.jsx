@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Operation from '../../store/operation';
+import Operations from '../../store/operations';
 
 const OfferCard = (props) => {
   const {id,
@@ -95,7 +95,7 @@ OfferCard.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleFavorites: (id, status) => dispatch(Operation.toggleFavorites(id, status)),
+  toggleFavorites: (id, status) => dispatch(Operations.toggleFavorites(id, status)),
 });
 
 export {OfferCard};
