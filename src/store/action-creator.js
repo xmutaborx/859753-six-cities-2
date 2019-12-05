@@ -51,9 +51,9 @@ const ActionCreator = {
     payload: offers
   }),
 
-  clearFavoritesList: (id, status) => ({
+  clearFavoritesList: (id) => ({
     type: ActionType.clearFavoritesList,
-    payload: {id, status},
+    payload: id
   }),
 
 };

@@ -43,7 +43,7 @@ const Operations = {
         if (response.status === 200) {
           batch(() => {
             dispatch(ActionCreator.toggleFavorites(id, status));
-            dispatch(ActionCreator.clearFavoritesList(id, status));
+            dispatch(ActionCreator.clearFavoritesList(id));
           });
         } else {
           history.push(`/login`);
