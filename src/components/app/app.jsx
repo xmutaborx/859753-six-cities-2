@@ -5,6 +5,7 @@ import SignIn from '../sign-in/sign-in.jsx';
 import Offer from '../offer/offer.jsx';
 import MainPage from '../main-page/main-page.jsx';
 import Favorites from '../favorites/favorites.jsx';
+import withAuth from '../../hocs/with-auth/with-auth.jsx';
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
       <Route exact path="/" component={MainPage} />
       <Route exact path="/login" component={SignIn} />
       <Route exact path="/offer/:id" component={Offer} />
-      <Route exact path="/favorites" component={Favorites} />
+      <Route exact path="/favorites" component={withAuth(Favorites)} />
     </Switch>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import FavoritesEmpty from '../favorites-empty/favorites-empty.jsx';
 import OffersList from '../offer-list/offers-list.jsx';
@@ -35,6 +36,12 @@ class Favorites extends React.PureComponent {
     );
   }
 }
+
+Favorites.propTypes = {
+  getFavorites: PropTypes.func.isRequired,
+  favorites: PropTypes.arrayOf(PropTypes.object),
+  favoritesCity: PropTypes.arrayOf(PropTypes.string),
+};
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   favorites: state.favorites,

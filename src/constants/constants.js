@@ -16,22 +16,3 @@ export const FEEDBACK_STARS = [
   {id: `2-stars`, value: 2, title: `badly`},
   {id: `1-star`, value: 1, title: `terribly`},
 ];
-
-// <li className="favorites__locations-items">
-//           <div className="favorites__locations locations locations--current">
-//             <div className="locations__item">
-//               <a className="locations__item-link" href="#">
-//                 <span>CityName</span>
-//               </a>
-//             </div>
-//           </div>
-//           <div className="favorites__places">
-//             {/* offers.map((it, i) =>
-//               <FavoritesCard
-//                 cards={it}
-//                 key={i}
-//               />
-//             )*/}
-//           </div>
-//         </li>
-//       </ul>
