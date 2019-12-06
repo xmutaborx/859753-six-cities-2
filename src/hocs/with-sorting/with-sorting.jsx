@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import ActionCreator from '../../store/action-creator';
 
-const withTypesSort = (Component) => {
-  class WithTypesSort extends React.PureComponent {
+const withSorting = (Component) => {
+  class WithSorting extends React.PureComponent {
     constructor(props) {
       super(props);
 
@@ -46,12 +46,12 @@ const withTypesSort = (Component) => {
     }
   }
 
-  WithTypesSort.propTypes = {
+  WithSorting.propTypes = {
     changeSortType: PropTypes.func.isRequired,
     sortType: PropTypes.string.isRequired,
   };
 
-  return WithTypesSort;
+  return WithSorting;
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -62,9 +62,9 @@ const mapDispatchToProps = (dispatch) => ({
   changeSortType: (type) => dispatch(ActionCreator.changeSortType(type)),
 });
 
-const composedWithTypesSort = compose(
+const composedWithSorting = compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withTypesSort
+    withSorting
 );
 
-export default composedWithTypesSort;
+export default composedWithSorting;

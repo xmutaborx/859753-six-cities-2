@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {SORT_OPTION} from '../../constants/constants';
-import withTypesSort from '../../hocs/with-types-sort/with-types-sort.jsx';
+import withTypesSort from '../../hocs/with-sorting/with-sorting.jsx';
 
 const TypesSort = (props) => {
   const {onToggleList, onChangeType, isOpen, sortTypeLabel, sortType} = props;
