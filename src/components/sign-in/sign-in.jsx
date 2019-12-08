@@ -66,4 +66,5 @@ SignIn.propTypes = {
   password: PropTypes.string.isRequired,
 };
 
+export {SignIn};
 export default withSignIn(SignIn);

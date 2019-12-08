@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {SORT_OPTION} from '../../constants/constants';
-import withTypesSort from '../../hocs/with-sorting/with-sorting.jsx';
+import withSorting from '../../hocs/with-sorting/with-sorting.jsx';
 
-const TypesSort = (props) => {
+const Sorting = (props) => {
   const {onToggleList, onChangeType, isOpen, sortTypeLabel, sortType} = props;
   return (
     <form className="places__sorting" action="#" method="get">
@@ -29,7 +29,7 @@ const TypesSort = (props) => {
   );
 };
 
-TypesSort.propTypes = {
+Sorting.propTypes = {
   onToggleList: PropTypes.func.isRequired,
   onChangeType: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
@@ -37,4 +37,5 @@ TypesSort.propTypes = {
   sortType: PropTypes.string.isRequired,
 };
 
-export default withTypesSort(TypesSort);
+export {Sorting};
+export default withSorting(Sorting);

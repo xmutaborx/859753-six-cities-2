@@ -114,4 +114,5 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   activePin: state.activePin,
 });
 
+export {CitiesMap};
 export default connect(mapStateToProps, null)(CitiesMap);

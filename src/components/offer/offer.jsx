@@ -127,19 +127,24 @@ class Offer extends React.PureComponent {
 }
 
 Offer.propTypes = {
-  currentOffer: PropTypes.object,
-  nearOffers: PropTypes.arrayOf(PropTypes.object),
-  allOffers: PropTypes.arrayOf(PropTypes.object),
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   comments: PropTypes.arrayOf(PropTypes.object),
+  userData: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    // eslint-disable-next-line camelcase
+    avatar_url: PropTypes.string,
+    // eslint-disable-next-line camelcase
+    is_pro: PropTypes.bool,
+  }),
   getComments: PropTypes.func.isRequired,
   toggleFavorites: PropTypes.func.isRequired,
-  offerId: PropTypes.string,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     })
-  })
+  }),
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {

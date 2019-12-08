@@ -6,7 +6,8 @@ it(`Cities List renders correctly`, () => {
   const tree = renderer
     .create(<CitiesList
       cities={[`first city`, `second city`]}
-      changeCity={() => {}}
+      currentCity={`second city`}
+      onChangeCity={() => {}}
     />)
     .toJSON();
 

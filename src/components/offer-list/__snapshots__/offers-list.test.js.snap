@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Offers Page correctly renders 1`] = `
+<div
+  className="cities__places-list places__list tabs__content"
+>
+  <Connect(OfferCard)
+    id={1}
+    image="img/1.png"
+    isFavorite={false}
+    isPremium={false}
+    key="1"
+    nearMode={false}
+    onChangeActiveItem={[Function]}
+    onClearItem={[Function]}
+    price={120}
+    rating={4.8}
+    title="Beautiful & luxurious studio at great location"
+    type="apartment"
+  />
+</div>
+`;

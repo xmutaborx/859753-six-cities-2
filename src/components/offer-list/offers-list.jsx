@@ -39,6 +39,8 @@ const OffersList = (props) => {
                     rating={offer.rating}
                     id={offer.id}
                   />;
+                } else {
+                  return null;
                 }
               })}
             </div>

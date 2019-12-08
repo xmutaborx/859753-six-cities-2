@@ -65,4 +65,5 @@ FeedbackForm.propTypes = {
   onPostComment: PropTypes.func.isRequired,
 };
 
+export {FeedbackForm};
 export default withFeedbackForm(FeedbackForm);
