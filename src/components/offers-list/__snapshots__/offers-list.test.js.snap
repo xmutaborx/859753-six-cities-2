@@ -18,5 +18,19 @@ exports[`Offers Page correctly renders 1`] = `
     title="Beautiful & luxurious studio at great location"
     type="apartment"
   />
+  <Connect(OfferCard)
+    id={2}
+    image="img/1.png"
+    isFavorite={false}
+    isPremium={false}
+    key="2"
+    nearMode={false}
+    onChangeActiveItem={[Function]}
+    onClearItem={[Function]}
+    price={400}
+    rating={5}
+    title="Beautiful & luxurious studio at great location"
+    type="apartment"
+  />
 </div>
 `;

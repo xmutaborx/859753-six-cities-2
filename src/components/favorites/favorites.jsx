@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import FavoritesEmpty from '../favorites-empty/favorites-empty.jsx';
-import OffersList from '../offer-list/offers-list.jsx';
+import OffersList from '../offers-list/offers-list.jsx';
 import {connect} from 'react-redux';
 import Operations from '../../store/operations';
 import {getFavoritesCitiesList} from '../../store/selectors';

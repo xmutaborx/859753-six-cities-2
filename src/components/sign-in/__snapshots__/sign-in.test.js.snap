@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Offers Page correctly renders 1`] = `
+exports[`SignIn Page correctly renders 1`] = `
 <div
   className="page page--gray page--login"
 >

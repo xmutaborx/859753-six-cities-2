@@ -33,8 +33,8 @@ const getFavoritesCitiesList = createSelector(
     getFavorites,
     (offers) => {
       const cities = new Set(offers.map((offer) => offer.city.name));
-      return [...cities].slice(0, MAX_CITIES);
+      return [...cities];
     }
 );
 
-export {getCityOffers, getCitiesList, getSortType, getFavoritesCitiesList};
+export {getCityOffers, getCitiesList, getFavoritesCitiesList};
