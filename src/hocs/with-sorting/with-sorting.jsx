@@ -67,4 +67,5 @@ const composedWithSorting = compose(
     withSorting
 );
 
+export {withSorting};
 export default composedWithSorting;

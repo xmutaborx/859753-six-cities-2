@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App works correctly "/" path should render Main page 1`] = `ReactWrapper {}`;

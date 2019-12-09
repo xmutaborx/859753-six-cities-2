@@ -62,4 +62,5 @@ const composedWithSignIn = compose(
     withSignIn
 );
 
+export {withSignIn};
 export default composedWithSignIn;

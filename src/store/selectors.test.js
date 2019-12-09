@@ -1,4 +1,4 @@
-import {getCitiesList, getCityOffers} from './selectors';
+import {getCitiesList, getCityOffers, getFavoritesCitiesList} from './selectors';
 import OFFER_MOCK from '../mocks/offer-mock';
 
 describe(`Selectors works correctly`, () => {
@@ -29,7 +29,7 @@ describe(`Selectors works correctly`, () => {
     const store = {
       offers: OFFER_MOCK,
       city: mock.city.name,
-      type: `lowToHigh`
+      sortType: `lowToHigh`
     };
     expect(getCityOffers(store)).toEqual(OFFER_MOCK);
   });
@@ -38,7 +38,7 @@ describe(`Selectors works correctly`, () => {
     const store = {
       offers: OFFER_MOCK,
       city: mock.city.name,
-      type: `highToLow`
+      sortType: `highToLow`
     };
 
     const sortOffers = OFFER_MOCK.slice();
@@ -50,11 +50,22 @@ describe(`Selectors works correctly`, () => {
     const store = {
       offers: OFFER_MOCK,
       city: mock.city.name,
-      type: `rated`
+      sortType: `rated`
     };
 
     const sortOffers = OFFER_MOCK.slice();
     [sortOffers[0], sortOffers[1]] = [sortOffers[1], sortOffers[0]];
     expect(getCityOffers(store)).toEqual(sortOffers);
+  });
+
+  it(`getFavoritesCitiesList works correctly`, () => {
+    const store = {
+      favorites: allCities.map((cityName) => {
+        const offer = JSON.parse(JSON.stringify(mock));
+        offer.city.name = cityName;
+        return offer;
+      }),
+    };
+    expect(getFavoritesCitiesList(store)).toEqual(allCities);
   });
 });

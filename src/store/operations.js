@@ -12,28 +12,17 @@ const Operations = {
       });
   },
 
-  checkAuthorization: () => (dispatch, _, api) => {
-    return api.get(`/login`)
+  getComments: (id) => (dispatch, _, api) => {
+    return api.get(`/comments/${id}`)
       .then((response) => {
-        if (response.status === 200) {
-          dispatch(ActionCreator.saveUserData(response.data));
-        }
+        dispatch(ActionCreator.getComments(response.data));
       });
   },
 
-  authorization: (email, password) => (dispatch, _, api) => {
-    return api.post(`/login`, {
-      email,
-      password
-    })
+  getFavorites: () => (dispatch, _, api) => {
+    return api.get(`/favorite`)
       .then((response) => {
-        if (response.status === 200) {
-          batch(() => {
-            dispatch(ActionCreator.saveUserData(response.data));
-            dispatch(ActionCreator.authorization(true));
-          });
-          history.push(`/`);
-        }
+        dispatch(ActionCreator.getFavorites(response.data));
       });
   },
 
@@ -51,10 +40,16 @@ const Operations = {
       });
   },
 
-  getComments: (id) => (dispatch, _, api) => {
-    return api.get(`/comments/${id}`)
+  authorization: (email, password) => (dispatch, _, api) => {
+    return api.post(`/login`, {
+      email,
+      password
+    })
       .then((response) => {
-        dispatch(ActionCreator.getComments(response.data));
+        if (response.status === 200) {
+          dispatch(ActionCreator.saveUserData(response.data));
+          history.push(`/`);
+        }
       });
   },
 
@@ -64,13 +59,6 @@ const Operations = {
         if (response.status === 200) {
           dispatch(ActionCreator.postComments(response.data));
         }
-      });
-  },
-
-  getFavorites: () => (dispatch, _, api) => {
-    return api.get(`/favorite`)
-      .then((response) => {
-        dispatch(ActionCreator.getFavorites(response.data));
       });
   },
 

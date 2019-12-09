@@ -53,4 +53,5 @@ const composedWithActiveItem = compose(
     withActiveItem
 );
 
+export {withActiveItem};
 export default composedWithActiveItem;

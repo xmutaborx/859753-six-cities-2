@@ -66,4 +66,5 @@ const composedWithFeedbackForm = compose(
     withFeedbackForm
 );
 
+export {withFeedbackForm};
 export default composedWithFeedbackForm;

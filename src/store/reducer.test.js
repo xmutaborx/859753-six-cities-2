@@ -1,7 +1,7 @@
 import reducer from './reducer';
 import ActionCreator from './action-creator';
 import OFFER_MOCK from '../mocks/offer-mock';
-
+import COMMENT_MOCK from '../mocks/comment-mock';
 
 describe(`reducer returns correctly state`, () => {
   it(`"loadOffers" return correctly state`, () => {
@@ -10,7 +10,6 @@ describe(`reducer returns correctly state`, () => {
       name: `Moscow`,
       premium: true
     }];
-
     const state = {
       city: `Berlin`,
       offers: [{
@@ -19,7 +18,6 @@ describe(`reducer returns correctly state`, () => {
         premium: false
       }]
     };
-
     const action = ActionCreator.loadOffers(offers);
 
     expect(reducer(state, action)).toEqual({
@@ -53,11 +51,9 @@ describe(`reducer returns correctly state`, () => {
       name: `Patric`,
       avatar: `src`
     };
-
     const state = {
       userData: [],
     };
-
     const action = ActionCreator.saveUserData(userData);
 
     expect(reducer(state, action)).toEqual({userData});
@@ -74,54 +70,65 @@ describe(`reducer returns correctly state`, () => {
 
     expect(reducer(state, action)).toEqual({offers: sortOffers});
   });
+
+  it(`"changeSortType" return correctly state`, () => {
+    const sortType = `highToLow`;
+    const state = {
+      sortType: ``
+    };
+    const action = ActionCreator.changeSortType(sortType);
+
+    expect(reducer(state, action)).toEqual({sortType});
+  });
+
+  it(`"setActivePin" return correctly state`, () => {
+    const activePin = [42, 24];
+    const state = {
+      activePin: [0, 1]
+    };
+    const action = ActionCreator.setActivePin(activePin);
+
+    expect(reducer(state, action)).toEqual({activePin});
+  });
+
+  it(`"getComments" return correctly state`, () => {
+    const comments = COMMENT_MOCK;
+    const state = {
+      comments: [`test`]
+    };
+    const action = ActionCreator.getComments(comments);
+
+    expect(reducer(state, action)).toEqual({comments});
+  });
+
+  it(`"postComments" return correctly state`, () => {
+    const comments = COMMENT_MOCK;
+    const state = {
+      comments: [`test`]
+    };
+    const action = ActionCreator.postComments(comments);
+
+    expect(reducer(state, action)).toEqual({comments});
+  });
+
+  it(`"getFavorites" return correctly state`, () => {
+    const favorites = OFFER_MOCK;
+    const state = {
+      favorites: [{id: 123, name: `?`}]
+    };
+    const action = ActionCreator.getFavorites(favorites);
+
+    expect(reducer(state, action)).toEqual({favorites});
+  });
+
+  it(`"clearFavoritesList" return correctly state`, () => {
+    let changedOffer = OFFER_MOCK.slice();
+    changedOffer = changedOffer.splice(0, 1);
+    const state = {
+      favorites: OFFER_MOCK
+    };
+    const action = ActionCreator.clearFavoritesList(2);
+
+    expect(reducer(state, action)).toEqual({favorites: changedOffer});
+  });
 });
-
-// describe(`ActionsCreator returns correctly action`, () => {
-//   it(`change city return correct object`, () => {
-//     const city = `Moscow`;
-//     const action = ActionCreator.changeCity(city);
-
-//     expect(action).toEqual({
-//       type: actionsType.changeCity,
-//       payload: city
-//     });
-//   });
-
-//   // it(`set offers return correct object`, () => {
-//   //   const offers = [{
-//   //     id: 1,
-//   //     name: `Paris`,
-//   //     price: 39
-//   //   }];
-//   //   const action = ActionCreator.setOffers(offers);
-
-//   //   expect(action).toEqual({
-//   //     type: ActionType.setOffers,
-//   //     payload: offers
-//   //   });
-//   // });
-
-//   // it(`set Available Cities return correct object`, () => {
-//   //   const cities = [`first city`, `second city`];
-//   //   const action = ActionCreator.setAvailableCities(cities);
-
-//   //   expect(action).toEqual({
-//   //     type: ActionType.availableCities,
-//   //     payload: cities
-//   //   });
-//   // });
-
-//   // it(`set Available Offers return correct object`, () => {
-//   //   const offers = [{
-//   //     id: 1,
-//   //     name: `Berlin`,
-//   //     premium: true
-//   //   }];
-//   //   const action = ActionCreator.setAvailableOffers(offers);
-
-//   //   expect(action).toEqual({
-//   //     type: ActionType.availableOffers,
-//   //     payload: offers
-//   //   });
-//   // });
-// });

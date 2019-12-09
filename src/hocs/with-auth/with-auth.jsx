@@ -8,6 +8,7 @@ const withAuth = (Component) => {
   const WithAuth = (props) => {
     if (!props.userData.id) {
       history.push(`/login`);
+      return null;
     }
     return (
       <Component
@@ -34,4 +35,5 @@ const composedWithAuth = compose(
     withAuth
 );
 
+export {withAuth};
 export default composedWithAuth;

@@ -8,7 +8,8 @@ exports[`Favorites Card render correctly 1`] = `
     className="favorites__image-wrapper place-card__image-wrapper"
   >
     <a
-      href="#"
+      href="/offer/1"
+      onClick={[Function]}
     >
       <img
         alt="Place image"

@@ -11,11 +11,6 @@ const ActionCreator = {
     payload: offers
   }),
 
-  authorization: (status) => ({
-    type: ActionType.Authorization,
-    payload: status,
-  }),
-
   saveUserData: (data) => ({
     type: ActionType.saveUserData,
     payload: data
