@@ -122,5 +122,6 @@ exports[`Favorites correctly renders 1`] = `
       </section>
     </div>
   </main>
+  <Footer />
 </div>
 `;

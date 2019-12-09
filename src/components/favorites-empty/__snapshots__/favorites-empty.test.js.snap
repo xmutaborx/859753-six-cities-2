@@ -36,21 +36,6 @@ exports[`Favorites Empty correctly renders 1`] = `
       </section>
     </div>
   </main>
-  <footer
-    className="footer"
-  >
-    <Link
-      className="footer__logo-link"
-      to="/"
-    >
-      <img
-        alt="6 cities logo"
-        className="footer__logo"
-        height={33}
-        src="img/logo.svg"
-        width={64}
-      />
-    </Link>
-  </footer>
+  <Footer />
 </div>
 `;
