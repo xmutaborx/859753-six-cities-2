@@ -4,6 +4,7 @@ import {MAX_CITIES} from '../constants/constants';
 const getOffers = (state) => state.offers;
 const getCity = (state) => state.city;
 const getSortType = (state) => state.sortType;
+const getFavorites = (state) => state.favorites;
 
 const getCityOffers = createSelector(
     [getOffers, getCity, getSortType],
@@ -28,4 +29,12 @@ const getCitiesList = createSelector(
     }
 );
 
-export {getCityOffers, getCitiesList, getSortType};
+const getFavoritesCitiesList = createSelector(
+    getFavorites,
+    (offers) => {
+      const cities = new Set(offers.map((offer) => offer.city.name));
+      return [...cities];
+    }
+);
+
+export {getCityOffers, getCitiesList, getFavoritesCitiesList};

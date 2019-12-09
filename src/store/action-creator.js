@@ -11,11 +11,6 @@ const ActionCreator = {
     payload: offers
   }),
 
-  authorization: (status) => ({
-    type: ActionType.Authorization,
-    payload: status,
-  }),
-
   saveUserData: (data) => ({
     type: ActionType.saveUserData,
     payload: data
@@ -44,7 +39,18 @@ const ActionCreator = {
   postComments: (comment) => ({
     type: ActionType.postComments,
     payload: comment
-  })
+  }),
+
+  getFavorites: (offers) => ({
+    type: ActionType.getFavorites,
+    payload: offers
+  }),
+
+  clearFavoritesList: (id) => ({
+    type: ActionType.clearFavoritesList,
+    payload: id
+  }),
+
 };
 
 export default ActionCreator;

@@ -8,6 +8,8 @@ const ActionType = {
   setActivePin: `SET_ACTIVE_PIN`,
   getComments: `GET_COMMENTS`,
   postComments: `POST_COMMENTS`,
+  getFavorites: `GET_FAVORITES`,
+  clearFavoritesList: `CLEAR_FAVORITES_LIST`,
 };
 
 export default ActionType;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
-import Operation from '../../store/operation';
+import Operations from '../../store/operations';
 
 const withSignIn = (Component) => {
   class WithSignIn extends React.PureComponent {
@@ -54,7 +54,7 @@ const withSignIn = (Component) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  submitForm: (login, password) => dispatch(Operation.authorization(login, password)),
+  submitForm: (login, password) => dispatch(Operations.authorization(login, password)),
 });
 
 const composedWithSignIn = compose(
@@ -62,4 +62,5 @@ const composedWithSignIn = compose(
     withSignIn
 );
 
+export {withSignIn};
 export default composedWithSignIn;

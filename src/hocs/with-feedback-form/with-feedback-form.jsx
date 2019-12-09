@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
-import Operation from '../../store/operation';
+import Operations from '../../store/operations';
 
 const withFeedbackForm = (Component) => {
   class WithFeedbackForm extends React.PureComponent {
@@ -27,10 +27,9 @@ const withFeedbackForm = (Component) => {
       this.setState({comment: event.target.value});
     }
 
-    handlePostComment(e, id) {
+    handlePostComment(e) {
       e.preventDefault();
       if (!this.state.rating || !this.state.comment) {
-        console.error(`error`);
         return;
       }
       this.props.postComments(this.props.id, this.state.rating, this.state.comment);
@@ -59,7 +58,7 @@ const withFeedbackForm = (Component) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  postComments: (id, rating, comment) => dispatch(Operation.postComments(id, rating, comment)),
+  postComments: (id, rating, comment) => dispatch(Operations.postComments(id, rating, comment)),
 });
 
 const composedWithFeedbackForm = compose(
@@ -67,4 +66,5 @@ const composedWithFeedbackForm = compose(
     withFeedbackForm
 );
 
+export {withFeedbackForm};
 export default composedWithFeedbackForm;

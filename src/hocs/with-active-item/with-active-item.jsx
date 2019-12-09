@@ -9,22 +9,16 @@ const withActiveItem = (Component) => {
     constructor(props) {
       super(props);
 
-      this.state = {
-        activeItem: {}
-      };
-
       this.handleChangeActiveItem = this.handleChangeActiveItem.bind(this);
-      this.handleClearItem = this.handleClearItem.bind(this);
+      this.handleClearActiveItem = this.handleClearActiveItem.bind(this);
     }
 
     handleChangeActiveItem(item) {
-      this.setState({activeItem: item});
       const location = item.location;
       this.props.setActivePin([location.latitude, location.longitude]);
     }
 
-    handleClearItem() {
-      this.setState({activeItem: {}});
+    handleClearActiveItem() {
       this.props.setActivePin([0, 0]);
     }
 
@@ -33,7 +27,7 @@ const withActiveItem = (Component) => {
         <Component
           {...this.props}
           onChangeActiveItem={this.handleChangeActiveItem}
-          onClearItem={this.handleClearItem}
+          onClearItem={this.handleClearActiveItem}
         />
       );
     }
@@ -59,4 +53,5 @@ const composedWithActiveItem = compose(
     withActiveItem
 );
 
+export {withActiveItem};
 export default composedWithActiveItem;

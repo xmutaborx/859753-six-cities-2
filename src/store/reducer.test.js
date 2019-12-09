@@ -1,128 +1,134 @@
-// import {reducer, ActionCreator, actionsTypes} from './reducer';
+import reducer from './reducer';
+import ActionCreator from './action-creator';
+import OFFER_MOCK from '../mocks/offer-mock';
+import COMMENT_MOCK from '../mocks/comment-mock';
 
-// describe(`ActionsCreator returns correctly action`, () => {
-//   it(`change city return correct object`, () => {
-//     const city = `Moscow`;
-//     const action = ActionCreator.changeCity(city);
+describe(`reducer returns correctly state`, () => {
+  it(`"loadOffers" return correctly state`, () => {
+    const offers = [{
+      id: 3,
+      name: `Moscow`,
+      premium: true
+    }];
+    const state = {
+      city: `Berlin`,
+      offers: [{
+        id: 1,
+        name: `Berlin`,
+        premium: false
+      }]
+    };
+    const action = ActionCreator.loadOffers(offers);
 
-//     expect(action).toEqual({
-//       type: actionsTypes.changeCity,
-//       payload: city
-//     });
-//   });
+    expect(reducer(state, action)).toEqual({
+      city: `Berlin`,
+      offers: [{
+        id: 3,
+        name: `Moscow`,
+        premium: true
+      }]
 
-//   it(`set offers return correct object`, () => {
-//     const offers = [{
-//       id: 1,
-//       name: `Paris`,
-//       price: 39
-//     }];
-//     const action = ActionCreator.setOffers(offers);
+    });
+  });
 
-//     expect(action).toEqual({
-//       type: actionsTypes.setOffers,
-//       payload: offers
-//     });
-//   });
+  it(`"change city" return correctly state`, () => {
+    const city = `Moscow`;
+    const state = {
+      city: ``,
+      offers: []
+    };
+    const action = ActionCreator.changeCity(city);
 
-//   it(`set Available Cities return correct object`, () => {
-//     const cities = [`first city`, `second city`];
-//     const action = ActionCreator.setAvailableCities(cities);
+    expect(reducer(state, action)).toEqual({
+      city: `Moscow`,
+      offers: []
+    });
+  });
 
-//     expect(action).toEqual({
-//       type: actionsTypes.availableCities,
-//       payload: cities
-//     });
-//   });
+  it(`"saveUserData" return correctly state`, () => {
+    const userData = {
+      id: 42,
+      name: `Patric`,
+      avatar: `src`
+    };
+    const state = {
+      userData: [],
+    };
+    const action = ActionCreator.saveUserData(userData);
 
-//   it(`set Available Offers return correct object`, () => {
-//     const offers = [{
-//       id: 1,
-//       name: `Berlin`,
-//       premium: true
-//     }];
-//     const action = ActionCreator.setAvailableOffers(offers);
+    expect(reducer(state, action)).toEqual({userData});
+  });
 
-//     expect(action).toEqual({
-//       type: actionsTypes.availableOffers,
-//       payload: offers
-//     });
-//   });
-// });
+  it(`toggleFavorites" return correctly state`, () => {
+    const state = {
+      offers: OFFER_MOCK,
+    };
+    const action = ActionCreator.toggleFavorites({id: 1, status: true});
+    const sortOffers = OFFER_MOCK.slice();
+    // eslint-disable-next-line camelcase
+    sortOffers[0].is_favorite = true;
 
-// describe(`reducer returns from reducer correctly state`, () => {
-//   it(`"change city" action return correctly state`, () => {
-//     const city = `Moscow`;
-//     const state = {
-//       city: ``,
-//       offers: []
-//     };
-//     const action = ActionCreator.changeCity(city);
+    expect(reducer(state, action)).toEqual({offers: sortOffers});
+  });
 
-//     expect(reducer(state, action)).toEqual({
-//       city: `Moscow`,
-//       offers: []
-//     });
-//   });
+  it(`"changeSortType" return correctly state`, () => {
+    const sortType = `highToLow`;
+    const state = {
+      sortType: ``
+    };
+    const action = ActionCreator.changeSortType(sortType);
 
-//   it(`"set offers" action from reducer return correctly state`, () => {
-//     const offers = [{
-//       id: 3,
-//       name: `Moscow`,
-//       premium: true
-//     }];
+    expect(reducer(state, action)).toEqual({sortType});
+  });
 
-//     const state = {
-//       city: `Berlin`,
-//       offers: [{
-//         id: 1,
-//         name: `Berlin`,
-//         premium: false
-//       }]
-//     };
+  it(`"setActivePin" return correctly state`, () => {
+    const activePin = [42, 24];
+    const state = {
+      activePin: [0, 1]
+    };
+    const action = ActionCreator.setActivePin(activePin);
 
-//     const action = ActionCreator.setOffers(offers);
+    expect(reducer(state, action)).toEqual({activePin});
+  });
 
-//     expect(reducer(state, action)).toEqual({
-//       city: `Berlin`,
-//       offers: [{
-//         id: 3,
-//         name: `Moscow`,
-//         premium: true
-//       }]
+  it(`"getComments" return correctly state`, () => {
+    const comments = COMMENT_MOCK;
+    const state = {
+      comments: [`test`]
+    };
+    const action = ActionCreator.getComments(comments);
 
-//     });
-//   });
+    expect(reducer(state, action)).toEqual({comments});
+  });
 
-//   it(`"set availabel cities" return correctly state`, () => {
-//     const cities = [`Berlin`, `Moscow`];
-//     const state = {
-//       availableCities: [],
-//       offers: [123]
-//     };
-//     const action = ActionCreator.setAvailableCities(cities);
+  it(`"postComments" return correctly state`, () => {
+    const comments = COMMENT_MOCK;
+    const state = {
+      comments: [`test`]
+    };
+    const action = ActionCreator.postComments(comments);
 
-//     expect(reducer(state, action)).toEqual({
-//       availableCities: cities,
-//       offers: [123]
-//     });
-//   });
+    expect(reducer(state, action)).toEqual({comments});
+  });
 
-//   it(`"set available offers" return correctly state`, () => {
-//     const offers = [{
-//       id: 42,
-//       name: `Paris`,
-//       premium: false
-//     }];
-//     const state = {
-//       availableOffers: [],
-//       city: ``
-//     };
-//     const action = ActionCreator.setAvailableOffers(offers);
+  it(`"getFavorites" return correctly state`, () => {
+    const favorites = OFFER_MOCK;
+    const state = {
+      favorites: [{id: 123, name: `?`}]
+    };
+    const action = ActionCreator.getFavorites(favorites);
 
-//     expect(reducer(state, action)).toEqual({
-//       availableOffers: offers,
-//       city: ``
-//     });
-//   });
-// });
+    expect(reducer(state, action)).toEqual({favorites});
+  });
+
+  it(`"clearFavoritesList" return correctly state`, () => {
+    let changedOffer = OFFER_MOCK.slice();
+    changedOffer = changedOffer.splice(0, 1);
+    const state = {
+      favorites: OFFER_MOCK
+    };
+    const action = ActionCreator.clearFavoritesList(2);
+
+    expect(reducer(state, action)).toEqual({favorites: changedOffer});
+  });
+});

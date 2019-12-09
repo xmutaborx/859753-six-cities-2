@@ -1,7 +1,7 @@
 const InitialState = {
   city: ``,
   offers: [],
-  isAuthorizationRequired: false,
+  favorites: [],
   userData: {},
   sortType: `popular`,
   activePin: [],

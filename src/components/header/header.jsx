@@ -16,21 +16,23 @@ const Header = ({userData}) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                {userData.id
-                  ? <Link to="/favorite" className="header__nav-link header__nav-link--profile">
+                {userData.id ? (
+                  <Link to="/favorites" className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">
                       {userData.email}
                     </span>
                   </Link>
-                  : <Link to="/login" className="header__nav-link header__nav-link--profile">
+                ) : (
+                  <Link to="/login" className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">
                       Sign in
                     </span>
-                  </Link>}
+                  </Link>
+                )}
               </li>
             </ul>
           </nav>

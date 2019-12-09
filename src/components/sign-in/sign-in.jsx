@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-import withSignIn from '../../hocs/with-sign-in/with-wign-in.jsx';
+import withSignIn from '../../hocs/with-sign-in/with-sign-in.jsx';
 
 const SignIn = (props) => {
   const {onSubmitForm, onChangeLogin, onChangePassword, login, password} = props;
@@ -46,9 +47,9 @@ const SignIn = (props) => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link className="locations__item-link" to="/">
                 <span>Amsterdam</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>
@@ -65,4 +66,5 @@ SignIn.propTypes = {
   password: PropTypes.string.isRequired,
 };
 
+export {SignIn};
 export default withSignIn(SignIn);

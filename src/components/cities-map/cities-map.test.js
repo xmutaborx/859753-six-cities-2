@@ -1,9 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import CitiesMap from './cities-map.jsx';
-
-import {cardMock} from '../../mocks/card-mock';
-import {mapConfigMock} from '../../mocks/map-config-mock';
+import {CitiesMap} from './cities-map.jsx';
+import OFFER_MOCK from '../../mocks/offer-mock';
 
 it(`Map correctly renders`, () => {
   const div = global.document.createElement(`div`);
@@ -11,8 +9,8 @@ it(`Map correctly renders`, () => {
   global.document.body.appendChild(div);
   const tree = renderer
     .create(<CitiesMap
-      offers={cardMock}
-      mapConfig={mapConfigMock}
+      offersList={OFFER_MOCK}
+      activePin={[0, 0]}
     />)
     .toJSON();
 

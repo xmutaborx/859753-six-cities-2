@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Operation from '../../store/operation';
+import Operations from '../../store/operations';
 
 import Header from '../header/header.jsx';
 import FeedbackList from '../feedback-list/feedback-list.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
-import OffersList from '../offer-list/offers-list.jsx';
+import OffersList from '../offers-list/offers-list.jsx';
 import FeedbackForm from '../feedback-form/feedback-form.jsx';
 
 class Offer extends React.PureComponent {
@@ -26,9 +26,9 @@ class Offer extends React.PureComponent {
 
   render() {
     const offerId = Number(this.props.match.params.id);
-    const [currentOffer] = this.props.offers.filter((it) => it.id === offerId);
 
-    let nearOffers = this.props.offers.filter((it) => it.city.name === currentOffer.city.name && it.id !== offerId).slice(0, 3);
+    const [currentOffer] = this.props.offers.filter((it) => it.id === offerId);
+    const nearOffers = this.props.offers.filter((it) => it.city.name === currentOffer.city.name && it.id !== offerId).slice(0, 3);
     const allOffers = nearOffers.concat([currentOffer]);
 
     if (!currentOffer) {
@@ -102,6 +102,27 @@ class Offer extends React.PureComponent {
                     ))}
                   </ul>
                 </div>
+                <div className="property__host">
+                  <h2 className="property__host-title">Meet the host</h2>
+                  <div className="property__host-user user">
+                    <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                      <img className="property__avatar user__avatar" src={currentOffer.host.avatar_url} width="74" height="74" alt="Host avatar" />
+                    </div>
+                    <span className="property__user-name">
+                      {currentOffer.host.name}
+                    </span>
+                    {currentOffer.host.is_pro && (
+                      <span className="property__user-status">
+                        Pro
+                      </span>
+                    )}
+                  </div>
+                  <div className="property__description">
+                    <p className="property__text">
+                      {currentOffer.description}
+                    </p>
+                  </div>
+                </div>
                 <section className="property__reviews reviews">
                   <FeedbackList comments={this.props.comments} />
                   {this.props.userData.id && <FeedbackForm id={offerId} />}
@@ -127,19 +148,24 @@ class Offer extends React.PureComponent {
 }
 
 Offer.propTypes = {
-  currentOffer: PropTypes.object,
-  nearOffers: PropTypes.arrayOf(PropTypes.object),
-  allOffers: PropTypes.arrayOf(PropTypes.object),
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   comments: PropTypes.arrayOf(PropTypes.object),
+  userData: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    // eslint-disable-next-line camelcase
+    avatar_url: PropTypes.string,
+    // eslint-disable-next-line camelcase
+    is_pro: PropTypes.bool,
+  }),
   getComments: PropTypes.func.isRequired,
   toggleFavorites: PropTypes.func.isRequired,
-  offerId: PropTypes.string,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     })
-  })
+  }),
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -149,8 +175,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getComments: (id) => dispatch(Operation.getComments(id)),
-  toggleFavorites: (id, status) => dispatch(Operation.toggleFavorites(id, status)),
+  getComments: (id) => dispatch(Operations.getComments(id)),
+  toggleFavorites: (id, status) => dispatch(Operations.toggleFavorites(id, status)),
 });
 
 export {Offer};

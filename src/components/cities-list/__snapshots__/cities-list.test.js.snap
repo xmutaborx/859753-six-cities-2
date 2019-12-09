@@ -14,7 +14,7 @@ exports[`Cities List renders correctly 1`] = `
         className="locations__item"
       >
         <a
-          className="locations__item-link tabs__item"
+          className="locations__item-link tabs__item "
           href="#"
           onClick={[Function]}
         >
@@ -27,7 +27,7 @@ exports[`Cities List renders correctly 1`] = `
         className="locations__item"
       >
         <a
-          className="locations__item-link tabs__item"
+          className="locations__item-link tabs__item tabs__item--active"
           href="#"
           onClick={[Function]}
         >
