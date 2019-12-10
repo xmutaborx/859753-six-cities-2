@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Operations from '../../store/operations';
+import {PROP_TYPES_OFFERS_LIST, PROP_TYPES_COMMENTS_LIST, PROP_TYPES_USER_DATA} from '../../constants/prop-types';
+import {correctRating} from '../../helpers/helpers';
 
 import Header from '../header/header.jsx';
 import FeedbackList from '../feedback-list/feedback-list.jsx';
@@ -72,7 +74,7 @@ class Offer extends React.PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `${currentOffer.rating * 20}%`}} />
+                    <span style={{width: `${correctRating(currentOffer.rating)}%`}} />
                     <span className="visually-hidden">{currentOffer.rating}</span>
                   </div>
                   <span className="property__rating-value rating__value">{currentOffer.rating}</span>
@@ -148,17 +150,9 @@ class Offer extends React.PureComponent {
 }
 
 Offer.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object),
-  userData: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    // eslint-disable-next-line camelcase
-    avatar_url: PropTypes.string,
-    // eslint-disable-next-line camelcase
-    is_pro: PropTypes.bool,
-  }),
+  offers: PROP_TYPES_OFFERS_LIST,
+  comments: PROP_TYPES_COMMENTS_LIST,
+  userData: PropTypes.shape(PROP_TYPES_USER_DATA),
   getComments: PropTypes.func.isRequired,
   toggleFavorites: PropTypes.func.isRequired,
   match: PropTypes.shape({

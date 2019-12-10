@@ -9,7 +9,7 @@ Enzyme.configure({adapter: new Adapter()});
 const mock = OFFER_MOCK[0];
 
 describe(`Offer Card`, () => {
-  const toggleFavorites = jest.fn();
+  const onToggleFavorites = jest.fn();
   const onChangeActiveItem = jest.fn();
   const onClearItem = jest.fn();
 
@@ -24,13 +24,13 @@ describe(`Offer Card`, () => {
     rating={mock.rating}
     onChangeActiveItem={onChangeActiveItem}
     onClearItem={onClearItem}
-    toggleFavorites={toggleFavorites}
+    onToggleFavorites={onToggleFavorites}
   />);
 
   it(`ToggleFavorites called when btn add to favorite pressed`, () => {
     const btn = card.find(`.place-card__bookmark-button`);
     btn.simulate(`click`);
-    expect(toggleFavorites).toHaveBeenCalledTimes(1);
+    expect(onToggleFavorites).toHaveBeenCalledTimes(1);
   });
 
   it(`onChangeActiveItem called when mouse over on card`, () => {

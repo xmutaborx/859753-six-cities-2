@@ -1,5 +1,6 @@
 import axios from 'axios';
 import history from './history';
+import SERVER_CODES from './constants/server-codes';
 
 const createAPI = () => {
   const api = axios.create({
@@ -11,7 +12,7 @@ const createAPI = () => {
   const onSuccess = (response) => response;
 
   const onFail = (error) => {
-    if (error.response.status === 401) {
+    if (error.response.status === SERVER_CODES.unauthorized) {
       history.push(`/login`);
     }
     return error;

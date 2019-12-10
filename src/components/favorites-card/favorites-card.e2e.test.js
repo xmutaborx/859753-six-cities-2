@@ -16,7 +16,7 @@ describe(`favorites card`, () => {
     rating={5}
     id={1}
     isFavorite={true}
-    toggleFavorites={onToggleFavorites}
+    onToggleFavorites={onToggleFavorites}
   />);
 
   it(`toggleFavorites is called when press 'add to favorite' button`, () => {

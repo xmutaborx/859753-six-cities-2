@@ -1,13 +1,15 @@
 import ActionCreator from './action-creator';
 import {batch} from 'react-redux';
 import history from '../history';
+import SERVER_CODES from '../constants/server-codes';
 
 const Operations = {
   loadOffers: () => (dispatch, _, api) => {
     return api.get(`/hotels`)
       .then((response) => {
         dispatch(ActionCreator.loadOffers(response.data));
-        const initialCity = response.data[0].city.name;
+        const randomCity = Math.floor(Math.random() * (response.data.length - 1)) + 1;
+        const initialCity = response.data[randomCity].city.name;
         dispatch(ActionCreator.changeCity(initialCity));
       });
   },
@@ -29,7 +31,7 @@ const Operations = {
   toggleFavorites: (id, status) => (dispatch, _, api) => {
     return api.post(`/favorite/${id}/${status ? 1 : 0}`)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === SERVER_CODES.ok) {
           batch(() => {
             dispatch(ActionCreator.toggleFavorites(id, status));
             dispatch(ActionCreator.clearFavoritesList(id));
@@ -46,7 +48,7 @@ const Operations = {
       password
     })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === SERVER_CODES.ok) {
           dispatch(ActionCreator.saveUserData(response.data));
           history.push(`/`);
         }
@@ -56,7 +58,7 @@ const Operations = {
   postComments: (id, rating, comment) => (dispatch, _, api) => {
     return api.post(`/comments/${id}`, {rating, comment})
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === SERVER_CODES.ok) {
           dispatch(ActionCreator.postComments(response.data));
         }
       });

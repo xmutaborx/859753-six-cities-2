@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Operations from '../../store/operations';
+import {correctRating} from '../../helpers/helpers';
 
 const FavoritesCard = (props) => {
-  const {title, price, type, image, rating, id, isFavorite, toggleFavorites} = props;
+  const {title, price, type, image, rating, id, isFavorite, onToggleFavorites} = props;
 
   return (
     <article className="favorites__card place-card">
@@ -23,7 +24,7 @@ const FavoritesCard = (props) => {
           <button
             className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : ``}`}
             type="button"
-            onClick={() => toggleFavorites(id, !isFavorite)}
+            onClick={() => onToggleFavorites(id, !isFavorite)}
           >
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
@@ -33,7 +34,7 @@ const FavoritesCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}} />
+            <span style={{width: `${correctRating(rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -54,11 +55,11 @@ FavoritesCard.propTypes = {
   rating: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  toggleFavorites: PropTypes.func.isRequired,
+  onToggleFavorites: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleFavorites: (id, status) => dispatch(Operations.toggleFavorites(id, status)),
+  onToggleFavorites: (id, status) => dispatch(Operations.toggleFavorites(id, status)),
 });
 
 export {FavoritesCard};

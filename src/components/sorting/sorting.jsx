@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {SORT_OPTION} from '../../constants/constants';
+import {SORT_OPTIONS} from '../../constants/constants';
 import withSorting from '../../hocs/with-sorting/with-sorting.jsx';
 
 const Sorting = (props) => {
@@ -16,7 +16,7 @@ const Sorting = (props) => {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpen ? `places__options--opened` : ``}`}>
-        {SORT_OPTION.map((it) => (
+        {SORT_OPTIONS.map((it) => (
           <li
             className={`places__option ${sortType === it.type ? `places__option--active` : ``}`}
             tabIndex="0"

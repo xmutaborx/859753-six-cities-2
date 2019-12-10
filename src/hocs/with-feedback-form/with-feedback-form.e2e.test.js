@@ -9,6 +9,9 @@ describe(`with-feedback-form works correctly`, () => {
   const MockComponent = () => <div>test</div>;
   const MockComponentWrapper = withFeedbackForm(MockComponent);
   const postComments = jest.fn();
+  const testComment = `test test test test test test test test test test
+    test test test test test test test test test test test test
+    test test test test test test test test test`;
   const wrapper = shallow(<MockComponentWrapper
     postComments={postComments}
     id={1}
@@ -36,25 +39,39 @@ describe(`with-feedback-form works correctly`, () => {
   it(`handleChangeComment changed commet field in state`, () => {
     const mock = {
       target: {
-        value: `test comment`,
+        value: testComment,
       },
     };
 
     wrapper.instance().handleChangeComment(mock);
-    expect(wrapper.state().comment).toEqual(`test comment`);
+    expect(wrapper.state().comment).toEqual(testComment);
   });
 
   it(`handlePostComment worked correctly`, () => {
     const mock = {
       preventDefault: () => {},
       target: {
-        value: `test comment`,
+        value: testComment,
       },
     };
 
     wrapper.instance().handlePostComment(mock);
     expect(postComments).toHaveBeenCalled();
-    expect(postComments).toHaveBeenCalledWith(1, 69, `test comment`);
+    expect(postComments).toHaveBeenCalledWith(1, 69, testComment);
+  });
+
+  it(`handlePostComment clear state after work`, () => {
+    const mock = {
+      preventDefault: () => {},
+      target: {
+        value: testComment,
+      },
+    };
+
+    wrapper.instance().handlePostComment(mock);
+    expect(postComments).toHaveBeenCalled();
+    expect(wrapper.state().rating).toEqual(null);
+    expect(wrapper.state().comment).toEqual(``);
   });
 
 });

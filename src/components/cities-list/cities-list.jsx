@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class CitiesList extends React.PureComponent {
-  clickHandler(e, city) {
+  handleClick(e, city) {
     e.preventDefault();
     this.props.onChangeCity(city);
   }
@@ -19,7 +19,7 @@ class CitiesList extends React.PureComponent {
                 <a
                   className={`locations__item-link tabs__item ${currentCity === it ? `tabs__item--active` : ``}`}
                   href="#"
-                  onClick={(e) => this.clickHandler(e, it)}
+                  onClick={(e) => this.handleClick(e, it)}
                 >
                   <span>{it}</span>
                 </a>

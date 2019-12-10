@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Operations from '../../store/operations';
+import {correctRating} from '../../helpers/helpers';
 
 const OfferCard = (props) => {
   const {id,
@@ -16,7 +17,7 @@ const OfferCard = (props) => {
     nearMode,
     onChangeActiveItem,
     onClearItem,
-    toggleFavorites} = props;
+    onToggleFavorites} = props;
 
   let articleClasses = `cities__place-card`;
   let wrappedClasses = `cities__image-wrapper`;
@@ -51,7 +52,7 @@ const OfferCard = (props) => {
           <button
             className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : ``}`}
             type="button"
-            onClick={() => toggleFavorites(id, !isFavorite)}
+            onClick={() => onToggleFavorites(id, !isFavorite)}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
@@ -61,7 +62,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}} />
+            <span style={{width: `${correctRating(rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -90,12 +91,12 @@ OfferCard.propTypes = {
   image: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   onMouseOver: PropTypes.func,
-  toggleFavorites: PropTypes.func,
+  onToggleFavorites: PropTypes.func,
   nearMode: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleFavorites: (id, status) => dispatch(Operations.toggleFavorites(id, status)),
+  onToggleFavorites: (id, status) => dispatch(Operations.toggleFavorites(id, status)),
 });
 
 export {OfferCard};

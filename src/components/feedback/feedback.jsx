@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {correctRating} from '../../helpers/helpers';
 
 const Feedback = (props) => {
   // eslint-disable-next-line camelcase
@@ -16,7 +17,7 @@ const Feedback = (props) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}} />
+            <span style={{width: `${correctRating(rating)}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

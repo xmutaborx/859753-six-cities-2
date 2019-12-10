@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import ActionCreator from '../../store/action-creator';
 import {getCityOffers, getCitiesList} from '../../store/selectors';
+import {PROP_TYPES_OFFERS_LIST} from '../../constants/prop-types';
 
 import Header from '../header/header.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
@@ -65,10 +66,10 @@ const mapDispatchToProps = (dispatch) => ({
 
 MainPage.propTypes = {
   city: PropTypes.string,
-  availableOffers: PropTypes.array,
-  availableCities: PropTypes.array,
-  changeCity: PropTypes.func,
-  offers: PropTypes.array
+  availableCities: PropTypes.arrayOf(PropTypes.string),
+  changeCity: PropTypes.func.isRequired,
+  availableOffers: PROP_TYPES_OFFERS_LIST,
+  offers: PROP_TYPES_OFFERS_LIST,
 };
 
 export {MainPage};

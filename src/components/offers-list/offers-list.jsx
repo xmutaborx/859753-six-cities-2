@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {PROP_TYPES_OFFERS_LIST} from '../../constants/prop-types';
 
 import OfferCard from '../offer-card/offer-card.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
@@ -80,18 +81,7 @@ OffersList.defaultProps = {
 OffersList.propTypes = {
   onChangeActiveItem: PropTypes.func.isRequired,
   onClearItem: PropTypes.func.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    // eslint-disable-next-line camelcase
-    is_premium: PropTypes.bool.isRequired,
-    // eslint-disable-next-line camelcase
-    is_favorite: PropTypes.bool.isRequired,
-    images: PropTypes.array.isRequired,
-    rating: PropTypes.number.isRequired,
-  })),
+  offers: PROP_TYPES_OFFERS_LIST,
   nearMode: PropTypes.bool,
   favoritesMode: PropTypes.bool,
   favoritesCity: PropTypes.arrayOf(PropTypes.string)

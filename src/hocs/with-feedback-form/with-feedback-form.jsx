@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import Operations from '../../store/operations';
+import {COMMENT_LENGTH} from '../../constants/constants';
 
 const withFeedbackForm = (Component) => {
   class WithFeedbackForm extends React.PureComponent {
@@ -29,10 +30,11 @@ const withFeedbackForm = (Component) => {
 
     handlePostComment(e) {
       e.preventDefault();
-      if (!this.state.rating || !this.state.comment) {
+      if (!this.state.rating || this.state.comment.length < COMMENT_LENGTH.min || this.state.comment.length > COMMENT_LENGTH.max) {
         return;
       }
       this.props.postComments(this.props.id, this.state.rating, this.state.comment);
+      this.setState({rating: null, comment: ``});
     }
 
     render() {
