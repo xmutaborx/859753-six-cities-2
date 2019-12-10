@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {correctRating} from '../../helpers/helpers';
+import {correctRating, dateTime} from '../../helpers/helpers';
 
 const Feedback = (props) => {
   // eslint-disable-next-line camelcase
@@ -22,7 +22,7 @@ const Feedback = (props) => {
           </div>
         </div>
         <p className="reviews__text">{comment}</p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+        <time className="reviews__time">{dateTime(date)}</time>
       </div>
     </li>
   );
