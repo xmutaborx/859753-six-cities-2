@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Operations from '../../store/operations';
 import {getFavoritesCitiesList} from '../../store/selectors';
-import {PROP_TYPES_OFFERS_LIST} from '../../constants/prop-types';
+import {PROP_TYPES_OFFERS_LIST} from '../../types/types';
 
 import Header from '../header/header.jsx';
 import FavoritesEmpty from '../favorites-empty/favorites-empty.jsx';

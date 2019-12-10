@@ -1,6 +1,6 @@
 import axios from 'axios';
 import history from './history';
-import SERVER_CODES from './constants/server-codes';
+import {SERVER_CODES} from './constants/constants';
 
 const createAPI = () => {
   const api = axios.create({

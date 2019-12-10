@@ -1,30 +1,30 @@
 import ActionCreator from './action-creator';
 import {batch} from 'react-redux';
 import history from '../history';
-import SERVER_CODES from '../constants/server-codes';
+import {SERVER_CODES} from '../constants/constants';
 
 const Operations = {
   loadOffers: () => (dispatch, _, api) => {
     return api.get(`/hotels`)
-      .then((response) => {
-        dispatch(ActionCreator.loadOffers(response.data));
-        const randomCity = Math.floor(Math.random() * (response.data.length - 1)) + 1;
-        const initialCity = response.data[randomCity].city.name;
+      .then(({data}) => {
+        dispatch(ActionCreator.loadOffers(data));
+        const randomCity = Math.floor(Math.random() * (data.length - 1)) + 1;
+        const initialCity = data[randomCity].city.name;
         dispatch(ActionCreator.changeCity(initialCity));
       });
   },
 
   getComments: (id) => (dispatch, _, api) => {
     return api.get(`/comments/${id}`)
-      .then((response) => {
-        dispatch(ActionCreator.getComments(response.data));
+      .then(({data}) => {
+        dispatch(ActionCreator.getComments(data));
       });
   },
 
   getFavorites: () => (dispatch, _, api) => {
     return api.get(`/favorite`)
-      .then((response) => {
-        dispatch(ActionCreator.getFavorites(response.data));
+      .then(({data}) => {
+        dispatch(ActionCreator.getFavorites(data));
       });
   },
 

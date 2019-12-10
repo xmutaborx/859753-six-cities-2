@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Operations from '../../store/operations';
-import {PROP_TYPES_OFFERS_LIST, PROP_TYPES_COMMENTS_LIST, PROP_TYPES_USER_DATA} from '../../constants/prop-types';
+import {PROP_TYPES_OFFERS_LIST, PROP_TYPES_COMMENTS_LIST, PROP_TYPES_USER_DATA} from '../../types/types';
 import {correctRating} from '../../helpers/helpers';
 
 import Header from '../header/header.jsx';

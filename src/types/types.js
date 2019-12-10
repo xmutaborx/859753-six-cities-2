@@ -59,4 +59,3 @@ export const PROP_TYPES_USER_DATA = {
 
 export const PROP_TYPES_OFFERS_LIST = arrayOf(shape(PROP_TYPES_OFFERS));
 export const PROP_TYPES_COMMENTS_LIST = arrayOf(shape(PROP_TYPES_COMMENTS));
-

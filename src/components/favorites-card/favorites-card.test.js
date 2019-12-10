@@ -15,7 +15,7 @@ it(`Favorites Card render correctly`, () => {
         rating={5}
         id={1}
         isFavorite={true}
-        toggleFavorites={() => {}}
+        onToggleFavorites={() => {}}
       />
     </Router>)
     .toJSON();

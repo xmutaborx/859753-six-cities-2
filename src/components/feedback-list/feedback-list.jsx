@@ -1,5 +1,5 @@
 import React from 'react';
-import {PROP_TYPES_COMMENTS_LIST} from '../../constants/prop-types';
+import {PROP_TYPES_COMMENTS_LIST} from '../../types/types';
 import {MAX_COMMENTS} from '../../constants/constants';
 
 import Feedback from '../feedback/feedback.jsx';

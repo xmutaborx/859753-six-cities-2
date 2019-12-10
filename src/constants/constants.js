@@ -39,3 +39,8 @@ export const NAMES_OF_MONTHS = [
   `November`,
   `December`
 ];
+
+export const SERVER_CODES = {
+  ok: 200,
+  unauthorized: 401
+};

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import {connect} from 'react-redux';
-import {PROP_TYPES_OFFERS_LIST} from '../../constants/prop-types';
+import {PROP_TYPES_OFFERS_LIST} from '../../types/types';
 
 import {DEFAULT_ZOOM, DEFAULT_CENTER, ICON_SIZE} from '../../constants/constants';
 

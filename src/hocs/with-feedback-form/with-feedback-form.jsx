@@ -30,11 +30,11 @@ const withFeedbackForm = (Component) => {
 
     handlePostComment(e) {
       e.preventDefault();
-      if (!this.state.rating || this.state.comment.length < COMMENT_LENGTH.min || this.state.comment.length > COMMENT_LENGTH.max) {
-        return;
+      const commentLength = this.state.comment.length;
+      if (this.state.rating && (commentLength >= COMMENT_LENGTH.min && commentLength <= COMMENT_LENGTH.max)) {
+        this.props.postComments(this.props.id, this.state.rating, this.state.comment);
+        this.setState({rating: null, comment: ``});
       }
-      this.props.postComments(this.props.id, this.state.rating, this.state.comment);
-      this.setState({rating: null, comment: ``});
     }
 
     render() {

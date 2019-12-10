@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {PROP_TYPES_OFFERS_LIST} from '../../constants/prop-types';
+import {PROP_TYPES_OFFERS_LIST} from '../../types/types';
 
 import OfferCard from '../offer-card/offer-card.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';

@@ -55,7 +55,7 @@ FavoritesCard.propTypes = {
   rating: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  onToggleFavorites: PropTypes.func,
+  onToggleFavorites: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
