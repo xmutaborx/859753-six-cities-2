@@ -2,12 +2,7 @@ HTML Academy (10.09 - 12.09)
 # Личный проект «Шесть городов»
 
 <ul>
-  <ul>
-    <h3>React</h3>
-    <li>PropTypes for all props</li>
-    <li>HOCS</li>
-    <li>Leaflet Map</li>
-  </ul>
+  <li><h3>React</h3></li>
   <li>
     <h3>Redux</h3>
   </li>
