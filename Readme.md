@@ -8,20 +8,15 @@ HTML Academy (10.09 - 12.09)
     <li>HOCS</li>
     <li>Leaflet Map</li>
   </ul>
-  <ul>
+  <li>
     <h3>Redux</h3>
-    <li>reducers, actionCreators, asyncActions</li> 
-  </ul>
-  <ul>
+  </li>
+  <li>
     <h3>React-router</h3>
-    <li>Routing for all pages</li>
-  </ul>
-  <ul>
+  </li>
+  <li>
     <h4>jest / enzyme</h4>
-    <li> All components tested (snapshots / e2e) </li>
-    <li> All reducers and action creator tested </li>
-  </ul>
-    
+  </li>
  </ul>
 
  <img src="https://sun9-45.userapi.com/c200628/v200628940/9f4d/kW_DXdymmHo.jpg">
